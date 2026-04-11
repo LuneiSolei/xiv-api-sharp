@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XivApiSharp.Tests", "XivApiSharp.Tests\XivApiSharp.Tests.csproj", "{14D84C8C-32D5-4926-83FB-6C6947D5AC36}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XivApiSharp.Client", "XivApiSharp.Client\XivApiSharp.Client.csproj", "{993D7F4F-7557-405B-9F7C-0B1E69F1A130}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{14D84C8C-32D5-4926-83FB-6C6947D5AC36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14D84C8C-32D5-4926-83FB-6C6947D5AC36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14D84C8C-32D5-4926-83FB-6C6947D5AC36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14D84C8C-32D5-4926-83FB-6C6947D5AC36}.Release|Any CPU.Build.0 = Release|Any CPU
+		{993D7F4F-7557-405B-9F7C-0B1E69F1A130}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{993D7F4F-7557-405B-9F7C-0B1E69F1A130}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{993D7F4F-7557-405B-9F7C-0B1E69F1A130}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{993D7F4F-7557-405B-9F7C-0B1E69F1A130}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

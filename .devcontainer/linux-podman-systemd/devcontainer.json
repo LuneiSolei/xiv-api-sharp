@@ -3,10 +3,10 @@
     "build": {
         "dockerfile": "Dockerfile"
     },
+    "initializeCommand": "sh .devcontainer/linux-podman-systemd/export-gpg-keys.sh ${localWorkspaceFolder}",
+    "postCreateCommand": "sh .devcontainer/linux-podman-systemd/import-gpg-keys.sh ${localWorkspaceFolderBasename}",
     "forwardPorts": [8080, 8443],
     "remoteUser": "vscode",
-    "initializeCommand": "sh .devcontainer/linux-podman/initializeCommands.sh ${localWorkspaceFolder}",
-    "postCreateCommand": "sh .devcontainer/linux-podman/postCreateCommands.sh ${localWorkspaceFolderBasename}",
     "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
     "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/${localWorkspaceFolderBasename},type=bind,options=Z",
     "mounts": [
@@ -17,9 +17,6 @@
         "--security-opt",
         "label=disable"
     ],
-    "remoteEnv": {
-        "XDG_RUNTIME_DIR": "${localEnv:XDG_RUNTIME_DIR}"
-    },
     "customizations": {
         "jetbrains": {
             "settings": {

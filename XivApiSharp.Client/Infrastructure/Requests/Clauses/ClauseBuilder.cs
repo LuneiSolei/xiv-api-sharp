@@ -36,7 +36,7 @@ public class ClauseBuilder : IInitialClauseBuilderStep, IConditionStep,
     internal ClauseBuilder() {}
 
     // WhereField Step
-    public IConditionStep WhereField(string name)
+    public IConditionStep WhereSpecifier(string name)
     {
         _name = name;
         

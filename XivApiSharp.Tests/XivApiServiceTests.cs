@@ -29,7 +29,7 @@ public class XivApiServiceTests
     // TODO: Double check that strings are converted to ints in the actual API
     
     // Storage Variables
-    private readonly IServiceCollection _serviceCollection = new ServiceCollection();
+    private readonly IServiceCollection _services = new ServiceCollection();
     private ServiceProvider _provider;
     private XivApiService _service;
     private XivApiOptions _options;
@@ -38,8 +38,8 @@ public class XivApiServiceTests
     [OneTimeSetUp]
     public void Setup()
     {
-        _serviceCollection.AddXivApiService();
-        _provider = _serviceCollection.BuildServiceProvider();
+        _services.AddXivApiService();
+        _provider = _services.BuildServiceProvider();
         _service = _provider.GetRequiredService<XivApiService>();
         _options = _provider.GetRequiredService<XivApiOptions>();
     }

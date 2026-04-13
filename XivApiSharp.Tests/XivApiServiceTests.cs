@@ -3,8 +3,11 @@ using XivApiSharp.Client.Core.Options;
 using XivApiSharp.Client.Services;
 using Microsoft.Extensions.DependencyInjection;
 using XivApiSharp.Client.Infrastructure.Requests.Steps;
+using XivApiSharp.Tests.Options;
 
 namespace XivApiSharp.Tests;
+
+[TestFixture]
 public class XivApiServiceTests
 {
     // Equal To (string) Clause Test:
@@ -54,13 +57,14 @@ public class XivApiServiceTests
     [Test]
     public void NewClause_StringEqualTo_BuildsCorrectly()
     {
+        ClauseTestOptions testOpts = AssemblySetup.TestConfig.EqualToClause;
         Clause clause = XivApiService.NewClause()
-            .WhereField(EqualToSpecifier)
+            .WhereField(testOpts.Specifier)
             .Is()
-            .EqualTo(EqualToValue);
+            .EqualTo(testOpts.Value);
 
         Assert.That(clause.ToString(), 
-            Is.EqualTo(EqualToExpectedValue));
+            Is.EqualTo(testOpts.ExpectedValue));
     }
 
     [Test]
@@ -81,11 +85,20 @@ public class XivApiServiceTests
         Clause clause = XivApiService.NewClause()
             .WhereField(GreaterThanSpecifier)
             .Is()
-            .PartiallyEqualTo(GreaterThanValue);
+            .GreaterThan(GreaterThanValue);
         
         Assert.That(clause.ToString(),
             Is.EqualTo(GreaterThanExpectedValue));
     }
+
+    // [Test]
+    // public void NewClause_StringGreaterThanOrEqualTo_BuildsCorrectly()
+    // {
+    //     Clause clause = XivApiService.NewClause()
+    //         .WhereField(GreaterThanOrEqualToSpecifier)
+    //         .Is()
+    //         .GreaterThanOrEqualTo(GreaterThanOrEqualToValue);
+    // }
     
     [Test]
     public void NewRequest_Search_BuildsCorrectly()

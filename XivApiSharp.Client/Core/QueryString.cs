@@ -15,9 +15,13 @@ public record QueryString
 
     public void AddClauseGroup<T>(ClauseGroup<T> clauseGroup) => 
         ClauseGroups.Add(clauseGroup);
+    public void AddClauseGroup(ClauseGroup group) => 
+        ClauseGroups.Add(group);
     
     public void AddClauseGroups<T>(IEnumerable<IClauseGroup> clausesGroups) =>
         ClauseGroups.AddRange(clausesGroups);
+    public void AddClauseGroups(IEnumerable<ClauseGroup> groups) =>
+        ClauseGroups.AddRange(groups);
     
     public override string ToString()
     {

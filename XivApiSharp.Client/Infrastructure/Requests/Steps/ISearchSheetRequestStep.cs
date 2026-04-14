@@ -13,8 +13,8 @@ public interface ISearchSheetRequestStep
     // Query
     ISearchSheetRequestStep WithClause<T>(Clause<T> clause);
     ISearchSheetRequestStep WithClauses<T>(IEnumerable<Clause<T>> clauses);
-    ISearchSheetRequestStep WithClauseGroup<T>(ClauseGroup<T> group);
-    ISearchSheetRequestStep WithClauseGroups<T>(IEnumerable<ClauseGroup<T>> groups);
+    ISearchSheetRequestStep WithClauseGroup<T>(ClauseGroup group);
+    ISearchSheetRequestStep WithClauseGroups<T>(IEnumerable<ClauseGroup> groups);
     
     // Parameters
     ISearchSheetRequestStep WithVersion(string version);

@@ -7,7 +7,6 @@
  *     LessThanOrEqualTo (INumber)
  */
 
-using XivApiSharp.Client.Core;
 using XivApiSharp.Client.Core.Clauses;
 using XivApiSharp.Client.Services;
 using XivApiSharp.Client.Infrastructure.Requests.Clauses.Steps;

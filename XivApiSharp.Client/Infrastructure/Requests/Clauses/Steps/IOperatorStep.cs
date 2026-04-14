@@ -1,5 +1,4 @@
 using System.Numerics;
-using XivApiSharp.Client.Core;
 using XivApiSharp.Client.Core.Clauses;
 
 namespace XivApiSharp.Client.Infrastructure.Requests.Clauses.Steps;

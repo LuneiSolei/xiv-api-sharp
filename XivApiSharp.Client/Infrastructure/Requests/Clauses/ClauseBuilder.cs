@@ -1,6 +1,5 @@
 using System.Numerics;
 using System.Web;
-using XivApiSharp.Client.Core;
 using XivApiSharp.Client.Core.Clauses;
 using XivApiSharp.Client.Core.Enums;
 using XivApiSharp.Client.Infrastructure.Requests.Clauses.Steps;
@@ -126,6 +125,6 @@ public class ClauseBuilder : IInitialClauseBuilderStep, IConditionStep,
         clause.Specifier = specifier;
     }
 
-    private void AddClauseOperator<T>(Clause<T> clause) => 
-        clause.Operator = Utilities.ToOperatorSign(_operator);
+    private void AddClauseOperator<T>(Clause<T> clause) =>
+        clause.Operator = _operator.ToStringOperator();
 }

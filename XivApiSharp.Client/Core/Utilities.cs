@@ -6,22 +6,15 @@ internal static class Utilities
 {
     public static string ToOperatorSign(ClauseOperators op)
     {
-        switch (op)
+        return op switch
         {
-            case ClauseOperators.EqualTo:
-                return "=";
-            case ClauseOperators.PartiallyEqualTo:
-                return "~";
-            case ClauseOperators.LessThan:
-                return "<";
-            case ClauseOperators.LessThanOrEqualTo:
-                return "<=";
-            case ClauseOperators.GreaterThan:
-                return ">";
-            case ClauseOperators.GreaterThanOrEqualTo:
-                return ">=";
-            default:
-                throw new ArgumentOutOfRangeException(nameof(op), op, null);
-        }
+            ClauseOperators.EqualTo => "=",
+            ClauseOperators.PartiallyEqualTo => "~",
+            ClauseOperators.LessThan => "<",
+            ClauseOperators.LessThanOrEqualTo => "<=",
+            ClauseOperators.GreaterThan => ">",
+            ClauseOperators.GreaterThanOrEqualTo => ">=",
+            _ => throw new ArgumentOutOfRangeException(nameof(op), op, null)
+        };
     }
 }

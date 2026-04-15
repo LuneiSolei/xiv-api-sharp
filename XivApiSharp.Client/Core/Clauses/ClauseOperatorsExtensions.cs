@@ -3,10 +3,23 @@ using XivApiSharp.Client.Core.Enums;
 
 namespace XivApiSharp.Client.Core.Clauses;
 
+/// <summary>
+/// Extension methods for <see cref="ClauseOperators"/>.
+/// </summary>
 public static class ClauseOperatorsExtensions
 {
     extension(ClauseOperators op)
     {
+        /// <summary>
+        /// Converts the instance into its string representation.
+        /// </summary>
+        /// <returns>
+        /// The symbol(s) that represent the operator in the
+        /// <see cref="QueryString"/>
+        /// </returns>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// Indicates that an invalid operator option was used.
+        /// </exception>
         public string Stringify()
         {
             return op switch

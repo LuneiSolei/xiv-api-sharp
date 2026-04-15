@@ -20,7 +20,7 @@ public class ClauseTests
 {
     private static IEnumerable<TestCaseData> StringClauseTestCases()
     {
-        TestConfig config = AssemblySetup.TestConfig;
+        TestConfig config = ConfigSetup.TestConfig;
         
         // EqualTo
         yield return new TestCaseData(
@@ -37,7 +37,7 @@ public class ClauseTests
     
     private static IEnumerable<TestCaseData> BoolClauseTestCases()
     {
-        TestConfig config = AssemblySetup.TestConfig;
+        TestConfig config = ConfigSetup.TestConfig;
         
         // EqualTo
         yield return new TestCaseData(
@@ -48,7 +48,7 @@ public class ClauseTests
 
     private static IEnumerable<TestCaseData> IntClauseTestCases()
     {
-        TestConfig config = AssemblySetup.TestConfig;
+        TestConfig config = ConfigSetup.TestConfig;
         
         // EqualTo
         yield return new TestCaseData(
@@ -83,7 +83,7 @@ public class ClauseTests
 
     private static IEnumerable<TestCaseData> DoubleClauseTestCases()
     {
-        TestConfig config = AssemblySetup.TestConfig;
+        TestConfig config = ConfigSetup.TestConfig;
         
         // EqualTo
         yield return new TestCaseData(
@@ -118,7 +118,7 @@ public class ClauseTests
     
     private static IEnumerable<TestCaseData> DecimalClauseTestCases()
     {
-        TestConfig config = AssemblySetup.TestConfig;
+        TestConfig config = ConfigSetup.TestConfig;
 
         // EqualTo
         yield return new TestCaseData(

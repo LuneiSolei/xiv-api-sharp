@@ -5,11 +5,11 @@ using XivApiSharp.Tests.Options;
 namespace XivApiSharp.Tests;
 
 [SetUpFixture]
-public class AssemblySetup
+public class ConfigSetup
 {
     public static TestConfig TestConfig { get; } = new();
 
-    static AssemblySetup()
+    static ConfigSetup()
     {
         IConfiguration config = new ConfigurationBuilder()
             .SetBasePath(Directory.GetCurrentDirectory())

@@ -1,4 +1,4 @@
-namespace XivApiSharp.Client.Core.Clauses.Enums;
+namespace XivApiSharp.Client.Core.Clauses;
 
 /// <summary>
 /// Represents the operation that the clause will use to compare its value to.

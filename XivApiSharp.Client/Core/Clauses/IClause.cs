@@ -1,4 +1,4 @@
-namespace XivApiSharp.Client.Core.Clauses.Interfaces;
+namespace XivApiSharp.Client.Core.Clauses;
 
 /// <summary>
 /// Defines a clause (filter/condition) as defined by the XIV API QueryString,

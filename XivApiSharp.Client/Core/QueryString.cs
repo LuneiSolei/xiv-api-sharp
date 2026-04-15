@@ -1,5 +1,4 @@
 using XivApiSharp.Client.Core.Clauses;
-using XivApiSharp.Client.Core.Clauses.Interfaces;
 
 namespace XivApiSharp.Client.Core;
 

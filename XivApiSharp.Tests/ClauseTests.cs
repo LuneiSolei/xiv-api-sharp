@@ -1,13 +1,4 @@
-﻿/* Tests the following:
- *     PartiallyEqualTo (string)
- *     EqualTo (string, bool, INumber)
- *     GreaterThan (INumber)
- *     GreaterThanOrEqualTo (INumber)
- *     LessThan (INumber)
- *     LessThanOrEqualTo (INumber)
- */
-
-using XivApiSharp.Client.Core.Clauses;
+﻿using XivApiSharp.Client.Core.Clauses;
 using XivApiSharp.Client.Services;
 using XivApiSharp.Client.Infrastructure.Requests.Clauses.Steps;
 using XivApiSharp.Tests.Options;
@@ -93,25 +84,25 @@ public class ClauseTests
         
         // GreaterThan
         yield return new TestCaseData(
-                config.Clauses.GreaterThan.IntTest, 
+                config.Clauses.GreaterThan.DoubleTest, 
                 (Func<IOperatorStep, double, Clause<double>>)((step, value) => step.GreaterThan(value)))
             .SetName("GreaterThan (double)");
         
         // GreaterThanOrEqualTo
         yield return new TestCaseData(
-                config.Clauses.GreaterThanOrEqualTo.IntTest, 
+                config.Clauses.GreaterThanOrEqualTo.DoubleTest, 
                 (Func<IOperatorStep, double, Clause<double>>)((step, value) => step.GreaterThanOrEqualTo(value)))
             .SetName("GreaterThanOrEqualTo (double)");
         
         // LessThan
         yield return new TestCaseData(
-                config.Clauses.LessThan.IntTest, 
+                config.Clauses.LessThan.DoubleTest, 
                 (Func<IOperatorStep, double, Clause<double>>)((step, value) => step.LessThan(value)))
             .SetName("LessThan (double)");
         
         // LessThanOrEqualTo
         yield return new TestCaseData(
-                config.Clauses.LessThanOrEqualTo.IntTest, 
+                config.Clauses.LessThanOrEqualTo.DoubleTest, 
                 (Func<IOperatorStep, double, Clause<double>>)((step, value) => step.LessThanOrEqualTo(value)))
             .SetName("LessThanOrEqualTo (double)");
     }
@@ -128,25 +119,25 @@ public class ClauseTests
         
         // GreaterThan
         yield return new TestCaseData(
-                config.Clauses.GreaterThan.IntTest, 
+                config.Clauses.GreaterThan.DecimalTest, 
                 (Func<IOperatorStep, decimal, Clause<decimal>>)((step, value) => step.GreaterThan(value)))
             .SetName("GreaterThan (decimal)");
         
         // GreaterThanOrEqualTo
         yield return new TestCaseData(
-                config.Clauses.GreaterThanOrEqualTo.IntTest, 
+                config.Clauses.GreaterThanOrEqualTo.DecimalTest, 
                 (Func<IOperatorStep, decimal, Clause<decimal>>)((step, value) => step.GreaterThanOrEqualTo(value)))
             .SetName("GreaterThanOrEqualTo (decimal)");
         
         // LessThan
         yield return new TestCaseData(
-                config.Clauses.LessThan.IntTest, 
+                config.Clauses.LessThan.DecimalTest, 
                 (Func<IOperatorStep, decimal, Clause<decimal>>)((step, value) => step.LessThan(value)))
             .SetName("LessThan (int)");
         
         // LessThanOrEqualTo
         yield return new TestCaseData(
-                config.Clauses.LessThanOrEqualTo.IntTest, 
+                config.Clauses.LessThanOrEqualTo.DecimalTest, 
                 (Func<IOperatorStep, decimal, Clause<decimal>>)((step, value) => step.LessThanOrEqualTo(value)))
             .SetName("LessThanOrEqualTo (decimal)");
     }

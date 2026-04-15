@@ -1,4 +1,6 @@
-namespace XivApiSharp.Client.Core.Clauses;
+using XivApiSharp.Client.Core.Clauses;
+
+namespace XivApiSharp.Client.Core.Extensions;
 
 /// <summary>
 /// Extension methods for <see cref="ClauseOperators"/>.

@@ -1,6 +1,7 @@
 using System.Numerics;
 using System.Web;
 using XivApiSharp.Client.Core.Clauses;
+using XivApiSharp.Client.Core.Extensions;
 using XivApiSharp.Client.Infrastructure.Requests.Clauses.Steps;
 
 namespace XivApiSharp.Client.Infrastructure.Requests.Clauses;

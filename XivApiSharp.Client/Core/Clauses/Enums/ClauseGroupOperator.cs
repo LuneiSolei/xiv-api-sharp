@@ -1,4 +1,4 @@
-namespace XivApiSharp.Client.Core.Enums;
+namespace XivApiSharp.Client.Core.Clauses.Enums;
 
 public enum ClauseGroupOperator
 {

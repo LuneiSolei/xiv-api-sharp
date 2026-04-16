@@ -20,16 +20,20 @@ public class ClauseBuilder : IInitialClauseBuilderStep, IConditionStep,
     private ClauseConditionals _conditionals;
     private ClauseOperators _operator;
     
+    /// <summary>
+    /// Internal empty constructor to prevent external instantiation.
+    /// </summary>
     internal ClauseBuilder() {}
 
-    // WhereField Step
+    /// <inheritdoc/>
     public IConditionStep WhereSpecifier(string name)
     {
         _name = name;
         
         return this;
     }
-
+    
+    /// <inheritdoc/>
     public IOperatorStep MustBe
     {
         get
@@ -40,6 +44,7 @@ public class ClauseBuilder : IInitialClauseBuilderStep, IConditionStep,
         }
     }
 
+    /// <inheritdoc/>
     public IOperatorStep MustNotBe
     {
         get
@@ -49,29 +54,36 @@ public class ClauseBuilder : IInitialClauseBuilderStep, IConditionStep,
             return this;
         }
     }
-
-    // Operator Step
+    
+    /// <inheritdoc/>
     public Clause<string> PartiallyEqualTo(string value) =>
         BuildClause(ClauseOperators.PartiallyEqualTo, value);
 
+    /// <inheritdoc/>
     public Clause<string> EqualTo(string value) =>
         BuildClause(ClauseOperators.EqualTo, value);
 
+    /// <inheritdoc/>
     public Clause<bool> EqualTo(bool value) =>
         BuildClause(ClauseOperators.EqualTo, value);
 
+    /// <inheritdoc/>
     public Clause<T> EqualTo<T>(T value) where T : INumber<T> =>
         BuildClause(ClauseOperators.EqualTo, value);
 
+    /// <inheritdoc/>
     public Clause<T> GreaterThan<T>(T value) where T : INumber<T> =>
         BuildClause(ClauseOperators.GreaterThan, value);
 
+    /// <inheritdoc/>
     public Clause<T> GreaterThanOrEqualTo<T>(T value) where T : INumber<T> =>
         BuildClause(ClauseOperators.GreaterThanOrEqualTo, value);
-    
+
+    /// <inheritdoc/>
     public Clause<T> LessThan<T>(T value) where T : INumber<T> =>
         BuildClause(ClauseOperators.LessThan, value);
 
+    /// <inheritdoc/>
     public Clause<T> LessThanOrEqualTo<T>(T value) where T : INumber<T> =>
         BuildClause(ClauseOperators.LessThanOrEqualTo, value);
 

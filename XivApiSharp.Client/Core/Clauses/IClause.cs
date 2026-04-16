@@ -1,8 +1,8 @@
 namespace XivApiSharp.Client.Core.Clauses;
 
 /// <summary>
-/// Defines a clause (filter/condition) as defined by the XIV API QueryString,
-/// combining a field specifier, comparison operator, and value.
+/// Defines a clause (filter/condition) as defined by the XIV API QueryString, combining a field specifier,
+/// comparison operator, a value, and (optionally) a decorator.
 /// </summary>
 /// <remarks>
 /// Implementations of <see cref="IClause"/> are expected to provide a strongly-typed <c>Value</c>

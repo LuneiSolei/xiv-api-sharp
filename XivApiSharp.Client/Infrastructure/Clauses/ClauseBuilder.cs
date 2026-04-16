@@ -1,5 +1,6 @@
 using System.Numerics;
 using System.Web;
+using XivApiSharp.Client.Core;
 using XivApiSharp.Client.Core.Clauses;
 using XivApiSharp.Client.Core.Extensions;
 using XivApiSharp.Client.Infrastructure.Clauses.Steps;
@@ -7,24 +8,11 @@ using XivApiSharp.Client.Infrastructure.Clauses.Steps;
 namespace XivApiSharp.Client.Infrastructure.Clauses;
 
 /// <summary>
-/// Builds the specific query parameter used by XIV API in the url string.
-/// This does <b>NOT</b> represent the actual query of the url. This query
-/// string contains an ordered list of clauses and parameters, in which both
-/// have operators, joined by an ampersand (&amp;).
+/// Builds a singular clause for use in a <see cref="QueryString"/>.
 /// </summary>
 /// <remarks>
-///     <para>
-///         <b>Parameter (param)</b> - Single key-value pair.
-///     </para>
-///     <para>
-///         <b>Clause</b> - Logical grouping/condition built from one or more
-///         parameters.
-///     </para>
-///     <para>
-///         <b>Operator (op)</b> - Symbol representing a specific operation
-///         (=, ~, +, -, etc.)
-///     </para>
 /// </remarks>
+/// <seealso cref="Clause{T}">Clause&lt;T&gt;</seealso>
 public class ClauseBuilder : IInitialClauseBuilderStep, IConditionStep,
     IOperatorStep 
 {
@@ -42,7 +30,7 @@ public class ClauseBuilder : IInitialClauseBuilderStep, IConditionStep,
         return this;
     }
 
-    public IOperatorStep Is
+    public IOperatorStep MustBe
     {
         get
         {
@@ -52,7 +40,7 @@ public class ClauseBuilder : IInitialClauseBuilderStep, IConditionStep,
         }
     }
 
-    public IOperatorStep IsNot
+    public IOperatorStep MustNotBe
     {
         get
         {

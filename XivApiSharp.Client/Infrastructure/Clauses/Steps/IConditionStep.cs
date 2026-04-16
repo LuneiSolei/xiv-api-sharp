@@ -2,6 +2,6 @@ namespace XivApiSharp.Client.Infrastructure.Clauses.Steps;
 
 public interface IConditionStep
 {
-    IOperatorStep Is { get; }
-    IOperatorStep IsNot { get; }
+    IOperatorStep MustBe { get; }
+    IOperatorStep MustNotBe { get; }
 }

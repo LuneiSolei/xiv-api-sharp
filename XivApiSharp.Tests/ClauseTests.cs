@@ -150,7 +150,7 @@ public class ClauseTests
         Clause<string> clause = buildClause(
             XivApiService.NewClause()
                 .WhereSpecifier(opts.Specifier)
-                .Is, 
+                .MustBe, 
             opts.Value);
         
         Assert.That(clause.ToString(), 
@@ -165,7 +165,7 @@ public class ClauseTests
         Clause<bool> clause = buildClause(
             XivApiService.NewClause()
                 .WhereSpecifier(opts.Specifier)
-                .Is, opts.Value);
+                .MustBe, opts.Value);
         
         Assert.That(clause.ToString(),
             Is.EqualTo(opts.ExpectedValue));
@@ -179,7 +179,7 @@ public class ClauseTests
         Clause<int> clause = buildClause(
             XivApiService.NewClause()
                 .WhereSpecifier(opts.Specifier)
-                .Is, opts.Value);
+                .MustBe, opts.Value);
         
         Assert.That(clause.ToString(),
             Is.EqualTo(opts.ExpectedValue));
@@ -193,7 +193,7 @@ public class ClauseTests
         Clause<double> clause = buildClause(
             XivApiService.NewClause()
                 .WhereSpecifier(opts.Specifier)
-                .Is, opts.Value);
+                .MustBe, opts.Value);
         
         Assert.That(clause.ToString(),
             Is.EqualTo(opts.ExpectedValue));
@@ -207,7 +207,7 @@ public class ClauseTests
         Clause<decimal> clause = buildClause(
             XivApiService.NewClause()
                 .WhereSpecifier(opts.Specifier)
-                .Is, opts.Value);
+                .MustBe, opts.Value);
         
         Assert.That(clause.ToString(),
             Is.EqualTo(opts.ExpectedValue));

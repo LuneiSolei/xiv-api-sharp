@@ -49,7 +49,7 @@ public record QueryString
     /// query.AddClause(clause);
     /// </code>
     /// </example>
-    public void AddClause<T>(Clause<T> clause) => 
+    public void AddClause(IClause clause) => 
         Clauses.Add(clause);
 
     /// <summary>
@@ -65,7 +65,7 @@ public record QueryString
     ///     .Is.GreaterThanOrEqualTo(4);
     /// </code>
     /// </example>
-    public void AddClauses<T>(IEnumerable<Clause<T>> clauses) =>
+    public void AddClauses(IEnumerable<IClause> clauses) =>
         Clauses.AddRange(clauses);
 
     /// <summary>

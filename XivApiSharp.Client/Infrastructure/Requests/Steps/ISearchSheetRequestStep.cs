@@ -10,8 +10,8 @@ public interface ISearchSheetRequestStep
     ISearchSheetRequestStep WithSheets(List<string> sheets);
     
     // Query
-    ISearchSheetRequestStep WithClause<T>(Clause<T> clause);
-    ISearchSheetRequestStep WithClauses<T>(IEnumerable<Clause<T>> clauses);
+    ISearchSheetRequestStep WithClause<T>(IClause clause);
+    ISearchSheetRequestStep WithClauses<T>(IEnumerable<IClause> clauses);
     ISearchSheetRequestStep WithClauseGroup<T>(ClauseGroup group);
     ISearchSheetRequestStep WithClauseGroups<T>(IEnumerable<ClauseGroup> groups);
     

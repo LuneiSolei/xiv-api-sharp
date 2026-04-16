@@ -50,7 +50,7 @@ public sealed class SearchSheetRequest : XivApiRequest, ISearchSheetRequestStep
         return this;
     }
 
-    public ISearchSheetRequestStep WithClause<T>(Clause<T> clause)
+    public ISearchSheetRequestStep WithClause<T>(IClause clause)
     {
         _queryString ??= new QueryString();
         _queryString.AddClause(clause);
@@ -58,7 +58,7 @@ public sealed class SearchSheetRequest : XivApiRequest, ISearchSheetRequestStep
         return this;
     }
     
-    public ISearchSheetRequestStep WithClauses<T>(IEnumerable<Clause<T>> clauses)
+    public ISearchSheetRequestStep WithClauses<T>(IEnumerable<IClause> clauses)
     {
         _queryString ??= new QueryString();
         _queryString.AddClauses(clauses);

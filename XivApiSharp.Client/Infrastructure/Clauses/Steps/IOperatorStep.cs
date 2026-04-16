@@ -20,8 +20,8 @@ public interface IOperatorStep
     /// <returns>
     /// An individual <see cref="Clause{T}">Clause&lt;T&gt;</see> to be used with a <see cref="QueryString"/>.
     /// </returns>
-    Clause<string> EqualTo(string value);
-    
+    IClause EqualTo(string value);
+
     /// <summary>
     /// Sets the clause to use the equal to operator (=) against the provided value.
     /// </summary>
@@ -29,8 +29,8 @@ public interface IOperatorStep
     /// <returns>
     /// An individual <see cref="Clause{T}">Clause&lt;T&gt;</see> to be used with a <see cref="QueryString"/>.
     /// </returns>
-    Clause<bool> EqualTo(bool value);
-    
+    IClause EqualTo(bool value);
+
     /// <summary>
     /// Sets the clause to use the equal to operator (=) against the provided value.
     /// </summary>
@@ -41,7 +41,7 @@ public interface IOperatorStep
     /// <returns>
     /// An individual <see cref="Clause{T}">Clause&lt;T&gt;</see> to be used with a <see cref="QueryString"/>.
     /// </returns>
-    Clause<T> EqualTo<T>(T value) where T : INumber<T>;
+    IClause EqualTo<T>(T value) where T : INumber<T>;
     
     /// <summary>
     /// Sets the clause to use the partial string match operator (~) against the provided value.
@@ -50,8 +50,8 @@ public interface IOperatorStep
     /// <returns>
     /// An individual <see cref="Clause{T}">Clause&lt;T&gt;</see> to be used with a <see cref="QueryString"/>.
     /// </returns>
-    Clause<string> PartiallyEqualTo(string value);
-    
+    IClause PartiallyEqualTo(string value);
+
     /// <summary>
     /// Sets the clause to use the greater than operator (&gt;) against the provided value.
     /// </summary>
@@ -62,8 +62,8 @@ public interface IOperatorStep
     /// <returns>
     /// An individual <see cref="Clause{T}">Clause&lt;T&gt;</see> to be used with a <see cref="QueryString"/>.
     /// </returns>
-    Clause<T> GreaterThan<T>(T value) where T : INumber<T>;
-    
+    IClause GreaterThan<T>(T value) where T : INumber<T>;
+
     /// <summary>
     /// Sets the clause to use the greater than or equal to operator (&gt;=) against the provided value.
     /// </summary>
@@ -74,8 +74,8 @@ public interface IOperatorStep
     /// <returns>
     /// An individual <see cref="Clause{T}">Clause&lt;T&gt;</see> to be used with a <see cref="QueryString"/>.
     /// </returns>
-    Clause<T> GreaterThanOrEqualTo<T>(T value) where T : INumber<T>;
-    
+    IClause GreaterThanOrEqualTo<T>(T value) where T : INumber<T>;
+
     /// <summary>
     /// Sets the clause to use the less than operator (&lt;) against the provided value.
     /// </summary>
@@ -86,8 +86,8 @@ public interface IOperatorStep
     /// <returns>
     /// An individual <see cref="Clause{T}">Clause&lt;T&gt;</see> to be used with a <see cref="QueryString"/>.
     /// </returns>
-    Clause<T> LessThan<T>(T value) where T : INumber<T>;
-    
+    IClause LessThan<T>(T value) where T : INumber<T>;
+
     /// <summary>
     /// Sets the clause to use the less than or equal to operator (&lt;=) against the provided value.
     /// </summary>
@@ -98,5 +98,5 @@ public interface IOperatorStep
     /// <returns>
     /// An individual <see cref="Clause{T}">Clause&lt;T&gt;</see> to be used with a <see cref="QueryString"/>.
     /// </returns>
-    Clause<T> LessThanOrEqualTo<T>(T value) where T : INumber<T>;
+    IClause LessThanOrEqualTo<T>(T value) where T : INumber<T>;
 }

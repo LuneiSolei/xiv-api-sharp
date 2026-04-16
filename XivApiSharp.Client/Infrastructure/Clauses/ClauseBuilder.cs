@@ -65,35 +65,35 @@ public class ClauseBuilder : IInitialClauseBuilderStep, IConditionStep,
     }
     
     /// <inheritdoc/>
-    public Clause<string> PartiallyEqualTo(string value) =>
+    public IClause PartiallyEqualTo(string value) =>
         BuildClause(ClauseOperators.PartiallyEqualTo, value);
 
     /// <inheritdoc/>
-    public Clause<string> EqualTo(string value) =>
+    public IClause EqualTo(string value) =>
         BuildClause(ClauseOperators.EqualTo, value);
 
     /// <inheritdoc/>
-    public Clause<bool> EqualTo(bool value) =>
+    public IClause EqualTo(bool value) =>
         BuildClause(ClauseOperators.EqualTo, value);
 
     /// <inheritdoc/>
-    public Clause<T> EqualTo<T>(T value) where T : INumber<T> =>
+    public IClause EqualTo<T>(T value) where T : INumber<T> =>
         BuildClause(ClauseOperators.EqualTo, value);
 
     /// <inheritdoc/>
-    public Clause<T> GreaterThan<T>(T value) where T : INumber<T> =>
+    public IClause GreaterThan<T>(T value) where T : INumber<T> =>
         BuildClause(ClauseOperators.GreaterThan, value);
 
     /// <inheritdoc/>
-    public Clause<T> GreaterThanOrEqualTo<T>(T value) where T : INumber<T> =>
+    public IClause GreaterThanOrEqualTo<T>(T value) where T : INumber<T> =>
         BuildClause(ClauseOperators.GreaterThanOrEqualTo, value);
 
     /// <inheritdoc/>
-    public Clause<T> LessThan<T>(T value) where T : INumber<T> =>
+    public IClause LessThan<T>(T value) where T : INumber<T> =>
         BuildClause(ClauseOperators.LessThan, value);
 
     /// <inheritdoc/>
-    public Clause<T> LessThanOrEqualTo<T>(T value) where T : INumber<T> =>
+    public IClause LessThanOrEqualTo<T>(T value) where T : INumber<T> =>
         BuildClause(ClauseOperators.LessThanOrEqualTo, value);
     
     /// <summary>

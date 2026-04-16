@@ -86,7 +86,7 @@ public class ClauseBuilder : IInitialClauseBuilderStep, IConditionStep,
         BuildClause(ClauseOperators.LessThanOrEqualTo, value);
 
     // Clause Building
-    private Clause<T> BuildClause<T>(ClauseOperators op, T value)
+    private Clause<T> BuildClause<T>(ClauseOperators op, T value) where T : notnull
     {
         Clause<T> clause = BuildCommon<T>(op);
         clause.Value = value;
@@ -102,7 +102,7 @@ public class ClauseBuilder : IInitialClauseBuilderStep, IConditionStep,
         return clause;
     }
 
-    private Clause<T> BuildCommon<T>(ClauseOperators op)
+    private Clause<T> BuildCommon<T>(ClauseOperators op) where T : notnull
     {
         _operator = op;
         Clause<T> baseClause = new();
@@ -113,7 +113,7 @@ public class ClauseBuilder : IInitialClauseBuilderStep, IConditionStep,
         return baseClause;
     }
     
-    private void AddClauseSpecifier<T>(Clause<T> clause)
+    private void AddClauseSpecifier<T>(Clause<T> clause) where T : notnull
     {
         string specifier = _conditionals == ClauseConditionals.Is
             ? string.Empty
@@ -123,6 +123,6 @@ public class ClauseBuilder : IInitialClauseBuilderStep, IConditionStep,
         clause.Specifier = specifier;
     }
 
-    private void AddClauseOperator<T>(Clause<T> clause) =>
+    private void AddClauseOperator<T>(Clause<T> clause) where T : notnull =>
         clause.Operator = _operator.Stringify();
 }

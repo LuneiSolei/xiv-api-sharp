@@ -12,5 +12,5 @@ public interface IInitialClauseBuilderStep
     /// </summary>
     /// <param name="name">The name of the specifier to use.</param>
     /// <seealso cref="Clause{T}">Clause&lt;T&gt;</seealso>
-    IConditionStep WhereSpecifier(string name);
+    IConditionalStep WhereSpecifier(string name);
 }

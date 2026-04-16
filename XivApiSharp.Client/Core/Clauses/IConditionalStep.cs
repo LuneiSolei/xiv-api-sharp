@@ -5,7 +5,7 @@ namespace XivApiSharp.Client.Infrastructure.Clauses.Steps;
 /// <summary>
 /// Defines properties for a ClauseBuilder that determine the boolean state of the <see cref="Clause{T}">Clause&lt;T&gt;</see>.
 /// </summary>
-public interface IConditionStep
+public interface IConditionalStep
 {
     /// <summary>
     /// Indicates the clause <b>MUST</b> be matched for every result returned.

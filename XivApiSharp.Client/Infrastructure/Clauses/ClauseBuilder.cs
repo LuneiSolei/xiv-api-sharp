@@ -11,8 +11,7 @@ namespace XivApiSharp.Client.Infrastructure.Clauses;
 /// Builds a singular clause for use in a <see cref="QueryString"/>.
 /// </summary>
 /// <seealso cref="Clause{T}">Clause&lt;T&gt;</seealso>
-public class ClauseBuilder : IInitialClauseBuilderStep, IConditionStep,
-    IOperatorStep 
+public class ClauseBuilder : IClauseBuilder
 {
     /// <summary>
     /// The name of the specifier to be used when building the <see cref="Clause{T}">Clause&lt;T&gt;</see>.
@@ -35,7 +34,7 @@ public class ClauseBuilder : IInitialClauseBuilderStep, IConditionStep,
     internal ClauseBuilder() {}
 
     /// <inheritdoc/>
-    public IConditionStep WhereSpecifier(string name)
+    public IConditionalStep WhereSpecifier(string name)
     {
         _specifier = name;
         

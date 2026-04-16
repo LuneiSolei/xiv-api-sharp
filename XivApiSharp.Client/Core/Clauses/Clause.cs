@@ -10,7 +10,7 @@ internal class Clause<T> : IClause where T : notnull
     public string? Operator { get; set; }
     
     /// <summary>
-    /// See: <see cref="IClause.Value"/>
+    /// The value of clause to be compared./>
     /// </summary>
     public T? Value { get; set; }
 

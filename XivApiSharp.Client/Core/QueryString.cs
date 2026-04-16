@@ -39,7 +39,6 @@ public record QueryString
     /// Adds a single clause to the query string.
     /// </summary>
     /// <param name="clause">The clause to add.</param>
-    /// <typeparam name="T">The type of the value to be compared in the clause.</typeparam>
     /// <example>
     /// <code>
     /// QueryString query = new();
@@ -56,7 +55,6 @@ public record QueryString
     /// Adds a multiple single clauses to the query string.
     /// </summary>
     /// <param name="clauses">The clauses to add.</param>
-    /// <typeparam name="T">The type of the value to be compared.</typeparam>
     /// <example>
     /// <code>
     /// QueryString query = new();

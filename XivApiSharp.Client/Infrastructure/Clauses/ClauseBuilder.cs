@@ -29,9 +29,9 @@ public class ClauseBuilder : IClauseBuilder
     private ClauseOperators _operator;
     
     /// <summary>
-    /// Internal empty constructor to prevent external instantiation.
+    /// Creates a new instance of ClauseBuilder(). 
     /// </summary>
-    internal ClauseBuilder() {}
+    public ClauseBuilder() {}
 
     /// <inheritdoc/>
     public IConditionalStep WhereSpecifier(string name)

@@ -1,4 +1,4 @@
-using XivApiSharp.Client.Core.Enums;
+using XivApiSharp.Client.Core;
 using XivApiSharp.Client.Core.Options;
 
 namespace XivApiSharp.Client.Infrastructure.Requests;

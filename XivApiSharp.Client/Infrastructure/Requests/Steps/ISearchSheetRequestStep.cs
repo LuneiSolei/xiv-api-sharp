@@ -1,5 +1,5 @@
+using XivApiSharp.Client.Core;
 using XivApiSharp.Client.Core.Clauses;
-using XivApiSharp.Client.Core.Enums;
 
 namespace XivApiSharp.Client.Infrastructure.Requests.Steps;
 

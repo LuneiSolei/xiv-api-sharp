@@ -1,4 +1,4 @@
-namespace XivApiSharp.Client.Core.Enums;
+namespace XivApiSharp.Client.Core;
 
 public enum SchemaLanguage
 {

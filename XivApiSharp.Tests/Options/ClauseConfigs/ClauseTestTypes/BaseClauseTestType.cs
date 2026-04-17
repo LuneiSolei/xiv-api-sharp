@@ -8,7 +8,7 @@ public abstract class BaseClauseTestType<T>
     public string Specifier { get; set; } = null!;
     
     [Required(AllowEmptyStrings = false)]
-    public virtual T? Value { get; set; }
+    public required virtual T Value { get; set; }
 
     [Required(AllowEmptyStrings = false)]
     public string ExpectedValue { get; set; } = null!;

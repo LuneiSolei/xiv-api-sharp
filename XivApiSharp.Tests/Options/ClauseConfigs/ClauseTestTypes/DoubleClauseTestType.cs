@@ -2,5 +2,5 @@ namespace XivApiSharp.Tests.Options.ClauseConfigs.ClauseTestTypes;
 
 public class DoubleClauseTestType : BaseClauseTestType<double>
 {
-    public override double Value { get; set; }
+    public required override double Value { get; set; }
 }

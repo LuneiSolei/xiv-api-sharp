@@ -5,7 +5,7 @@ namespace XivApiSharp.Client.Core.Extensions;
 /// <summary>
 /// Extension methods for <see cref="ClauseOperators"/>.
 /// </summary>
-public static class ClauseOperatorsExtensions
+internal static class ClauseOperatorsExtensions
 {
     extension(ClauseOperators op)
     {

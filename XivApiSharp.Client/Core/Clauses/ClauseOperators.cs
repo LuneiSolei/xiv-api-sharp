@@ -4,7 +4,7 @@ namespace XivApiSharp.Client.Core.Clauses;
 /// Represents the operation that the clause will use to compare its value to.
 /// </summary>
 /// <seealso cref="Clause{T}">Clause&lt;T&gt;</seealso>
-public enum ClauseOperators
+internal enum ClauseOperators
 {
     /// <summary>
     /// Uses the <c>"~="</c> operator.

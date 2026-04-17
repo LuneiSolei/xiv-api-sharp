@@ -9,11 +9,11 @@ public enum ClauseConditionals
     /// <summary>
     /// Helper enum which specifies that the clause is used to exclude results.
     /// </summary>
-    IsNot,
+    MustBe,
     
     /// <summary>
     /// Helper enum which specifies that the clause is used to include results.
     /// </summary>
     /// <remarks>This is the default conditional.</remarks>
-    Is
+    MustNotBe
 }

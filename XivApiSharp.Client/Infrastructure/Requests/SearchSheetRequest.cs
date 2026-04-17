@@ -1,6 +1,5 @@
+using XivApiSharp.Client.Application.Clauses;
 using XivApiSharp.Client.Core;
-using XivApiSharp.Client.Core.ClauseGroups;
-using XivApiSharp.Client.Core.Clauses;
 using XivApiSharp.Client.Core.Extensions;
 using XivApiSharp.Client.Core.Options;
 using XivApiSharp.Client.Core.Requests;

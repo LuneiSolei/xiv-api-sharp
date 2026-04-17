@@ -1,7 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using XivApiSharp.Client.Core.Clauses;
-using XivApiSharp.Client.Infrastructure.Clauses;
-using XivApiSharp.Client.Services;
+using XivApiSharp.Client.Application.Clauses;
 using XivApiSharp.Tests.Options;
 using XivApiSharp.Tests.Options.ClauseConfigs.ClauseTestTypes;
 
@@ -17,13 +15,13 @@ public class ClauseTests
         // EqualTo
         yield return new TestCaseData(
                 config.Clauses.EqualTo.StringTest,
-                (Func<IOperatorStep, string, IClause>)((step, value) => step.EqualTo(value)))
+                (Func<IWithConditional, string, IClause>)((step, value) => step.EqualTo(value)))
             .SetName("EqualTo (string)");
         
         // PartiallyEqualTo
         yield return new TestCaseData(
                 config.Clauses.PartiallyEqualTo.StringTest,
-                (Func<IOperatorStep, string, IClause>)((step, value) => step.PartiallyEqualTo(value)))
+                (Func<IWithConditional, string, IClause>)((step, value) => step.PartiallyEqualTo(value)))
             .SetName("PartiallyEqualTo (bool)");
     }
     
@@ -34,7 +32,7 @@ public class ClauseTests
         // EqualTo
         yield return new TestCaseData(
                 config.Clauses.EqualTo.BoolTest,
-                (Func<IOperatorStep, bool, IClause>)((step, value) => step.EqualTo(value)))
+                (Func<IWithConditional, bool, IClause>)((step, value) => step.EqualTo(value)))
             .SetName("EqualTo (bool)");
     }
 
@@ -45,31 +43,31 @@ public class ClauseTests
         // EqualTo
         yield return new TestCaseData(
                 config.Clauses.EqualTo.IntTest, 
-                (Func<IOperatorStep, int, IClause>)((step, value) => step.EqualTo(value)))
+                (Func<IWithConditional, int, IClause>)((step, value) => step.EqualTo(value)))
             .SetName("EqualTo (int)");
         
         // GreaterThan
         yield return new TestCaseData(
                 config.Clauses.GreaterThan.IntTest, 
-                (Func<IOperatorStep, int, IClause>)((step, value) => step.GreaterThan(value)))
+                (Func<IWithConditional, int, IClause>)((step, value) => step.GreaterThan(value)))
             .SetName("GreaterThan (int)");
         
         // GreaterThanOrEqualTo
         yield return new TestCaseData(
                 config.Clauses.GreaterThanOrEqualTo.IntTest, 
-                (Func<IOperatorStep, int, IClause>)((step, value) => step.GreaterThanOrEqualTo(value)))
+                (Func<IWithConditional, int, IClause>)((step, value) => step.GreaterThanOrEqualTo(value)))
             .SetName("GreaterThanOrEqualTo (int)");
         
         // LessThan
         yield return new TestCaseData(
                 config.Clauses.LessThan.IntTest, 
-                (Func<IOperatorStep, int, IClause>)((step, value) => step.LessThan(value)))
+                (Func<IWithConditional, int, IClause>)((step, value) => step.LessThan(value)))
             .SetName("LessThan (int)");
         
         // LessThanOrEqualTo
         yield return new TestCaseData(
                 config.Clauses.LessThanOrEqualTo.IntTest, 
-                (Func<IOperatorStep, int, IClause>)((step, value) => step.LessThanOrEqualTo(value)))
+                (Func<IWithConditional, int, IClause>)((step, value) => step.LessThanOrEqualTo(value)))
             .SetName("LessThanOrEqualTo (int)");
     }
 
@@ -80,31 +78,31 @@ public class ClauseTests
         // EqualTo
         yield return new TestCaseData(
                 config.Clauses.EqualTo.DoubleTest,
-                (Func<IOperatorStep, double, IClause>)((step, value) => step.EqualTo(value)))
+                (Func<IWithConditional, double, IClause>)((step, value) => step.EqualTo(value)))
             .SetName("EqualTo (double)");
         
         // GreaterThan
         yield return new TestCaseData(
                 config.Clauses.GreaterThan.DoubleTest, 
-                (Func<IOperatorStep, double, IClause>)((step, value) => step.GreaterThan(value)))
+                (Func<IWithConditional, double, IClause>)((step, value) => step.GreaterThan(value)))
             .SetName("GreaterThan (double)");
         
         // GreaterThanOrEqualTo
         yield return new TestCaseData(
                 config.Clauses.GreaterThanOrEqualTo.DoubleTest, 
-                (Func<IOperatorStep, double, IClause>)((step, value) => step.GreaterThanOrEqualTo(value)))
+                (Func<IWithConditional, double, IClause>)((step, value) => step.GreaterThanOrEqualTo(value)))
             .SetName("GreaterThanOrEqualTo (double)");
         
         // LessThan
         yield return new TestCaseData(
                 config.Clauses.LessThan.DoubleTest, 
-                (Func<IOperatorStep, double, IClause>)((step, value) => step.LessThan(value)))
+                (Func<IWithConditional, double, IClause>)((step, value) => step.LessThan(value)))
             .SetName("LessThan (double)");
         
         // LessThanOrEqualTo
         yield return new TestCaseData(
                 config.Clauses.LessThanOrEqualTo.DoubleTest, 
-                (Func<IOperatorStep, double, IClause>)((step, value) => step.LessThanOrEqualTo(value)))
+                (Func<IWithConditional, double, IClause>)((step, value) => step.LessThanOrEqualTo(value)))
             .SetName("LessThanOrEqualTo (double)");
     }
     
@@ -115,38 +113,38 @@ public class ClauseTests
         // EqualTo
         yield return new TestCaseData(
                 config.Clauses.EqualTo.DecimalTest, 
-                (Func<IOperatorStep, decimal, IClause>)((step, value) => step.EqualTo(value)))
+                (Func<IWithConditional, decimal, IClause>)((step, value) => step.EqualTo(value)))
             .SetName("EqualTo (decimal)");
         
         // GreaterThan
         yield return new TestCaseData(
                 config.Clauses.GreaterThan.DecimalTest, 
-                (Func<IOperatorStep, decimal, IClause>)((step, value) => step.GreaterThan(value)))
+                (Func<IWithConditional, decimal, IClause>)((step, value) => step.GreaterThan(value)))
             .SetName("GreaterThan (decimal)");
         
         // GreaterThanOrEqualTo
         yield return new TestCaseData(
                 config.Clauses.GreaterThanOrEqualTo.DecimalTest, 
-                (Func<IOperatorStep, decimal, IClause>)((step, value) => step.GreaterThanOrEqualTo(value)))
+                (Func<IWithConditional, decimal, IClause>)((step, value) => step.GreaterThanOrEqualTo(value)))
             .SetName("GreaterThanOrEqualTo (decimal)");
         
         // LessThan
         yield return new TestCaseData(
                 config.Clauses.LessThan.DecimalTest, 
-                (Func<IOperatorStep, decimal, IClause>)((step, value) => step.LessThan(value)))
+                (Func<IWithConditional, decimal, IClause>)((step, value) => step.LessThan(value)))
             .SetName("LessThan (int)");
         
         // LessThanOrEqualTo
         yield return new TestCaseData(
                 config.Clauses.LessThanOrEqualTo.DecimalTest, 
-                (Func<IOperatorStep, decimal, IClause>)((step, value) => step.LessThanOrEqualTo(value)))
+                (Func<IWithConditional, decimal, IClause>)((step, value) => step.LessThanOrEqualTo(value)))
             .SetName("LessThanOrEqualTo (decimal)");
     }
 
     [TestCaseSource(nameof(StringClauseTestCases))]
     public void NewClause_BuildsStringCorrectly(
         StringClauseTestType opts,
-        Func<IOperatorStep, string, IClause> buildClause)
+        Func<IWithConditional, string, IClause> buildClause)
     {
         IClauseBuilder builder = TestsSetup.ServiceProvider
             .GetRequiredService<IClauseBuilder>();
@@ -161,7 +159,7 @@ public class ClauseTests
     [TestCaseSource(nameof(BoolClauseTestCases))]
     public void NewClause_BuildsBoolCorrectly(
         BoolClauseTestType opts,
-        Func<IOperatorStep, bool, IClause> buildClause)
+        Func<IWithConditional, bool, IClause> buildClause)
     {
         IClauseBuilder builder = TestsSetup.ServiceProvider
             .GetRequiredService<IClauseBuilder>();
@@ -176,7 +174,7 @@ public class ClauseTests
     [TestCaseSource(nameof(IntClauseTestCases))]
     public void NewClause_BuildsNumberCorrectly(
         IntClauseTestType opts,
-        Func<IOperatorStep, int, IClause> buildClause)
+        Func<IWithConditional, int, IClause> buildClause)
     {
         IClauseBuilder builder = TestsSetup.ServiceProvider
             .GetRequiredService<IClauseBuilder>();
@@ -191,7 +189,7 @@ public class ClauseTests
     [TestCaseSource(nameof(DoubleClauseTestCases))]
     public void NewClause_BuildsDoubleCorrectly(
         DoubleClauseTestType opts,
-        Func<IOperatorStep, double, IClause> buildClause)
+        Func<IWithConditional, double, IClause> buildClause)
     {
         IClauseBuilder builder = TestsSetup.ServiceProvider
             .GetRequiredService<IClauseBuilder>();
@@ -206,7 +204,7 @@ public class ClauseTests
     [TestCaseSource(nameof(DecimalClauseTestCases))]
     public void NewClause_BuildsDecimalCorrectly(
         DecimalClauseTestType opts,
-        Func<IOperatorStep, decimal, IClause> buildClause)
+        Func<IWithConditional, decimal, IClause> buildClause)
     {
         IClauseBuilder builder = TestsSetup.ServiceProvider
             .GetRequiredService<IClauseBuilder>();

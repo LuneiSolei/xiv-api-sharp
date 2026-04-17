@@ -3,11 +3,11 @@ using System.Reflection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
-using XivApiSharp.Client.Core.Clauses;
+using XivApiSharp.Client.Application.Clauses;
 using XivApiSharp.Client.Core.Options;
 using XivApiSharp.Client.Infrastructure.Clauses;
 
-namespace XivApiSharp.Client.Services;
+namespace XivApiSharp.Client.Application;
 
 public static class ServiceCollectionExtensions
 {

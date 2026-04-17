@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using XivApiSharp.Client.Services;
+using XivApiSharp.Client.Application;
 using XivApiSharp.Tests.Options;
 
 namespace XivApiSharp.Tests;

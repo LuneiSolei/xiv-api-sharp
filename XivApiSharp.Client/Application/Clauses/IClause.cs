@@ -1,9 +1,9 @@
-namespace XivApiSharp.Client.Core.Clauses;
+namespace XivApiSharp.Client.Application.Clauses;
 
 /// <summary>
-/// Represents a type that is used as a clause (filter/condition) as defined
-/// by the XIV API QueryString, combining a field specifier, comparison
-/// operator, a value, and (optionally) a decorator.
+/// Represents a type that is used as a clause as defined by the XIV API
+/// QueryString model. A clause combines a specifier, operator, a value, and
+/// an optional decorator.
 /// </summary>
 public interface IClause
 { 

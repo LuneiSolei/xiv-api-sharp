@@ -1,4 +1,4 @@
-namespace XivApiSharp.Client.Core.ClauseGroups;
+namespace XivApiSharp.Client.Application.Clauses;
  
 // TODO: Implement
 public interface IClauseGroup

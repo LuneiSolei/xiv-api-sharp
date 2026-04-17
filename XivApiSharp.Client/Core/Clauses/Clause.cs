@@ -1,3 +1,5 @@
+using XivApiSharp.Client.Application.Clauses;
+
 namespace XivApiSharp.Client.Core.Clauses;
 
 /// <inheritdoc />

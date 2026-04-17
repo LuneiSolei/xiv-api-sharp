@@ -10,13 +10,13 @@ public interface IClause
     /// <summary>
     /// Name of the field to compare the value against.
     /// </summary>
-    internal string? Specifier { get; set; }
+    internal string Specifier { get; set; }
     
     /// <summary>
     /// The comparison operator to use.
     /// </summary>
     internal ClauseOperators Operator { get; set; }
-    
+
     /// <summary>
     /// Converts the specifier, operator, and value of this instance into its
     /// string representation.

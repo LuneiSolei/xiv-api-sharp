@@ -1,7 +1,7 @@
 namespace XivApiSharp.Client.Core.Clauses;
 
 /// <inheritdoc />
-internal class Clause<T> : IClause where T : notnull
+internal sealed class Clause<T> : IClause where T : notnull
 {
     /// <inheritdoc />
     public string? Specifier { get; set; }

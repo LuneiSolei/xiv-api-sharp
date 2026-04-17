@@ -23,7 +23,7 @@ namespace XivApiSharp.Client.Core;
 /// 
 /// <seealso cref="Clause{T}">Clause&lt;T&gt;</seealso>
 /// <seealso cref="ClauseGroup"/>
-public record QueryString
+public sealed record QueryString
 {
     /// <summary>
     /// A collection of <see cref="ClauseGroups"/>.
@@ -71,7 +71,7 @@ public record QueryString
     /// </summary>
     /// <param name="group">The clause group to add.</param>
     // TODO: Add example code.
-    public void AddClauseGroup(ClauseGroup group) => 
+    public void AddClauseGroup(IClauseGroup group) => 
         ClauseGroups.Add(group);
     
     /// <summary>
@@ -79,7 +79,7 @@ public record QueryString
     /// </summary>
     /// <param name="groups">The clause groups to add.</param>
     // TODO: Add example code.
-    public void AddClauseGroups(IEnumerable<ClauseGroup> groups) =>
+    public void AddClauseGroups(IEnumerable<IClauseGroup> groups) =>
         ClauseGroups.AddRange(groups);
     
     /// <summary>

@@ -1,7 +1,7 @@
 namespace XivApiSharp.Client.Core.Clauses;
 
 // TODO: Implement
-public class ClauseGroup(ClauseGroupOperators? groupOperator) : IClauseGroup
+internal sealed class ClauseGroup(ClauseGroupOperators? groupOperator) : IClauseGroup
 {
     private List<IClause> Clauses { get; }
     private ClauseGroupOperators Operators { get; } = 

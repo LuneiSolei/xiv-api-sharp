@@ -10,7 +10,7 @@ namespace XivApiSharp.Client.Infrastructure.Clauses;
 /// Builds a singular clause for use in a <see cref="QueryString"/>.
 /// </summary>
 /// <seealso cref="Clause{T}">Clause&lt;T&gt;</seealso>
-public class ClauseBuilder : IClauseBuilder
+public sealed class ClauseBuilder : IClauseBuilder
 {
     /// <summary>
     /// The name of the specifier to be used when building the <see cref="Clause{T}">Clause&lt;T&gt;</see>.

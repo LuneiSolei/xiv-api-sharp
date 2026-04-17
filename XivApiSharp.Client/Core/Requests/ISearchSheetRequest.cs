@@ -11,8 +11,8 @@ public interface ISearchSheetRequest
     // Query
     ISearchSheetRequest WithClause<T>(IClause clause);
     ISearchSheetRequest WithClauses<T>(IEnumerable<IClause> clauses);
-    ISearchSheetRequest WithClauseGroup<T>(ClauseGroup group);
-    ISearchSheetRequest WithClauseGroups<T>(IEnumerable<ClauseGroup> groups);
+    ISearchSheetRequest WithClauseGroup<T>(IClauseGroup group);
+    ISearchSheetRequest WithClauseGroups<T>(IEnumerable<IClauseGroup> groups);
     
     // Parameters
     ISearchSheetRequest WithVersion(string version);

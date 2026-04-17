@@ -66,7 +66,7 @@ public sealed class SearchSheetRequest : XivApiRequest, ISearchSheetRequest
         return this;
     }
 
-    public ISearchSheetRequest WithClauseGroup<T>(ClauseGroup group)
+    public ISearchSheetRequest WithClauseGroup<T>(IClauseGroup group)
     {
         _queryString ??= new QueryString();
         _queryString.AddClauseGroup(group);
@@ -75,7 +75,7 @@ public sealed class SearchSheetRequest : XivApiRequest, ISearchSheetRequest
     }
 
     public ISearchSheetRequest WithClauseGroups<T>(
-        IEnumerable<ClauseGroup> groups)
+        IEnumerable<IClauseGroup> groups)
     {
         _queryString ??= new QueryString();
         _queryString.AddClauseGroups(groups);

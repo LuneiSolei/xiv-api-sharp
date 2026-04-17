@@ -6,7 +6,7 @@ namespace XivApiSharp.Client.Core.Clauses;
 /// an optional decorator.
 /// </summary>
 public interface IClause
-{ 
+{
     /// <summary>
     /// Name of the field to compare the value against.
     /// </summary>
@@ -17,6 +17,11 @@ public interface IClause
     /// </summary>
     internal ClauseOperators Operator { get; set; }
 
+    /// <summary>
+    /// The boolean operator state of the clause.
+    /// </summary>
+    internal ClauseConditionals Condition { get; set; }
+    
     /// <summary>
     /// Converts the specifier, operator, and value of this instance into its
     /// string representation.

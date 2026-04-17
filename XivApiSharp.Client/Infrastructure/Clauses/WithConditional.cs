@@ -20,12 +20,6 @@ internal sealed class WithConditional(string specifier,
     /// must meet.
     /// </summary>
     private readonly ClauseConditionals _condition = condition;
-    
-    /// <summary>
-    /// The matching operation with which the specifier and value will be
-    /// compared.
-    /// </summary>
-    private ClauseOperators _operator;
 
     /// <inheritdoc/>
     public IClause PartiallyEqualTo(string value) =>
@@ -69,36 +63,11 @@ internal sealed class WithConditional(string specifier,
     /// <returns>A fully constructed clause.</returns>
     /// <seealso cref="ClauseOperators"/>
     /// <seealso cref="IClause"/>
-
     private IClause BuildClause<T>(ClauseOperators op, T value) where T : notnull
     {
-        IClause newClause = clauseFactory.CreateClause(_specifier, op, value);
+        IClause newClause = clauseFactory.CreateClause(_specifier, op, value, 
+            _condition);
 
         return newClause;
     }
-    
-    /// <summary>
-    /// Adds the builder's stored specifier to the clause.
-    /// </summary>
-    /// <param name="clause">The clause to add the specifier to.</param>
-    /// <seealso cref="IClause"/>
-    private void AddSpecifier(IClause clause)
-    {
-        string specifier = _condition == ClauseConditionals.MustBe
-            ? string.Empty
-            : "-";
-
-        specifier += $"{_specifier}";
-        clause.Specifier = specifier;
-    }
-
-    /// <summary>
-    /// Adds the builder's stored operator to the clause.
-    /// </summary>
-    /// <param name="clause">The clause to add the operator to.</param>
-    /// <typeparam name="T">The type of the clause value.</typeparam>
-    /// <seealso cref="ClauseOperators"/>
-    /// <seealso cref="IClause"/>
-    private void AddOperator(IClause clause) =>
-        clause.Operator = _operator;
 }

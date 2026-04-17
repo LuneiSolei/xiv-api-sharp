@@ -5,9 +5,9 @@ internal class ClauseFactory : IClauseFactory
 {
     /// <inheritdoc/>
     IClause IClauseFactory.CreateClause<T>(string specifier, ClauseOperators op,
-        T value)
+        T value, ClauseConditionals condition)
     {
-        Clause<T> clause = new(specifier, op, value);
+        Clause<T> clause = new(specifier, op, value, condition);
         
         return clause;
     }

@@ -1,6 +1,4 @@
-using XivApiSharp.Client.Core.Clauses;
-
-namespace XivApiSharp.Client.Infrastructure.Clauses.Steps;
+namespace XivApiSharp.Client.Core.Clauses;
 
 /// <summary>
 /// Defines properties for a ClauseBuilder that determine the boolean state of the <see cref="Clause{T}">Clause&lt;T&gt;</see>.

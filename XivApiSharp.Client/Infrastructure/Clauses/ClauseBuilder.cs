@@ -3,7 +3,6 @@ using System.Web;
 using XivApiSharp.Client.Core;
 using XivApiSharp.Client.Core.Clauses;
 using XivApiSharp.Client.Core.Extensions;
-using XivApiSharp.Client.Infrastructure.Clauses.Steps;
 
 namespace XivApiSharp.Client.Infrastructure.Clauses;
 

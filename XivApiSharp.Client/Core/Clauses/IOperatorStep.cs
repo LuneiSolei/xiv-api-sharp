@@ -1,8 +1,6 @@
 using System.Numerics;
-using XivApiSharp.Client.Core;
-using XivApiSharp.Client.Core.Clauses;
 
-namespace XivApiSharp.Client.Infrastructure.Clauses.Steps;
+namespace XivApiSharp.Client.Core.Clauses;
 
 /// <summary>
 /// Defines methods for selecting comparison operators to create a single query clause.

@@ -1,9 +1,9 @@
 using XivApiSharp.Client.Core.Options;
-using XivApiSharp.Client.Infrastructure.Requests.Steps;
+using XivApiSharp.Client.Core.Requests;
 
 namespace XivApiSharp.Client.Infrastructure.Requests;
 
-public sealed class RequestBuilder : IInitialRequestBuilderStep
+public sealed class RequestBuilder : IRequestBuilder
 {
     private readonly XivApiOptions _opts;
 
@@ -12,7 +12,7 @@ public sealed class RequestBuilder : IInitialRequestBuilderStep
         _opts = opts;
     }
 
-    public ISearchSheetRequestStep AsSearch()
+    public ISearchSheetRequest AsSearch()
     {
         return new SearchSheetRequest(_opts);
     }

@@ -2,11 +2,11 @@ using XivApiSharp.Client.Core;
 using XivApiSharp.Client.Core.Clauses;
 using XivApiSharp.Client.Core.Extensions;
 using XivApiSharp.Client.Core.Options;
-using XivApiSharp.Client.Infrastructure.Requests.Steps;
+using XivApiSharp.Client.Core.Requests;
 
 namespace XivApiSharp.Client.Infrastructure.Requests;
 
-public sealed class SearchSheetRequest : XivApiRequest, ISearchSheetRequestStep
+public sealed class SearchSheetRequest : XivApiRequest, ISearchSheetRequest
 {
     private List<string>? _sheets;
     private QueryString? _queryString;
@@ -22,7 +22,7 @@ public sealed class SearchSheetRequest : XivApiRequest, ISearchSheetRequestStep
     /// <remarks>At least one must be specified if not querying a cursor.</remarks>
     /// <seealso cref="WithSheets"/>
     /// <param name="sheet">Name of the Excel sheet.</param>
-    public ISearchSheetRequestStep WithSheet(string sheet)
+    public ISearchSheetRequest WithSheet(string sheet)
     {
         _sheets?.Add(sheet.ToFirstCapital());
         
@@ -35,7 +35,7 @@ public sealed class SearchSheetRequest : XivApiRequest, ISearchSheetRequestStep
     /// <remarks>At least one must be specified if not querying a cursor.</remarks>
     /// <param name="sheets"></param>
     /// <seealso cref="WithSheet"/>
-    public ISearchSheetRequestStep WithSheets(List<string> sheets)
+    public ISearchSheetRequest WithSheets(List<string> sheets)
     {
         // XIV API requires capitalized sheet names
         for (int i = 0; i > sheets.Count; i++)
@@ -50,7 +50,7 @@ public sealed class SearchSheetRequest : XivApiRequest, ISearchSheetRequestStep
         return this;
     }
 
-    public ISearchSheetRequestStep WithClause<T>(IClause clause)
+    public ISearchSheetRequest WithClause<T>(IClause clause)
     {
         _queryString ??= new QueryString();
         _queryString.AddClause(clause);
@@ -58,7 +58,7 @@ public sealed class SearchSheetRequest : XivApiRequest, ISearchSheetRequestStep
         return this;
     }
     
-    public ISearchSheetRequestStep WithClauses<T>(IEnumerable<IClause> clauses)
+    public ISearchSheetRequest WithClauses<T>(IEnumerable<IClause> clauses)
     {
         _queryString ??= new QueryString();
         _queryString.AddClauses(clauses);
@@ -66,7 +66,7 @@ public sealed class SearchSheetRequest : XivApiRequest, ISearchSheetRequestStep
         return this;
     }
 
-    public ISearchSheetRequestStep WithClauseGroup<T>(ClauseGroup group)
+    public ISearchSheetRequest WithClauseGroup<T>(ClauseGroup group)
     {
         _queryString ??= new QueryString();
         _queryString.AddClauseGroup(group);
@@ -74,7 +74,7 @@ public sealed class SearchSheetRequest : XivApiRequest, ISearchSheetRequestStep
         return this;
     }
 
-    public ISearchSheetRequestStep WithClauseGroups<T>(
+    public ISearchSheetRequest WithClauseGroups<T>(
         IEnumerable<ClauseGroup> groups)
     {
         _queryString ??= new QueryString();
@@ -84,45 +84,45 @@ public sealed class SearchSheetRequest : XivApiRequest, ISearchSheetRequestStep
     }
 
     // Parameters
-    public ISearchSheetRequestStep WithVersion(string? version)
+    public ISearchSheetRequest WithVersion(string? version)
     {
         base.Version = version;
 
         return this;
     }
 
-    public ISearchSheetRequestStep WithLanguage(SchemaLanguage language)
+    public ISearchSheetRequest WithLanguage(SchemaLanguage language)
     {
         base.Language = language;
         
         return this;
     }
     
-    public ISearchSheetRequestStep WithCursor(string? cursor)
+    public ISearchSheetRequest WithCursor(string? cursor)
     {
         _cursor = cursor;
 
         return this;
     }
 
-    public ISearchSheetRequestStep WithLimit(uint limit)
+    public ISearchSheetRequest WithLimit(uint limit)
     {
         _limit = limit;
 
         return this;
     }
 
-    public ISearchSheetRequestStep WithSchema(string schemaSpecifier)
+    public ISearchSheetRequest WithSchema(string schemaSpecifier)
     {
         throw new NotImplementedException();
     }
 
-    public ISearchSheetRequestStep WithFields(List<string> fields)
+    public ISearchSheetRequest WithFields(List<string> fields)
     {
         throw new NotImplementedException();
     }
 
-    public ISearchSheetRequestStep WithTransient(string transient)
+    public ISearchSheetRequest WithTransient(string transient)
     {
         throw new NotImplementedException();
     }

@@ -1,7 +1,6 @@
-using XivApiSharp.Client.Core;
 using XivApiSharp.Client.Core.Options;
 
-namespace XivApiSharp.Client.Infrastructure.Requests;
+namespace XivApiSharp.Client.Core.Requests;
 
 public abstract class XivApiRequest
 {

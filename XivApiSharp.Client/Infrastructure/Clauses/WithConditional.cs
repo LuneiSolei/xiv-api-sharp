@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 using System.Web;
 using XivApiSharp.Client.Application.Clauses;
@@ -6,10 +7,25 @@ using XivApiSharp.Client.Core.Extensions;
 
 namespace XivApiSharp.Client.Infrastructure.Clauses;
 
+/// <inheritdoc/>
+[SuppressMessage("Performance", "CA1859:Use concrete types when possible for improved performance")]
 internal sealed class WithConditional(string specifier, ClauseConditionals condition) : IWithConditional
 {
+    /// <summary>
+    /// The name of the specifier to be compared.
+    /// </summary>
     private readonly string _specifier = specifier;
+    
+    /// <summary>
+    /// The matching condition with which any returned results from the XIV API
+    /// must meet.
+    /// </summary>
     private readonly ClauseConditionals _condition = condition;
+    
+    /// <summary>
+    /// The matching operation with which the specifier and value will be
+    /// compared.
+    /// </summary>
     private ClauseOperators _operator;
 
     /// <inheritdoc/>
@@ -45,12 +61,16 @@ internal sealed class WithConditional(string specifier, ClauseConditionals condi
         BuildClause(ClauseOperators.LessThanOrEqualTo, value);
     
     /// <summary>
-    /// Builds a <see cref="Clause{T}">Clause&lt;T&gt;</see> by assigning the specified operator and <paramref name="value"/> to the clause.
+    /// Builds a clause by assigning the specified operator and
+    /// <paramref name="value"/> to the clause.
     /// </summary>
     /// <param name="op">The comparison operator to use for the clause.</param>
     /// <param name="value">The value to compare against.</param>
     /// <typeparam name="T">The type of the clause value.</typeparam>
-    /// <returns>A fully constructed <see cref="Clause{T}">Clause&lt;T&gt;</see>.</returns>
+    /// <returns>A fully constructed clause.</returns>
+    /// <seealso cref="ClauseOperators"/>
+    /// <seealso cref="IClause"/>
+
     private Clause<T> BuildClause<T>(ClauseOperators op, T value) where T : notnull
     {
         Clause<T> clause = BuildCommon<T>(op);
@@ -60,11 +80,14 @@ internal sealed class WithConditional(string specifier, ClauseConditionals condi
     }
 
     /// <summary>
-    /// Builds a <see cref="Clause{T}">Clause&lt;T&gt;</see> by assigning the specified operator and <paramref name="value"/> to the clause.
+    /// Builds a clause by assigning the specified operator and
+    /// <paramref name="value"/> to the clause.
     /// </summary>
     /// <param name="op">The comparison operator to use for the clause.</param>
     /// <param name="value">The value to compare against.</param>
-    /// <returns>A fully constructed <see cref="Clause{T}">Clause&lt;T&gt;</see>.</returns>
+    /// <returns>A fully constructed clause.</returns>
+    /// <seealso cref="ClauseOperators"/>
+    /// <seealso cref="IClause"/>
     private Clause<string> BuildClause(ClauseOperators op, string value)
     {
         Clause<string> clause = BuildCommon<string>(op);
@@ -74,11 +97,14 @@ internal sealed class WithConditional(string specifier, ClauseConditionals condi
     }
 
     /// <summary>
-    /// Assigns the provided operator and the builder's stored specifier to the clause.
+    /// Assigns the provided operator and the builder's stored specifier
+    /// to the clause.
     /// </summary>
     /// <param name="op">The comparison operator to use for the clause.</param>
     /// <typeparam name="T">The type of the clause value.</typeparam>
-    /// <returns>A partially constructed <see cref="Clause{T}">Clause&lt;T&gt;</see>.</returns>
+    /// <returns>A partially constructed clause.</returns>
+    /// <seealso cref="ClauseOperators"/>
+    /// <seealso cref="IClause"/>
     private Clause<T> BuildCommon<T>(ClauseOperators op) where T : notnull
     {
         _operator = op;
@@ -91,11 +117,11 @@ internal sealed class WithConditional(string specifier, ClauseConditionals condi
     }
     
     /// <summary>
-    /// Adds the builder's stored specifier to the <see cref="Clause{T}">Clause&lt;T&gt;</see>.
+    /// Adds the builder's stored specifier to the clause.
     /// </summary>
-    /// <param name="clause">The <see cref="Clause{T}">Clause&lt;T&gt;</see> to add the specifier to.</param>
-    /// <typeparam name="T">The type of the clause value.</typeparam>
-    private void AddClauseSpecifier<T>(Clause<T> clause) where T : notnull
+    /// <param name="clause">The clause to add the specifier to.</param>
+    /// <seealso cref="IClause"/>
+    private void AddClauseSpecifier(IClause clause)
     {
         string specifier = _condition == ClauseConditionals.MustBe
             ? string.Empty
@@ -106,10 +132,12 @@ internal sealed class WithConditional(string specifier, ClauseConditionals condi
     }
 
     /// <summary>
-    /// Adds the builder's stored operator to the <see cref="Clause{T}">Clause&lt;T&gt;</see>.
+    /// Adds the builder's stored operator to the clause.
     /// </summary>
-    /// <param name="clause">The <see cref="Clause{T}">Clause&lt;T&gt;</see> to add the operator to.</param>
+    /// <param name="clause">The clause to add the operator to.</param>
     /// <typeparam name="T">The type of the clause value.</typeparam>
+    /// <seealso cref="ClauseOperators"/>
+    /// <seealso cref="IClause"/>
     private void AddClauseOperator<T>(Clause<T> clause) where T : notnull =>
         clause.Operator = _operator.Stringify();
 }

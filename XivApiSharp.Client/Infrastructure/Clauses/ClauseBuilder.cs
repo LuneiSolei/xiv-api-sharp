@@ -9,10 +9,13 @@ namespace XivApiSharp.Client.Infrastructure.Clauses;
 /// <seealso cref="IClause"/>
 public sealed class ClauseBuilder : IClauseBuilder
 {
+    /// <summary>
+    /// The injected IClauseFactory for the builder to use.
+    /// </summary>
     private readonly IClauseFactory _factory;
 
     /// <summary>
-    /// Creates new instance with an injected IClauseFactory.
+    /// Creates a new instance with an injected IClauseFactory.
     /// </summary>
     /// <param name="factory">The factory instance for the builder to use.</param>
     internal ClauseBuilder(IClauseFactory factory)

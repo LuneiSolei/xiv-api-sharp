@@ -6,6 +6,11 @@ namespace XivApiSharp.Client.Core.Options;
 /// <summary>
 /// Represents XivApiService options for the XIV API endpoints.
 /// </summary>
+/// <remarks>
+/// This is populated from the "XivApiService:Endpoints" section of the
+/// XivApiService configuration. All endpoints are required and validated at
+/// startup.
+/// </remarks>
 [UsedImplicitly]
 internal sealed class Endpoints
 {

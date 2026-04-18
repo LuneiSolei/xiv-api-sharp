@@ -1,5 +1,6 @@
 ﻿using System.Net.Http.Headers;
 using System.Reflection;
+using System.Resources;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
@@ -35,20 +36,28 @@ public static class ServiceCollectionExtensions
 
         private void BuildConfig()
         {
-            ConfigurationBuilder builder = new();
-            Assembly assembly = typeof(ServiceCollectionExtensions).Assembly;
-            string? resourceName = assembly.GetManifestResourceNames()
-                .FirstOrDefault(n => n.EndsWith(FileName, StringComparison.OrdinalIgnoreCase));
-
-            if (resourceName is not null)
-            {
-                Stream stream = assembly.GetManifestResourceStream(resourceName)
-                                ?? throw new FileNotFoundException($"Embedded resource '{resourceName}' not found.");
-                builder.AddJsonStream(stream);
-            }
+            // Get our current assembly
+            Assembly assembly = Assembly.GetExecutingAssembly();
             
-            // Load default values from appsettings.json
-            _config = builder.Build();
+            // Using the default namespace, get the full resource name. Throw
+            // exception if not found.
+            string resourceName = assembly.GetManifestResourceNames()
+                .FirstOrDefault(name => 
+                    name.EndsWith(FileName, StringComparison.OrdinalIgnoreCase))
+                ?? throw new MissingManifestResourceException(
+                    $"No manifest resource ending with {FileName}' could be " +
+                    $"found");
+
+            // From the full resource name, get the file stream
+            using Stream stream = assembly.GetManifestResourceStream(resourceName)
+                ?? throw new MissingManifestResourceException(
+                    $"Stream for required manifest resource '{resourceName}' " +
+                    $"not found");
+            
+            // Load values
+            _config = new ConfigurationBuilder()
+                .AddJsonStream(stream)
+                .Build();
         }
 
         private void RegisterCommon()

@@ -3,7 +3,7 @@ using XivApiSharp.Tests.Options.ClauseConfigs;
 
 namespace XivApiSharp.Tests.Options;
 
-public class ClauseConfig
+public class ClauseOptions
 {
     [Required(AllowEmptyStrings = false)]
     public EqualToConfig EqualTo { get; set; } = null!;

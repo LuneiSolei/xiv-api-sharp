@@ -9,9 +9,7 @@
     </PropertyGroup>
     
     <ItemGroup>
-        <Content Include="appsettings.json">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </Content>
+        <EmbeddedResource Include="appsettings.json" />
     </ItemGroup>
 
     <ItemGroup>

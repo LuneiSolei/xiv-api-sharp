@@ -2,8 +2,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace XivApiSharp.Tests.Options;
 
-public class TestConfig
+public class TestingOptions
 {
     [Required] 
-    public ClauseConfig Clauses { get; set; } = null!;
+    public ClauseOptions Clauses { get; set; } = null!;
 }

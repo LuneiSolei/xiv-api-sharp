@@ -13,5 +13,6 @@ if [ -f "$KEY_FILE" ]; then
     fi
 fi
 
-# Restore .NET dependencies
+# Additional Commands
+dotnet tool update -g docfx
 dotnet restore

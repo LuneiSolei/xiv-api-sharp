@@ -126,11 +126,6 @@ echo -e "Exported to $OUTPUT_FILE"
 echo -e "Keys will be imported when the container starts."
 echo ""
 
-#mkdir -p "${1}/tmp"
-#gpg --export > "${1}/tmp/pubkeys.gpg"
-#
-
-
 if [ -z "${XDG_RUNTIME_DIR}" ]; then
     echo "Error: Environment variable, 'XDG_RUNTIME_DIR', is not set. GPG agent forwarding will not work."
     exit 1

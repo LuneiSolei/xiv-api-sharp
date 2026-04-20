@@ -23,30 +23,16 @@ public interface IClause
     internal ClauseConditionals Condition { get; set; }
     
     /// <summary>
-    /// Converts the specifier, operator, and value of this instance into its
-    /// string representation.
+    /// Converts this instance into its URI encoded string representation.
     /// </summary>
     /// <remarks>
-    /// Clauses have several rules that they must follow.
-    /// <list type="number">
-    ///     <item>
-    ///     Each clause is formed from a <c>[specifier][operator][value]</c>.
-    ///     </item>
-    ///     <item>
-    ///     Multiple clauses are specified by a literal plus (+) sign.*
-    ///     </item>
-    /// </list>
-    /// <br/>
-    /// <br/>
-    /// *The official documentation states that multiple clauses are separated
-    /// by whitespace. However, experimentation has proven that this results in
-    /// undesired behavior. Using literal plus signs (+) for multiple clauses
-    /// instead of whitespace resolves this issue. By extension, use URI encoded
-    /// plus signs (%2B) when using "Must Be" decorated clauses.
+    /// All strings are automatically URI encoded by default. To retrieve an
+    /// unencoded string, use <see cref="ToStringUnencoded"/> instead.
     /// </remarks>
     /// <returns>
-    /// The string representation of this instance.
+    /// The URI encoded string representation of this instance.
     /// </returns>
+    /// <seealso cref="ToStringUnencoded"/>
     string ToString();
 
     /// <summary>

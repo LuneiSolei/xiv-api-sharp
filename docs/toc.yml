@@ -1,6 +1,6 @@
-- name: Introduction
-  href: introduction.md
-- name: Getting Started
-  href: getting-started.md
-- name: Clauses
-  href: clauses.md
+- name: Library Docs
+  href: library-docs/
+- name: API
+  href: api/
+- name: Dev Docs
+  href: dev-docs/

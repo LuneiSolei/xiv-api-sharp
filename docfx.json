@@ -1,51 +1,57 @@
 {
-  "$schema": "https://raw.githubusercontent.com/dotnet/docfx/main/schemas/docfx.schema.json",
-  "metadata": [
-    {
-      "src": [
+    "$schema": "https://raw.githubusercontent.com/dotnet/docfx/main/schemas/docfx.schema.json",
+    "metadata": [
         {
-          "src": "../",
-          "files": [
-            "**/*.csproj"
-          ]
+            "src": [
+                {
+                    "src": "./",
+                    "files": [
+                        "**/*.csproj"
+                    ],
+                    "exclude": [
+                        "docs/**"
+                    ]
+                }
+            ],
+            "dest": "docs/api"
         }
-      ],
-      "dest": "api"
-    }
-  ],
-  "build": {
-      "markdownEngineProperties": {
-          "alerts": {
-              "TODO": "alert alert-secondary"
-          }
-      },
-    "content": [
-      {
-        "files": [
-          "**/*.{md,yml}"
+    ],
+    "build": {
+        "markdownEngineProperties": {
+            "alerts": {
+                "TODO": "alert alert-secondary",
+                "DEV_NOTE": "alert alert-secondary"
+            }
+        },
+        "content": [
+            {
+                "src": "docs",
+                "files": [
+                    "**/*.{md,yml}"
+                ],
+                "exclude": [
+                    "_site/**"
+                ]
+            }
         ],
-        "exclude": [
-          "_site/**"
-        ]
-      }
-    ],
-    "resource": [
-      {
-        "files": [
-          "images/**"
-        ]
-      }
-    ],
-    "output": "_site",
-    "template": [
-      "default",
-      "modern"
-    ],
-    "globalMetadata": {
-      "_appName": "mysite",
-      "_appTitle": "mysite",
-      "_enableSearch": false,
-      "pdf": false
+        "resource": [
+            {
+                "files": [
+                    "docs/images/**"
+                ]
+            }
+        ],
+        "output": "docs/_site",
+        "template": [
+            "default",
+            "modern",
+            "docs/templates/custom-alert-titles"
+        ],
+        "globalMetadata": {
+            "_appName": "XIV API Sharp",
+            "_appTitle": "XIV API Sharp",
+            "_enableSearch": false,
+            "pdf": false
+        }
     }
-  }
 }

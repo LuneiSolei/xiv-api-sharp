@@ -60,8 +60,8 @@ TestResult.xml
 nunit-*.xml
 
 # DocFX - Docs will be generated on GitHub via workflow
-api
-_site
+/docs/api
+/docs/_site
 _site_pdf
 .manifest
 .publish

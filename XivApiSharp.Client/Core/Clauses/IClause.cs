@@ -15,12 +15,12 @@ public interface IClause
     /// <summary>
     /// The comparison operator to use.
     /// </summary>
-    internal ClauseOperators Operator { get; set; }
+    internal ClauseOperators ClauseOperator { get; set; }
 
     /// <summary>
     /// The boolean operator state of the clause.
     /// </summary>
-    internal ClauseConditionals Condition { get; set; }
+    internal ClauseDecorators Decorator { get; set; }
     
     /// <summary>
     /// Converts this instance into its URI encoded string representation.

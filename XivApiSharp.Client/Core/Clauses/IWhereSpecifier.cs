@@ -10,10 +10,10 @@ public interface IWhereSpecifier
     /// <summary>
     /// Indicates the clause <b>MUST</b> be matched for every result returned.
     /// </summary>
-    IWithConditional Must { get; }
+    IWithDecorator Must { get; }
     
     /// <summary>
     /// Indicates the clause <b>MUST NOT</b> be matched for any result returned.
     /// </summary>
-    IWithConditional MustNot { get; }
+    IWithDecorator MustNot { get; }
 }

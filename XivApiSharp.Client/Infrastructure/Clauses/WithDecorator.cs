@@ -6,9 +6,9 @@ namespace XivApiSharp.Client.Infrastructure.Clauses;
 
 /// <inheritdoc/>
 [SuppressMessage("Performance", "CA1859:Use concrete types when possible for improved performance")]
-internal sealed class WithConditional(string specifier, 
-    ClauseConditionals condition, IClauseFactory clauseFactory) 
-    : IWithConditional
+internal sealed class WithDecorator(string specifier, 
+    ClauseDecorators decorator, IClauseFactory clauseFactory) 
+    : IWithDecorator
 {
     /// <summary>
     /// The name of the specifier to be compared.
@@ -16,10 +16,10 @@ internal sealed class WithConditional(string specifier,
     private readonly string _specifier = specifier;
     
     /// <summary>
-    /// The matching condition with which any returned results from the XIV API
+    /// The matching decorator with which any returned results from the XIV API
     /// must meet.
     /// </summary>
-    private readonly ClauseConditionals _condition = condition;
+    private readonly ClauseDecorators _decorator = decorator;
 
     /// <inheritdoc/>
     public IClause PartiallyEqual(string value) =>
@@ -66,7 +66,7 @@ internal sealed class WithConditional(string specifier,
     private IClause BuildClause<T>(ClauseOperators op, T value) where T : notnull
     {
         IClause newClause = clauseFactory.CreateClause(_specifier, op, value, 
-            _condition);
+            _decorator);
 
         return newClause;
     }

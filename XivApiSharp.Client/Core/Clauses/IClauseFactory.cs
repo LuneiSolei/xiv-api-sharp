@@ -21,8 +21,8 @@ internal interface IClauseFactory
     /// <param name="value">
     /// The value being compared.
     /// </param>
-    /// <param name="condition">
-    /// The matching condition for the clause.
+    /// <param name="decorator">
+    /// The matching decorator for the clause.
     /// </param>
     /// <typeparam name="T">
     /// The type of the clause value.
@@ -32,5 +32,5 @@ internal interface IClauseFactory
     /// </returns>
     /// <seealso cref="IClause"/>
     IClause CreateClause<T>(string specifier, ClauseOperators op, T value,
-        ClauseConditionals condition) where T : notnull;
+        ClauseDecorators decorator) where T : notnull;
 }

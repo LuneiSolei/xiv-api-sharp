@@ -18,23 +18,23 @@ internal sealed class Clause<T> : IClause where T : notnull
     /// <param name="value">
     /// The value to be compared.
     /// </param>
-    /// <param name="condition">
-    /// The matching condition for the clause.
+    /// <param name="decorator">
+    /// The matching decorator for the clause.
     /// </param>
     /// <seealso cref="IClause"/>
-    public Clause(string specifier, ClauseOperators op, T value, ClauseConditionals condition)
+    public Clause(string specifier, ClauseOperators op, T value, ClauseDecorators decorator)
     {
         Specifier = specifier;
-        Operator = op;
+        ClauseOperator = op;
         Value = value;
-        Condition = condition;
+        Decorator = decorator;
     }
     
     /// <inheritdoc />
     public string Specifier { get; set; }
 
     /// <inheritdoc />
-    public ClauseOperators Operator { get; set; }
+    public ClauseOperators ClauseOperator { get; set; }
 
     /// <summary>
     /// The value of clause to be compared.
@@ -42,16 +42,16 @@ internal sealed class Clause<T> : IClause where T : notnull
     public T Value { get; set; }
     
     /// <inheritdoc/>
-    public ClauseConditionals Condition { get; set; }
+    public ClauseDecorators Decorator { get; set; }
 
     /// <inheritdoc cref="IClause.ToString" />
     public override string ToString()
     {
-        // Set specifier with condition attached
-        string specifierWithCondition = Condition == ClauseConditionals.MustBe
+        // Set specifier with decorator attached
+        string specifierWithDecorator = Decorator == ClauseDecorators.Must
             ? string.Empty
             : "-";
-        specifierWithCondition += $"{Specifier}";
+        specifierWithDecorator += $"{Specifier}";
 
         string newValue = Value switch
         {
@@ -60,7 +60,7 @@ internal sealed class Clause<T> : IClause where T : notnull
             _ => Value.ToString() ?? string.Empty // Anything else gets to be a string without encoding.
         };
 
-        return $"{specifierWithCondition}{Operator.Stringify()}{newValue}";
+        return $"{specifierWithDecorator}{ClauseOperator.Stringify()}{newValue}";
     }
 
     /// <inheritdoc cref="IClause.ToStringUnencoded" />

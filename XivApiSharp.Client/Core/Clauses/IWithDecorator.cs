@@ -6,7 +6,7 @@ namespace XivApiSharp.Client.Core.Clauses;
 /// Defines methods for adding comparison operators to a clause.
 /// </summary>
 /// <seealso cref="IClause"/>
-public interface IWithConditional
+public interface IWithDecorator
 {
     /// <summary>
     /// Sets the clause to use the equal to operator (=) against the provided value.

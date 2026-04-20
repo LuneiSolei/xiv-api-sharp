@@ -5,7 +5,7 @@ namespace XivApiSharp.Client.Core.Clauses;
 /// the clause.
 /// </summary>
 /// <seealso cref="IClause"/>
-public interface IWhereSpecifier
+public interface IWhereSpecifier : IWithDecorator
 {
     /// <summary>
     /// Indicates the clause <b>MUST</b> be matched for every result returned.

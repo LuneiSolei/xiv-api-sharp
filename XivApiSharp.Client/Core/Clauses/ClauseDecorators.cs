@@ -7,11 +7,16 @@ namespace XivApiSharp.Client.Core.Clauses;
 internal enum ClauseDecorators
 {
     /// <summary>
-    /// Helper enum which specifies that the clause is used to include results.
+    /// Helper enum which specifies that no decorator is used.
     /// </summary>
     /// <remarks>
     /// This is the default decorator.
     /// </remarks>
+    May,
+    
+    /// <summary>
+    /// Helper enum which specifies that the clause is used to include results.
+    /// </summary>
     Must,
     
     /// <summary>

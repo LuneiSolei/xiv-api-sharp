@@ -2,26 +2,28 @@ using XivApiSharp.Client.Core.Clauses;
 
 namespace XivApiSharp.Client.Infrastructure.Clauses;
 
-/// <inheritdoc/>
-internal sealed class WhereSpecifier(string specifier, 
-    IClauseFactory clauseFactory) : IWhereSpecifier
+/// <inheritdoc cref="IWhereSpecifier"/>
+internal sealed class WhereSpecifier(string specifier, IClauseFactory clauseFactory) 
+    : WithDecorator(specifier, ClauseDecorators.May, clauseFactory), 
+        IWhereSpecifier
 {
-    /// <summary>
-    /// The name of the specifier to be compared.
-    /// </summary>
-    private readonly string _specifier = specifier;
-    
     /// <inheritdoc/>
     public IWithDecorator Must
     {
-        get => new WithDecorator(_specifier, 
-            ClauseDecorators.Must, clauseFactory);
+        get
+        {
+            Decorator = ClauseDecorators.Must;
+            return this;
+        }
     }
 
     /// <inheritdoc/>
     public IWithDecorator MustNot
     {
-        get => new WithDecorator(_specifier, 
-            ClauseDecorators.MustNot, clauseFactory);
+        get
+        {
+            Decorator = ClauseDecorators.MustNot;
+            return this;
+        }
     }
 }

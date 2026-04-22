@@ -2,26 +2,22 @@ using XivApiSharp.Client.Core.Clauses;
 
 namespace XivApiSharp.Client.Core.ClauseGroups;
 
-// TODO: Implement
+/// <inheritdoc/>
 internal sealed class ClauseGroup(ClauseGroupOperators? groupOperator) : IClauseGroup
 {
     private List<IClause> Clauses { get; }
     private ClauseGroupOperators Operators { get; } = 
         groupOperator ?? ClauseGroupOperators.Or;
+ 
+    /// <inheritdoc cref="IClauseGroup"/>
+    public override string ToString() =>
+        throw new NotImplementedException();
 
-    public override string ToString()
-    {
-        return $"{GenerateOperator()}({string.Join(' ', Clauses)})";
-    }
+    /// <inheritdoc/>
+    public string ToEncodedString() =>
+        throw new NotImplementedException();
 
-    private string GenerateOperator()
-    {
-        return Operators switch
-        {
-            ClauseGroupOperators.Or => string.Empty,
-            ClauseGroupOperators.Must => "+",
-            ClauseGroupOperators.MustNot => "-",
-            _ => string.Empty
-        };
-    }
+    /// <inheritdoc/>
+    public string ToUnencodedString() =>
+        throw new NotImplementedException();
 }

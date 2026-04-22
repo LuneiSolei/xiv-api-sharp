@@ -11,7 +11,7 @@ internal class WithDecorator(string specifier,
     /// <summary>
     /// The clause's field specifier.
     /// </summary>
-    private readonly string Specifier = specifier;
+    private readonly string _specifier = specifier;
     
     /// <summary>
     /// The clause's field decorator.
@@ -21,7 +21,7 @@ internal class WithDecorator(string specifier,
     /// <summary>
     /// The clause factory with which to create a new clause from.
     /// </summary>
-    private IClauseFactory ClauseFactory = clauseFactory;
+    private readonly IClauseFactory _clauseFactory = clauseFactory;
     
     /// <inheritdoc/>
     public IClause PartiallyEqual(string value) =>
@@ -67,7 +67,7 @@ internal class WithDecorator(string specifier,
     /// <seealso cref="IClause"/>
     private IClause BuildClause<T>(ClauseOperators op, T value) where T : notnull
     {
-        IClause newClause = ClauseFactory.CreateClause(Specifier, op, value, 
+        IClause newClause = _clauseFactory.CreateClause(_specifier, op, value, 
             Decorator);
 
         return newClause;

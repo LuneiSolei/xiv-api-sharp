@@ -1,17 +1,27 @@
-using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 using XivApiSharp.Client.Core.Clauses;
 
 namespace XivApiSharp.Client.Infrastructure.Clauses;
 
 /// <inheritdoc/>
-[SuppressMessage("Performance", "CA1859:Use concrete types when possible for improved performance")]
 internal class WithDecorator(string specifier, 
     ClauseDecorators decorator, IClauseFactory clauseFactory) : IWithDecorator
 {
-    internal string Specifier = specifier;
+
+    /// <summary>
+    /// The clause's field specifier.
+    /// </summary>
+    private readonly string Specifier = specifier;
+    
+    /// <summary>
+    /// The clause's field decorator.
+    /// </summary>
     internal ClauseDecorators Decorator = decorator;
-    internal IClauseFactory ClauseFactory = clauseFactory;
+    
+    /// <summary>
+    /// The clause factory with which to create a new clause from.
+    /// </summary>
+    private IClauseFactory ClauseFactory = clauseFactory;
     
     /// <inheritdoc/>
     public IClause PartiallyEqual(string value) =>

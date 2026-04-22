@@ -29,6 +29,11 @@ public class XivApiService
     private readonly IInternalDependencies _internalDependencies;
 
     /// <summary>
+    /// The HttpClient to use for making requests.
+    /// </summary>
+    private readonly HttpClient _client;
+
+    /// <summary>
     /// Constructor for XivApiService.
     /// </summary>
     /// <param name="opts">
@@ -46,6 +51,7 @@ public class XivApiService
     {
         _opts = opts.Value;
         _internalDependencies = internalDependencies;
+        _client = client;
     }
     
     /// <summary>

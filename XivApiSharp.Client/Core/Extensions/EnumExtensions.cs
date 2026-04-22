@@ -2,10 +2,24 @@ using System.Reflection;
 
 namespace XivApiSharp.Client.Core.Extensions;
 
+/// <summary>
+/// Provides extended functionality for enums.
+/// </summary>
 internal static class EnumExtensions
 {
     extension(Enum value)
     {
+        /// <summary>
+        /// Gets the string value provided by the attribute
+        /// <see cref="StringValueAttribute"/>
+        /// </summary>
+        /// <returns>
+        /// The assigned string value for the enum.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// Throws if the enum does not have this attribute specified.
+        /// </exception>
+        /// <seealso cref="StringValueAttribute"/>
         public string GetStringValue()
         {
             ArgumentNullException.ThrowIfNull(value);

@@ -6,6 +6,26 @@ namespace XivApiSharp.Client.Core.Clauses;
 /// <inheritdoc />
 internal sealed class Clause<T> : IClause where T : notnull
 {
+        /// <summary>
+    /// The value of clause to be compared.
+    /// </summary>
+    private T Value { get; }
+        
+    /// <inheritdoc/>
+    public SchemaLanguage Language { get; set; }
+
+    /// <inheritdoc/>
+    public string EncodedValue { get; set; } = "";
+
+    /// <inheritdoc />
+    public string Specifier { get; set; }
+
+    /// <inheritdoc />
+    public ClauseOperators ClauseOperator { get; set; }
+    
+    /// <inheritdoc/>
+    public ClauseDecorators Decorator { get; set; }
+        
     /// <summary>
     /// Main constructor for clause.
     /// </summary>
@@ -34,26 +54,6 @@ internal sealed class Clause<T> : IClause where T : notnull
         Decorator = decorator;
         Language = lang;
     }
-    
-    /// <inheritdoc/>
-    public SchemaLanguage Language { get; set; }
-
-    /// <inheritdoc/>
-    public string EncodedValue { get; set; } = "";
-
-    /// <inheritdoc />
-    public string Specifier { get; set; }
-
-    /// <inheritdoc />
-    public ClauseOperators ClauseOperator { get; set; }
-
-    /// <summary>
-    /// The value of clause to be compared.
-    /// </summary>
-    public T Value { get; set; }
-    
-    /// <inheritdoc/>
-    public ClauseDecorators Decorator { get; set; }
 
     /// <inheritdoc cref="IClauseElement.ToUriEncodedString"/>
     public string ToUriEncodedString()

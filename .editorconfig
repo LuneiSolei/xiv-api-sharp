@@ -3,7 +3,7 @@ root = true
 # Microsoft .NET properties
 [*]
 csharp_new_line_before_members_in_object_initializers = false
-csharp_preferred_modifier_order = public, required, protected, internal, file, new, private, override, sealed, virtual, abstract, readonly, extern, unsafe, volatile, async, static:suggestion
+csharp_preferred_modifier_order = public, private, protected, internal, required, file, new, override, sealed, virtual, abstract, readonly, extern, unsafe, volatile, async, static:suggestion
 csharp_style_prefer_utf8_string_literals = true:suggestion
 csharp_style_var_when_type_is_apparent = false:suggestion
 

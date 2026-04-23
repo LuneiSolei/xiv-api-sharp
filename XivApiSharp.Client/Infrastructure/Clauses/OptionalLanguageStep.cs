@@ -16,7 +16,7 @@ internal sealed class OptionalLanguageStep
     /// <param name="specifier">
     /// The name of the field specifier for the clause to use.
     /// </param>
-    public OptionalLanguageStep(IClauseFactory factory, string specifier) 
+    internal OptionalLanguageStep(IClauseFactory factory, string specifier) 
         : base(factory, specifier, SchemaLanguage.None) { }
     
     /// <inheritdoc/>

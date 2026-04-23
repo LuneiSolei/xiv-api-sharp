@@ -6,7 +6,7 @@ namespace XivApiSharp.Client.Core.ClauseGroups;
 internal class ClauseGroupFactory : IClauseGroupFactory
 {
     /// <inheritdoc/>
-    public IClauseGroup CreateClauseGroup(IEnumerable<IClauseElement> elements,
+    public IClauseGroup CreateClauseGroup(IEnumerable<IBaseClause> elements,
         ClauseDecorators decorator) =>
         new ClauseGroup(elements, decorator);
 }

@@ -20,6 +20,6 @@ internal interface IClauseGroupFactory
     /// The created clause group.
     /// </returns>
     /// <seealso cref="IClauseGroup"/>
-    IClauseGroup CreateClauseGroup(IEnumerable<IClauseElement> elements, 
+    IClauseGroup CreateClauseGroup(IEnumerable<IBaseClause> elements, 
         ClauseDecorators decorator);
 }

@@ -4,7 +4,7 @@ using XivApiSharp.Client.Core.Extensions;
 namespace XivApiSharp.Client.Core.ClauseGroups;
 
 /// <inheritdoc/>
-internal sealed class ClauseGroup(IEnumerable<IClauseElement> clauses, 
+internal sealed class ClauseGroup(IEnumerable<IBaseClause> clauses, 
     ClauseDecorators decorator) : IClauseGroup
 {
     public string EncodedValue { get; set; }

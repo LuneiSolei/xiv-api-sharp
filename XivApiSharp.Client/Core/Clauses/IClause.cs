@@ -5,25 +5,25 @@ namespace XivApiSharp.Client.Core.Clauses;
 /// QueryString model. A clause combines a specifier, operator, a value, and
 /// an optional decorator.
 /// </summary>
-public interface IClause : IClauseElement
+public interface IClause
 {
     /// <summary>
     /// Name of the field to compare the value against.
     /// </summary>
-    internal string Specifier { get; set; }
+    string Specifier { get; set; }
     
     /// <summary>
     /// The comparison operator to use.
     /// </summary>
-    internal ClauseOperators ClauseOperator { get; set; }
+    ClauseOperators ClauseOperator { get; set; }
 
     /// <summary>
     /// The boolean operator state of the clause.
     /// </summary>
-    internal ClauseDecorators Decorator { get; set; }
+    ClauseDecorators Decorator { get; set; }
     
     /// <summary>
     /// The language to use for the clause.
     /// </summary>
-    internal SchemaLanguage Language { get; set; }
+    SchemaLanguage Language { get; set; }
 }

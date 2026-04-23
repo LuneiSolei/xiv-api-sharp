@@ -1,4 +1,7 @@
-namespace XivApiSharp.Client.Core.Clauses;
+using XivApiSharp.Client.Core;
+using XivApiSharp.Client.Core.Clauses;
+
+namespace XivApiSharp.Client.Infrastructure.Clauses;
 
 /// <inheritdoc/>
 internal class ClauseFactory : IClauseFactory

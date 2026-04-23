@@ -44,7 +44,7 @@ public sealed record QueryString
     /// <code>
     /// QueryString query = new();
     /// Clause&lt;string&gt; clause = XivApiService.NewClause()
-    ///     .WhereSpecifier("Name")
+    ///     .OptionalDecoratorStep("Name")
     ///     .Is.EqualTo("Tank You, Paladin I");
     /// query.AddClause(clause);
     /// </code>
@@ -60,7 +60,7 @@ public sealed record QueryString
     /// <code>
     /// QueryString query = new();
     /// Clause&lt;int&gt; clause = XivApiService.NewClause()
-    ///     .WhereSpecifier("Amount")
+    ///     .OptionalDecoratorStep("Amount")
     ///     .Is.GreaterThanOrEqualTo(4);
     /// </code>
     /// </example>

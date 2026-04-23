@@ -1,13 +1,13 @@
 using System.Numerics;
+using XivApiSharp.Client.Core;
 using XivApiSharp.Client.Core.Clauses;
 
 namespace XivApiSharp.Client.Infrastructure.Clauses;
 
 /// <inheritdoc/>
-internal class WithDecorator(string specifier, 
-    ClauseDecorators decorator, IClauseFactory clauseFactory) : IWithDecorator
+internal class OperatorStep(IClauseFactory clauseFactory, string specifier, 
+    ClauseDecorators decorator, SchemaLanguage lang) : IOperatorStep
 {
-
     /// <summary>
     /// The clause's field specifier.
     /// </summary>
@@ -67,8 +67,8 @@ internal class WithDecorator(string specifier,
     /// <seealso cref="IClause"/>
     private IClause BuildClause<T>(ClauseOperators op, T value) where T : notnull
     {
-        IClause newClause = _clauseFactory.CreateClause(_specifier, op, value, 
-            Decorator);
+        IClause newClause = _clauseFactory.CreateClause(_specifier, op, 
+            value, Decorator, lang);
 
         return newClause;
     }

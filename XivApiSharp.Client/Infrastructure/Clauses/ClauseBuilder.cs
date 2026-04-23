@@ -24,6 +24,6 @@ public sealed class ClauseBuilder : IClauseBuilder
     }
 
     /// <inheritdoc/>
-    public IWhereSpecifier WhereSpecifier(string name) => 
-        new WhereSpecifier(name, _factory);
+    public IOptionalLanguageStep WhereSpecifier(string specifier) => 
+        new OptionalLanguageStep(_factory, specifier);
 }

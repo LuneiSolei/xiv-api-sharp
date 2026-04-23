@@ -5,15 +5,15 @@ namespace XivApiSharp.Client.Core.Clauses;
 /// the clause.
 /// </summary>
 /// <seealso cref="IClause"/>
-public interface IWhereSpecifier : IWithDecorator
+public interface IOptionalDecoratorStep : IOperatorStep
 {
     /// <summary>
     /// Indicates the clause <b>MUST</b> be matched for every result returned.
     /// </summary>
-    IWithDecorator Must { get; }
+    IOperatorStep Must { get; }
     
     /// <summary>
     /// Indicates the clause <b>MUST NOT</b> be matched for any result returned.
     /// </summary>
-    IWithDecorator MustNot { get; }
+    IOperatorStep MustNot { get; }
 }

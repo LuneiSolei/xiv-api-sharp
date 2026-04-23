@@ -1,4 +1,4 @@
-namespace XivApiSharp.Client.Core;
+namespace XivApiSharp.Client.Core.Clauses;
 
 /// <summary>
 /// Represents a type that is the base type for all clauses related to

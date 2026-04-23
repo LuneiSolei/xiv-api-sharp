@@ -24,6 +24,9 @@ internal interface IClauseFactory
     /// <param name="decorator">
     /// The matching decorator for the clause.
     /// </param>
+    /// <param name="lang">
+    /// The language to use for the clause.
+    /// </param>
     /// <typeparam name="T">
     /// The type of the clause value.
     /// </typeparam>
@@ -32,5 +35,5 @@ internal interface IClauseFactory
     /// </returns>
     /// <seealso cref="IClause"/>
     IClause CreateClause<T>(string specifier, ClauseOperators op, T value,
-        ClauseDecorators decorator) where T : notnull;
+        ClauseDecorators decorator, SchemaLanguage lang) where T : notnull;
 }

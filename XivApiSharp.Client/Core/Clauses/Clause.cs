@@ -21,17 +21,25 @@ internal sealed class Clause<T> : IClause where T : notnull
     /// <param name="decorator">
     /// The matching decorator for the clause.
     /// </param>
+    /// <param name="lang">
+    /// (Optional) The language to use for this Clause.
+    /// </param>
     /// <seealso cref="IClause"/>
-    public Clause(string specifier, ClauseOperators op, T value, ClauseDecorators decorator)
+    public Clause(string specifier, ClauseOperators op, T value, 
+        ClauseDecorators decorator, SchemaLanguage lang = SchemaLanguage.None)
     {
         Specifier = specifier;
         ClauseOperator = op;
         Value = value;
         Decorator = decorator;
+        Language = lang;
     }
-    public SchemaLanguage Language { get; set; }
+    
     /// <inheritdoc/>
-    public string EncodedValue { get; set; }
+    public SchemaLanguage Language { get; set; }
+
+    /// <inheritdoc/>
+    public string EncodedValue { get; set; } = "";
 
     /// <inheritdoc />
     public string Specifier { get; set; }
@@ -50,7 +58,21 @@ internal sealed class Clause<T> : IClause where T : notnull
     /// <inheritdoc cref="IClauseElement.ToUriEncodedString"/>
     public string ToUriEncodedString()
     {
-        string newValue = Value switch
+        string encodedDecorator = Decorator.ToUriEncodedString();
+        string encodedOperator = ClauseOperator.ToUriEncodedString();
+        string encodedSpecifier = HttpUtility.UrlEncode(Specifier);
+        string encodedLanguage = string.Empty;
+        
+        // Use language, if any was provided
+        if (Language != SchemaLanguage.None)
+        {
+            encodedLanguage = HttpUtility.UrlEncode(
+                $"@{Language.ToString().ToLower()}");
+        }
+
+        
+        // Determine new encoded clause value
+        string encodedValue = Value switch
         {
             // Convert boolean values to lowercase because .NET capitalizes them by default.
             bool b => b.ToString().ToLowerInvariant(), 
@@ -62,8 +84,8 @@ internal sealed class Clause<T> : IClause where T : notnull
             _ => Value.ToString() ?? string.Empty 
         };
 
-        return $"{Decorator.GetStringValue()}{Specifier}{ClauseOperator
-            .GetStringValue()}{newValue}";
+        return $"{encodedDecorator}{encodedSpecifier}{encodedLanguage}"
+               + $"{encodedOperator}{encodedValue}";
     }
 
     /// <inheritdoc cref="IClause.ToUnencodedString"/>

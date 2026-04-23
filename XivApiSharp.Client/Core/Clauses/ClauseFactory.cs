@@ -5,9 +5,9 @@ internal class ClauseFactory : IClauseFactory
 {
     /// <inheritdoc/>
     IClause IClauseFactory.CreateClause<T>(string specifier, ClauseOperators op,
-        T value, ClauseDecorators decorator)
+        T value, ClauseDecorators decorator, SchemaLanguage lang)
     {
-        Clause<T> clause = new(specifier, op, value, decorator);
+        Clause<T> clause = new(specifier, op, value, decorator, lang);
         
         return clause;
     }

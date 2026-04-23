@@ -22,7 +22,8 @@ public interface IClause : IClauseElement
     /// </summary>
     internal ClauseDecorators Decorator { get; set; }
     
+    /// <summary>
+    /// The language to use for the clause.
+    /// </summary>
     internal SchemaLanguage Language { get; set; }
-    
-    
 }

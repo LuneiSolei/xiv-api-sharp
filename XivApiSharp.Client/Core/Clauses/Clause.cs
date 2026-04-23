@@ -69,7 +69,6 @@ internal sealed class Clause<T> : IClause where T : notnull
             encodedLanguage = HttpUtility.UrlEncode(
                 $"@{Language.ToString().ToLower()}");
         }
-
         
         // Determine new encoded clause value
         string encodedValue = Value switch

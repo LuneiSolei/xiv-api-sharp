@@ -4,7 +4,7 @@ namespace XivApiSharp.Client.Core;
 /// Represents a type that is the base type for all clauses related to
 /// <see cref="QueryString"/>.
 /// </summary>
-public interface IClauseElement
+public interface IBaseClause
 {
     /// <summary>
     /// Gets this instance's URI encoded string representation.
@@ -23,4 +23,12 @@ public interface IClauseElement
     /// </returns>
     /// <seealso cref="ToUriEncodedString"/>
     string ToUnencodedString();
+
+    /// <summary>
+    /// A wrapper for <see cref="ToUriEncodedString"/>.
+    /// </summary>
+    /// <returns>
+    /// The URI encoded string representation of this instance.
+    /// </returns>
+    string ToString() => ToUriEncodedString();
 }

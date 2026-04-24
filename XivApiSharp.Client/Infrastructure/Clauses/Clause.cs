@@ -40,34 +40,38 @@ internal sealed class Clause<T> : BaseClause, IClause where T : notnull
         get => GetCached(ref field);
         set => SetCached(ref field, value);
     }
-        
+
     /// <summary>
     /// Main constructor for clause.
     /// </summary>
-    /// <param name="specifier">
-    /// The specifier to be compared against.
+    /// <param name="decorator">
+    ///     The matching decorator for the clause.
     /// </param>
-    /// <param name="op">
-    /// The comparison operator to perform.
+    /// <param name="specifier">
+    ///     The specifier to be compared against.
+    /// </param>
+    /// <param name="language">
+    /// the language to use for this clause.
+    /// </param>
+    /// <param name="operation">
+    ///     The comparison operator to perform.
     /// </param>
     /// <param name="value">
-    /// The value to be compared.
-    /// </param>
-    /// <param name="decorator">
-    /// The matching decorator for the clause.
-    /// </param>
-    /// <param name="lang">
-    /// (Optional) The language to use for this Clause.
+    ///     The value to be compared.
     /// </param>
     /// <seealso cref="IClause"/>
-    internal Clause(string specifier, ClauseOperators op, T value, 
-        ClauseDecorators decorator, SchemaLanguage lang = SchemaLanguage.None)
+    internal Clause(
+        ClauseDecorators decorator, 
+        string specifier, 
+        SchemaLanguage language, 
+        ClauseOperators operation, 
+        T value)
     {
-        Specifier = specifier;
-        ClauseOperator = op;
-        Value = value;
         Decorator = decorator;
-        Language = lang;
+        Specifier = specifier;
+        Language = language;
+        ClauseOperator = operation;
+        Value = value;
     }
 
     /// <inheritdoc/>
@@ -149,6 +153,7 @@ internal sealed class Clause<T> : BaseClause, IClause where T : notnull
     /// <param name="field">The backing field.</param>
     /// <param name="value">The new value.</param>
     /// <typeparam name="TCache">The backing field's type.</typeparam>
+    // ReSharper disable once RedundantAssignment
     private void SetCached<TCache>(ref TCache field, TCache value)
     {
         field = value;

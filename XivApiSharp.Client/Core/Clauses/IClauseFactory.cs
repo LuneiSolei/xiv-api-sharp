@@ -11,22 +11,6 @@ internal interface IClauseFactory
     /// <summary>
     /// Creates a new instance of Clause&lt;T&gt;.
     /// </summary>
-    /// <param name="specifier">
-    /// The name of the specifier being compared
-    /// against.
-    /// </param>
-    /// <param name="op">
-    /// The comparison operator to compare the specifier and value with.
-    /// </param>
-    /// <param name="value">
-    /// The value being compared.
-    /// </param>
-    /// <param name="decorator">
-    /// The matching decorator for the clause.
-    /// </param>
-    /// <param name="lang">
-    /// The language to use for the clause.
-    /// </param>
     /// <typeparam name="T">
     /// The type of the clause value.
     /// </typeparam>
@@ -34,6 +18,10 @@ internal interface IClauseFactory
     /// An instance of IClause
     /// </returns>
     /// <seealso cref="IClause"/>
-    IClause CreateClause<T>(string specifier, ClauseOperators op, T value,
-        ClauseDecorators decorator, SchemaLanguage lang) where T : notnull;
+    IClause CreateClause<T>(
+        ClauseDecorators decorator, 
+        string specifier, 
+        SchemaLanguage language, 
+        ClauseOperators op,
+        T value) where T : notnull;
 }

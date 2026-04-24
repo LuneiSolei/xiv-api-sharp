@@ -7,16 +7,36 @@ namespace XivApiSharp.Client.Core.ClauseGroups;
 internal sealed class ClauseGroup(IEnumerable<IBaseClause> clauses, 
     ClauseDecorators decorator) : IClauseGroup
 {
-    public string EncodedValue { get; set; }
-
+    private string? _encodedValue;
+    private string? _unencodedValue;
+    
     /// <inheritdoc cref="IClauseGroup.ToString"/>
-    public override string ToString() => ToEncodedString();
+    public override string ToString() => ToUriEncodedString();
 
     /// <inheritdoc/>
-    public string ToEncodedString() =>
-        $"{decorator}({string.Join(' ', clauses)})";
+    public string ToUriEncodedString()
+    {
+        _encodedValue ??= $"{decorator}({string.Join(' ', clauses)})";
+
+        return _encodedValue;
+    }
 
     /// <inheritdoc/>
-    public string ToUnencodedString() =>
-        throw new NotImplementedException();
+    public string ToUnencodedString()
+    {
+        _unencodedValue ??= $"{decorator}({string.Join(' ', clauses)})";
+        
+        return _unencodedValue;
+    }
+
+    private void RebuildEncodedCache()
+    {
+        // Encode all clauses
+        IEnumerable<string> encodedClauses = clauses.Select(clause => 
+            clause.ToUriEncodedString());
+        
+        // Encode decorator
+        decorator.ToUriEncodedString();
+        _encodedValue = $"{decorator}({string.Join(' ', encodedClauses)})";
+    }
 }

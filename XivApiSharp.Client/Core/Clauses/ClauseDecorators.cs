@@ -15,7 +15,7 @@ public enum ClauseDecorators
     /// This is the default decorator.
     /// </remarks>
     [StringValue("")]
-    May,
+    None,
     
     /// <summary>
     /// Helper enum which specifies that the clause is used to include results.

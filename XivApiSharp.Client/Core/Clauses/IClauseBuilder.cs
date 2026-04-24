@@ -3,7 +3,8 @@ namespace XivApiSharp.Client.Core.Clauses;
 /// <summary>
 /// Defines methods for the initial step of a ClauseBuilder.
 /// </summary>
-public interface IClauseBuilder
+public interface IClauseBuilder 
+    : IOptionalLanguageStep, IOptionalDecoratorStep, IOperatorStep
 {
     /// <summary>
     /// Sets the specifier portion of the clause.

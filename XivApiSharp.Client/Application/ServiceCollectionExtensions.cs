@@ -127,7 +127,7 @@ public static class ServiceCollectionExtensions
 
                 // Inject dependencies
                 .AddScoped<IClauseFactory, ClauseFactory>()
-                .AddScoped<IClauseBuilder, ClauseBuilder>()
+                .AddTransient<IClauseBuilder, ClauseBuilder>()
                 .AddScoped<IInternalDependencies, InternalDependencies>(sp =>
                 {
                     IClauseFactory clauseFactory =

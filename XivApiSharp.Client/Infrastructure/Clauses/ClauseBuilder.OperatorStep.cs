@@ -1,28 +1,10 @@
 using System.Numerics;
-using XivApiSharp.Client.Core;
 using XivApiSharp.Client.Core.Clauses;
 
 namespace XivApiSharp.Client.Infrastructure.Clauses;
 
-/// <inheritdoc/>
-internal class OperatorStep(IClauseFactory clauseFactory, string specifier, 
-    ClauseDecorators decorator, SchemaLanguage lang) : IOperatorStep
+internal sealed partial class ClauseBuilder
 {
-    /// <summary>
-    /// The clause's field specifier.
-    /// </summary>
-    private readonly string _specifier = specifier;
-    
-    /// <summary>
-    /// The clause's field decorator.
-    /// </summary>
-    internal ClauseDecorators Decorator = decorator;
-    
-    /// <summary>
-    /// The clause factory with which to create a new clause from.
-    /// </summary>
-    private readonly IClauseFactory _clauseFactory = clauseFactory;
-    
     /// <inheritdoc/>
     public IClause PartiallyEqual(string value) =>
         BuildClause(ClauseOperators.PartiallyEqual, value);
@@ -67,8 +49,12 @@ internal class OperatorStep(IClauseFactory clauseFactory, string specifier,
     /// <seealso cref="IClause"/>
     private IClause BuildClause<T>(ClauseOperators op, T value) where T : notnull
     {
-        IClause newClause = _clauseFactory.CreateClause(_specifier, op, 
-            value, Decorator, lang);
+        IClause newClause = _factory.CreateClause(
+            decorator: _decorator, 
+            specifier: _specifier, 
+            language: _language, 
+            op: op, 
+            value: value);
 
         return newClause;
     }

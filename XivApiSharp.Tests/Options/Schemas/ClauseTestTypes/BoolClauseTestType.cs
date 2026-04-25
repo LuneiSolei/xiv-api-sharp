@@ -1,4 +1,4 @@
-namespace XivApiSharp.Tests.Options.ClauseConfigs.ClauseTestTypes;
+namespace XivApiSharp.Tests.Options.Schemas.ClauseTestTypes;
 
 public class BoolClauseTestType : BaseClauseTestType<bool>
 {

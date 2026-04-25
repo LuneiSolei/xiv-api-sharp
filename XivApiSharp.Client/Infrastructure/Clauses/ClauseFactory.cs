@@ -7,7 +7,7 @@ namespace XivApiSharp.Client.Infrastructure.Clauses;
 internal class ClauseFactory : IClauseFactory
 {
     /// <inheritdoc/>
-    IClause IClauseFactory.CreateClause<T>(
+    IClause<T> IClauseFactory.CreateClause<T>(
         ClauseDecorators decorator, 
         string specifier, 
         SchemaLanguage language, 

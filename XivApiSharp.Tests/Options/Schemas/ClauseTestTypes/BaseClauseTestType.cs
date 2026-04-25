@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace XivApiSharp.Tests.Options.ClauseConfigs.ClauseTestTypes;
+namespace XivApiSharp.Tests.Options.Schemas.ClauseTestTypes;
 
 public abstract class BaseClauseTestType<T>
 {

@@ -1,44 +1,95 @@
 using System.Web;
+using JetBrains.Annotations;
 using XivApiSharp.Client.Core;
 using XivApiSharp.Client.Core.Clauses;
 using XivApiSharp.Client.Core.Extensions;
 
 namespace XivApiSharp.Client.Infrastructure.Clauses;
 
-/// <inheritdoc cref="IClause"/>
-internal sealed class Clause<T> : BaseClause, IClause where T : notnull
+/// <inheritdoc cref="IClause{T}"/>
+internal sealed class Clause<T> : BaseClause, IClause<T> where T : notnull
 {
-        /// <summary>
+    /// <summary>
+    /// Backing field for <see cref="Value"/>
+    /// </summary>
+    private T _value;
+    
+    /// <summary>
     /// The value of clause to be compared.
     /// </summary>
-    private T Value { get; }
+    [UsedImplicitly]
+    public T Value
+    {
+        get => _value;
+        set
+        {
+            _value = value;
+            UpdateCaches();
+        }
+    }
+
+    /// <summary>
+    /// Backing field for <see cref="Language"/>
+    /// </summary>
+    private SchemaLanguage _language;
     
-    /// <inheritdoc cref="IClause.Language"/>
+    /// <inheritdoc />
     public SchemaLanguage Language
     {
-        get => GetCached(ref field);
-        set => SetCached(ref field, value);
+        get => _language;
+        set         
+        {
+            _language = value; 
+            UpdateCaches();
+        }
     }
+
+    /// <summary>
+    /// Backing field for <see cref="Specifier"/>
+    /// </summary>
+    private string _specifier;
     
     /// <inheritdoc />
     public string Specifier
     {
-        get => GetCached(ref field);
-        set => SetCached(ref field, value);
+        get => _specifier;
+        set         
+        {
+            _specifier = value; 
+            UpdateCaches();
+        }
     }
 
+    /// <summary>
+    /// Backing field for <see cref="ClauseOperator"/>.
+    /// </summary>
+    private ClauseOperators _clauseOperator;
+    
     /// <inheritdoc />
     public ClauseOperators ClauseOperator
     {
-        get => GetCached(ref field);
-        set => SetCached(ref field, value);
+        get => _clauseOperator;
+        set
+        {
+            _clauseOperator = value; 
+            UpdateCaches();
+        }
     }
-
+    
+    /// <summary>
+    /// Backing field for <see cref="Decorator"/>.
+    /// </summary>
+    private ClauseDecorators _decorator;
+    
     /// <inheritdoc/>
     public ClauseDecorators Decorator
     {
-        get => GetCached(ref field);
-        set => SetCached(ref field, value);
+        get => _decorator;
+        set
+        {
+            _decorator = value; 
+            UpdateCaches();
+        }
     }
 
     /// <summary>
@@ -59,7 +110,7 @@ internal sealed class Clause<T> : BaseClause, IClause where T : notnull
     /// <param name="value">
     ///     The value to be compared.
     /// </param>
-    /// <seealso cref="IClause"/>
+    /// <seealso cref="IClause{T}"/>
     internal Clause(
         ClauseDecorators decorator, 
         string specifier, 
@@ -67,11 +118,11 @@ internal sealed class Clause<T> : BaseClause, IClause where T : notnull
         ClauseOperators operation, 
         T value)
     {
-        Decorator = decorator;
-        Specifier = specifier;
-        Language = language;
-        ClauseOperator = operation;
-        Value = value;
+        _decorator = decorator;
+        _specifier = specifier;
+        _language = language;
+        _clauseOperator = operation;
+        _value = value;
     }
 
     /// <inheritdoc/>
@@ -121,42 +172,5 @@ internal sealed class Clause<T> : BaseClause, IClause where T : notnull
 
         UnencodedCache =  $"{decorator}{specifier}{lang}"
                           + $"{clauseOperator}{value}";
-    }
-
-    /// <summary>
-    /// Rebuilds all cached values.
-    /// </summary>
-    private void UpdateCache()
-    {
-        RebuildUnencodedCache();
-        RebuildUriEncodedCache();
-        IsCacheStale = false;
-    }
-
-    /// <summary>
-    /// Updates the cache, if necessary, and then retrieves the cached value 
-    /// from its backing field.
-    /// </summary>
-    /// <param name="field">The backing field.</param>
-    /// <typeparam name="TCache">The backing field's type.</typeparam>
-    /// <returns>The updated cache value.</returns>
-    private TCache GetCached<TCache>(ref TCache field)
-    {
-        if (IsCacheStale) UpdateCache();
-        return field;
-    }
-
-    /// <summary>
-    /// Sets the backing field to the updated value and then rebuilds all 
-    /// caches.
-    /// </summary>
-    /// <param name="field">The backing field.</param>
-    /// <param name="value">The new value.</param>
-    /// <typeparam name="TCache">The backing field's type.</typeparam>
-    // ReSharper disable once RedundantAssignment
-    private void SetCached<TCache>(ref TCache field, TCache value)
-    {
-        field = value;
-        UpdateCache();
     }
 }

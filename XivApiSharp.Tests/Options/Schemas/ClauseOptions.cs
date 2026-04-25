@@ -1,7 +1,6 @@
 using System.ComponentModel.DataAnnotations;
-using XivApiSharp.Tests.Options.ClauseConfigs;
 
-namespace XivApiSharp.Tests.Options;
+namespace XivApiSharp.Tests.Options.Schemas;
 
 public class ClauseOptions
 {

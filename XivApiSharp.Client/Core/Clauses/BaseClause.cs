@@ -14,11 +14,6 @@ internal abstract class BaseClause : IBaseClause
     private protected string UnencodedCache { get; set; } = string.Empty;
 
     /// <summary>
-    /// Indicates if the cache needs to be rebuilt.
-    /// </summary>
-    private protected bool IsCacheStale { get; set; }
-
-    /// <summary>
     /// Gets this instance's URI encoded string representation.
     /// </summary>
     /// <returns>
@@ -26,12 +21,10 @@ internal abstract class BaseClause : IBaseClause
     /// </returns>
     /// <seealso cref="ToUnencodedString"/>
     public virtual string ToUriEncodedString()
-    {
-        if (IsCacheStale) RebuildUriEncodedCache();
-
+    { 
         return UriEncodedCache;
     }
-
+    
     /// <summary>
     /// Converts this instance into its unencoded string representation.
     /// </summary>
@@ -41,8 +34,6 @@ internal abstract class BaseClause : IBaseClause
     /// <seealso cref="ToUriEncodedString"/>
     public virtual string ToUnencodedString()
     {
-        if (IsCacheStale) RebuildUnencodedCache();
-        
         return UnencodedCache;
     }
 
@@ -63,4 +54,13 @@ internal abstract class BaseClause : IBaseClause
     /// Rebuilds the unencoded string cache for this instance.
     /// </summary>
     private protected abstract void RebuildUnencodedCache();
+
+    /// <summary>
+    /// Rebuilds all caches.
+    /// </summary>
+    private protected void UpdateCaches()
+    {
+        RebuildUriEncodedCache();
+        RebuildUnencodedCache();
+    }
 }

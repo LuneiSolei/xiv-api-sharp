@@ -4,7 +4,7 @@ namespace XivApiSharp.Client.Core.Clauses;
 /// Represents a type that is used for creating clause instances used with an
 /// instance of QueryString.
 /// </summary>
-/// <seealso cref="IClause"/>
+/// <seealso cref="IClause{T}"/>
 /// <seealso cref="QueryString"/>
 internal interface IClauseFactory
 {
@@ -17,8 +17,8 @@ internal interface IClauseFactory
     /// <returns>
     /// An instance of IClause
     /// </returns>
-    /// <seealso cref="IClause"/>
-    IClause CreateClause<T>(
+    /// <seealso cref="IClause{T}"/>
+    IClause<T> CreateClause<T>(
         ClauseDecorators decorator, 
         string specifier, 
         SchemaLanguage language, 

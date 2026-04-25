@@ -16,7 +16,7 @@ public interface IOperatorStep
     /// An individual <see cref="IClause"/> to be used with a
     /// <see cref="QueryString"/>.
     /// </returns>
-    IClause Equal(string value);
+    IClause<string> Equal(string value);
 
     /// <summary>
     /// Sets the clause to use the equal to operator (=) against the provided
@@ -27,7 +27,7 @@ public interface IOperatorStep
     /// An individual <see cref="IClause"/> to be used with a
     /// <see cref="QueryString"/>.
     /// </returns>
-    IClause Equal(bool value);
+    IClause<bool> Equal(bool value);
 
     /// <summary>
     /// Sets the clause to use the equal to operator (=) against the provided
@@ -42,7 +42,7 @@ public interface IOperatorStep
     /// An individual <see cref="IClause"/> to be used with a
     /// <see cref="QueryString"/>.
     /// </returns>
-    IClause Equal<T>(T value) where T : INumber<T>;
+    IClause<T> Equal<T>(T value) where T : INumber<T>;
     
     /// <summary>
     /// Sets the clause to use the partial string match operator (~) against
@@ -50,10 +50,10 @@ public interface IOperatorStep
     /// </summary>
     /// <param name="value">The value to compare to.</param>
     /// <returns>
-    /// An individual <see cref="IClause"/> to be used with a
+    /// An individual <see cref="IClause{T}"/> to be used with a
     /// <see cref="QueryString"/>.
     /// </returns>
-    IClause PartiallyEqual(string value);
+    IClause<string> PartiallyEqual(string value);
 
     /// <summary>
     /// Sets the clause to use the greater than operator (&gt;) against the provided value.
@@ -64,10 +64,10 @@ public interface IOperatorStep
     /// <see cref="INumber{TSelf}">INumber&lt;TSelf&gt;</see> interface.
     /// </typeparam>
     /// <returns>
-    /// An individual <see cref="IClause"/> to be used with a
+    /// An individual <see cref="IClause{T}"/> to be used with a
     /// <see cref="QueryString"/>.
     /// </returns>
-    IClause GreaterThan<T>(T value) where T : INumber<T>;
+    IClause<T> GreaterThan<T>(T value) where T : INumber<T>;
 
     /// <summary>
     /// Sets the clause to use the greater than or equal to operator (&gt;=)
@@ -79,10 +79,10 @@ public interface IOperatorStep
     /// <see cref="INumber{TSelf}">INumber&lt;TSelf&gt;</see> interface.
     /// </typeparam>
     /// <returns>
-    /// An individual <see cref="IClause"/> to be used with a
+    /// An individual <see cref="IClause{T}"/> to be used with a
     /// <see cref="QueryString"/>.
     /// </returns>
-    IClause GreaterThanOrEqual<T>(T value) where T : INumber<T>;
+    IClause<T> GreaterThanOrEqual<T>(T value) where T : INumber<T>;
 
     /// <summary>
     /// Sets the clause to use the less than operator (&lt;) against the
@@ -94,10 +94,10 @@ public interface IOperatorStep
     /// <see cref="INumber{TSelf}">INumber&lt;TSelf&gt;</see> interface.
     /// </typeparam>
     /// <returns>
-    /// An individual <see cref="IClause"/> to be used with a
+    /// An individual <see cref="IClause{T}"/> to be used with a
     /// <see cref="QueryString"/>.
     /// </returns>
-    IClause LessThan<T>(T value) where T : INumber<T>;
+    IClause<T> LessThan<T>(T value) where T : INumber<T>;
 
     /// <summary>
     /// Sets the clause to use the less than or equal to operator (&lt;=)
@@ -109,8 +109,8 @@ public interface IOperatorStep
     /// <see cref="INumber{TSelf}">INumber&lt;TSelf&gt;</see> interface.
     /// </typeparam>
     /// <returns>
-    /// An individual <see cref="IClause"/> to be used with a
+    /// An individual <see cref="IClause{T}"/> to be used with a
     /// <see cref="QueryString"/>.
     /// </returns>
-    IClause LessThanOrEqual<T>(T value) where T : INumber<T>;
+    IClause<T> LessThanOrEqual<T>(T value) where T : INumber<T>;
 }

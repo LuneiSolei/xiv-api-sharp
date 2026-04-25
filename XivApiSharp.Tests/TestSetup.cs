@@ -10,28 +10,31 @@ using XivApiSharp.Tests.Options;
 namespace XivApiSharp.Tests;
 
 [SetUpFixture]
-internal class TestingSetup
+internal class TestSetup
 {
     private const string FileName = "appsettings.json";
     private static IConfiguration _config = null!;
-    internal static TestingOptions TestingOptions { get; set; }
-    internal readonly static XivApiService ApiService;
-
-    static TestingSetup()
+    internal readonly static IServiceProvider ServiceContainer;
+    internal static TopLevelOptions Options { get; }
+    internal readonly static XivApiService Service;
+    
+    static TestSetup()
     {
+        // Create dependency injection container with configure custom testing
+        // options
         ConfigureOptions();
-        IServiceProvider serviceProvider = new ServiceCollection()
-            .Configure<TestingOptions>(_config.GetSection("TestingOptions"))
+        ServiceContainer = new ServiceCollection()
+            .Configure<TopLevelOptions>(_config.GetSection("TestingOptions"))
             .AddXivApiService()
             .BuildServiceProvider();
         
         // Store and validate options from DI container
-        TestingOptions = serviceProvider
-            .GetRequiredService<IOptions<TestingOptions>>().Value;
+        Options = ServiceContainer
+            .GetRequiredService<IOptions<TopLevelOptions>>().Value;
         ValidateOptions();
         
         // Store XivApiService
-        ApiService = serviceProvider.GetRequiredService<XivApiService>();
+        Service = ServiceContainer.GetRequiredService<XivApiService>();
     }
 
     private static void ConfigureOptions()
@@ -64,8 +67,8 @@ internal class TestingSetup
         // Require all values be filled in appsettings.json
         List<ValidationResult> validationResults = [];
         bool isValid = Validator.TryValidateObject(
-            TestingOptions,
-            new ValidationContext(TestingOptions),
+            Options,
+            new ValidationContext(Options),
             validationResults,
             validateAllProperties: true);
         

@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
-using XivApiSharp.Tests.Options.ClauseConfigs.ClauseTestTypes;
+using XivApiSharp.Tests.Options.Schemas.ClauseTestTypes;
 
-namespace XivApiSharp.Tests.Options.ClauseConfigs;
+namespace XivApiSharp.Tests.Options.Schemas;
 
 public class EqualToConfig
 {

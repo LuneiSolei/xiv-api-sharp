@@ -35,7 +35,7 @@ public sealed record QueryString
     /// <summary>
     /// A collection of single instances of <see cref="Clause{T}">Clause&lt;T&gt;</see>.
     /// </summary>
-    private List<IClause> Clauses { get; } = [];
+    private List<IBaseClause> Clauses { get; } = [];
 
     /// <summary>
     /// Adds a single clause to the query string.
@@ -50,7 +50,7 @@ public sealed record QueryString
     /// query.AddClause(clause);
     /// </code>
     /// </example>
-    public void AddClause(IClause clause) => 
+    public void AddClause(IBaseClause clause) => 
         Clauses.Add(clause);
 
     /// <summary>
@@ -65,7 +65,7 @@ public sealed record QueryString
     ///     .Is.GreaterThanOrEqualTo(4);
     /// </code>
     /// </example>
-    public void AddClauses(IEnumerable<IClause> clauses) =>
+    public void AddClauses(IEnumerable<IBaseClause> clauses) =>
         Clauses.AddRange(clauses);
 
     /// <summary>

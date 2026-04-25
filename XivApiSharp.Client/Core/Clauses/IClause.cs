@@ -5,8 +5,13 @@ namespace XivApiSharp.Client.Core.Clauses;
 /// QueryString model. A clause combines a specifier, operator, a value, and
 /// an optional decorator.
 /// </summary>
-public interface IClause
+public interface IClause<T> : IBaseClause
 {
+    /// <summary>
+    /// The value to compare against the specifier.
+    /// </summary>
+    T Value { get; set; }
+    
     /// <summary>
     /// Name of the field to compare the value against.
     /// </summary>

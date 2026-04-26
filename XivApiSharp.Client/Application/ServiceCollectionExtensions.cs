@@ -21,12 +21,12 @@ public static class ServiceCollectionExtensions
     /// The name of the file used for storing configuration options.
     /// </summary>
     private const string FileName = "appsettings.json";
-    
+
     /// <summary>
     /// Internal storage for the loaded configuration options.
     /// </summary>
     private static IConfiguration? _config;
-    
+
     extension(IServiceCollection services)
     {
         /// <summary>
@@ -50,10 +50,10 @@ public static class ServiceCollectionExtensions
         {
             _config = config;
             services.RegisterCommon();
-            
+
             return services;
         }
-        
+
         /// <summary>
         /// Registers XivApiService using the built-in options.
         /// </summary>
@@ -84,11 +84,11 @@ public static class ServiceCollectionExtensions
         {
             // Get our current assembly
             Assembly assembly = Assembly.GetExecutingAssembly();
-            
+
             // Using the default namespace, get the full resource name. Throw
             // exception if not found.
             string resourceName = assembly.GetManifestResourceNames()
-                .FirstOrDefault(name => 
+                .FirstOrDefault(name =>
                     name.EndsWith(FileName, StringComparison.OrdinalIgnoreCase))
                 ?? throw new MissingManifestResourceException(
                     $"Required manifest resource ending with '{FileName}' " +
@@ -99,7 +99,7 @@ public static class ServiceCollectionExtensions
                 ?? throw new FileLoadException(
                     $"Stream for required manifest resource '{resourceName}' " +
                     $"could not be loaded");
-            
+
             // Load values
             _config = new ConfigurationBuilder()
                 .AddJsonStream(stream)
@@ -130,17 +130,16 @@ public static class ServiceCollectionExtensions
                 .AddTransient<IClauseBuilder, ClauseBuilder>()
                 .AddScoped<IInternalDependencies, InternalDependencies>(sp =>
                 {
-                    IClauseFactory clauseFactory =
-                        sp.GetRequiredService<IClauseFactory>();
+                    IClauseFactory clauseFactory = sp.GetRequiredService<IClauseFactory>();
                     return new InternalDependencies(clauseFactory);
                 })
 
-                // Add HttpClient 
+                // Add HttpClient
                 .AddHttpClient<XivApiService>((sp, client) =>
                 {
                     XivApiOptions opts = sp
                         .GetRequiredService<IOptions<XivApiOptions>>().Value;
-                
+
                     client.BaseAddress =
                         new Uri($"{opts.Scheme}://{opts.BaseUrl}");
                     client.DefaultRequestHeaders.Accept.Add(

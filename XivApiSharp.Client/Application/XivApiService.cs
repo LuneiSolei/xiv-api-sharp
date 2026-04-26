@@ -10,14 +10,14 @@ namespace XivApiSharp.Client.Application;
 /// Provides functionality to interact with the XIV API.
 /// </summary>
 /// <seealso href="https://xivapi.com"/>
-public class XivApiService
+internal class XivApiService : IXivApiService
 {
     /// <summary>
     /// Stores the options configuration.
     /// </summary>
     /// <seealso cref="XivApiOptions"/>
     private readonly XivApiOptions _opts;
-    
+
     /// <summary>
     /// Stores access to internal dependencies required by XivApiService.
     /// </summary>
@@ -53,13 +53,7 @@ public class XivApiService
         _internalDependencies = internalDependencies;
         _client = client;
     }
-    
-    /// <summary>
-    /// Creates a new instance of ClauseBuilder.
-    /// </summary>
-    /// <returns>
-    /// The interface for ClauseBuilder.
-    /// </returns>
-    /// <seealso cref="IClauseBuilder"/>
+
+    /// <inheritdoc />
     public IClauseBuilder NewClause() => new ClauseBuilder(_internalDependencies.ClauseFactory);
 }

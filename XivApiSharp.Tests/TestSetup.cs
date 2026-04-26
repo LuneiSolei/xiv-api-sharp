@@ -19,7 +19,7 @@ internal static class TestSetup
     private static IConfiguration _config = null!;
     internal static readonly IServiceProvider ServiceContainer;
     internal static TopLevelOptions Options { get; }
-    internal static readonly XivApiService Service;
+    internal static readonly IXivApiService Service;
 
     static TestSetup()
     {
@@ -37,7 +37,7 @@ internal static class TestSetup
         ValidateOptions();
 
         // Store XivApiService
-        Service = ServiceContainer.GetRequiredService<XivApiService>();
+        Service = ServiceContainer.GetRequiredService<IXivApiService>();
     }
 
     public static IClause<TValue> SetUpClause<TOptions, TValue>(TOptions options, TValue value)

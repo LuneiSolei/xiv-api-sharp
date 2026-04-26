@@ -11,7 +11,7 @@ public interface IOptionalDecoratorStep : IOperatorStep
     /// Indicates the clause <b>MUST</b> be matched for every result returned.
     /// </summary>
     IOperatorStep Must { get; }
-    
+
     /// <summary>
     /// Indicates the clause <b>MUST NOT</b> be matched for any result returned.
     /// </summary>

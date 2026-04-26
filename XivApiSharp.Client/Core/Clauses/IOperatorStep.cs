@@ -43,7 +43,7 @@ public interface IOperatorStep
     /// <see cref="QueryString"/>.
     /// </returns>
     IClause<T> Equal<T>(T value) where T : INumber<T>;
-    
+
     /// <summary>
     /// Sets the clause to use the partial string match operator (~) against
     /// the provided value.

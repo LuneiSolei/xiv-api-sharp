@@ -37,7 +37,7 @@ internal static class TestSetup
         ValidateOptions();
 
         // Store XivApiService
-        Service = ServiceContainer.GetRequiredService<IXivApiService>();
+        Service = ServiceContainer.GetRequiredService<XivApiService>();
     }
 
     public static IClause<TValue> SetUpClause<TOptions, TValue>(TOptions options, TValue value)

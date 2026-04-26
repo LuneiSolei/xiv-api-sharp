@@ -25,7 +25,7 @@ internal interface IClauseFactory
         string specifier,
         SchemaLanguage language,
         ClauseOperators op,
-        T value) where T : notnull;
+        T value);
 
     /// <summary>
     /// Creates a new instance of a clause group with the provided elements.

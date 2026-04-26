@@ -1,3 +1,4 @@
+using System.Numerics;
 using System.Text;
 using System.Web;
 using JetBrains.Annotations;
@@ -14,6 +15,13 @@ internal sealed class Clause<T> : BaseClause, IClause<T> where T : notnull
     /// Backing field for <see cref="Value"/>
     /// </summary>
     private T _value;
+
+    /// <summary>
+    /// Cache for determining if this instance is of a numeric type.
+    /// </summary>
+    private static readonly bool IsNumericType = typeof(T).GetInterfaces().Any(i =>
+            i.IsGenericType &&
+            i.GetGenericTypeDefinition() == typeof(INumber<>));
 
     /// <summary>
     /// The value of clause to be compared.
@@ -145,18 +153,13 @@ internal sealed class Clause<T> : BaseClause, IClause<T> where T : notnull
                 $"@{Language.ToString().ToLower()}");
         }
 
-        // Determine new encoded clause value
         string encodedValue = Value switch
         {
-            // Convert boolean values to lowercase because .NET capitalizes
-            // them by default.
             bool b => b.ToString().ToLowerInvariant(),
-
-            // Encode strings.
-            string s => $"\"{HttpUtility.UrlEncode(s)}\"",
-
-            // Anything else gets to be a string without encoding.
-            _ => Value.ToString() ?? string.Empty
+            string s => HttpUtility.UrlEncode(s),
+            _ when IsNumericType => Value.ToString() ?? string.Empty,
+            _ => throw new InvalidOperationException($"Unsupported value type: {Value.GetType().Name}. " +
+                                                     $"Only numeric, boolean, and string types are supported.")
         };
 
         UriEncodedCache = $"{encodedDecorator}{encodedSpecifier}"

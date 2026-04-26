@@ -7,28 +7,33 @@ namespace XivApiSharp.Client.Infrastructure.Clauses;
 /// Builds a singular clause for use in a <see cref="QueryString"/>.
 /// </summary>
 /// <seealso cref="IClause"/>
-internal sealed partial class ClauseBuilder : IClauseBuilder
+internal sealed partial class ClauseBuilder : IClauseBuilder, IOptionalLanguageStep, IOperatorStep, IValueStep
 {
     /// <summary>
     /// The injected IClauseFactory for the builder to use.
     /// </summary>
     private readonly IClauseFactory _factory;
-    
+
     /// <summary>
     /// The decorator for the clause to use.
     /// </summary>
     private ClauseDecorators _decorator;
-    
+
     /// <summary>
     /// The specifier for the clause to use.
     /// </summary>
     private string _specifier;
-    
+
     /// <summary>
     /// The language override for the clause to use.
     /// </summary>
     private SchemaLanguage _language;
-    
+
+    /// <summary>
+    /// The operator for the clause to use.
+    /// </summary>
+    private ClauseOperators _operator;
+
     /// <summary>
     /// Configures the clause to require itself to match on any returned result.
     /// </summary>
@@ -66,6 +71,12 @@ internal sealed partial class ClauseBuilder : IClauseBuilder
         _language = SchemaLanguage.None;
         _specifier = string.Empty;
         _decorator = ClauseDecorators.None;
+    }
+
+    public IClauseBuilder WithDecorator(ClauseDecorators decorator)
+    {
+        _decorator = decorator;
+        return this;
     }
 
     /// <inheritdoc/>

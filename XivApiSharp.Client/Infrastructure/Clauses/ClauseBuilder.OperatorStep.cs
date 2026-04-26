@@ -36,7 +36,9 @@ internal sealed partial class ClauseBuilder
     /// <inheritdoc/>
     public IClause<T> LessThanOrEqual<T>(T value) where T : INumber<T> =>
         BuildClause(ClauseOperators.LessThanOrEqual, value);
-    
+
+
+
     /// <summary>
     /// Builds a clause by assigning the specified operator and
     /// <paramref name="value"/> to the clause.
@@ -47,14 +49,13 @@ internal sealed partial class ClauseBuilder
     /// <returns>A fully constructed clause.</returns>
     /// <seealso cref="ClauseOperators"/>
     /// <seealso cref="IClause{T}"/>
-    private IClause<T> BuildClause<T>(ClauseOperators op, T value) where T : notnull
+    private IClause<T> BuildClause<T>(ClauseOperators op, T value)
     {
-        
         return _factory.CreateClause(
-            decorator: _decorator, 
-            specifier: _specifier, 
-            language: _language, 
-            op: op, 
+            decorator: _decorator,
+            specifier: _specifier,
+            language: _language,
+            op: op,
             value: value);
     }
 }

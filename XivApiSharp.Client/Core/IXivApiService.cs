@@ -15,8 +15,8 @@ public interface IXivApiService
     /// <returns>
     /// The interface for ClauseBuilder.
     /// </returns>
-    /// <seealso cref="IClauseBuilder"/>
-    IClauseBuilder NewClause();
+    /// <seealso cref="IClauseBuilder{T}"/>
+    IClauseBuilder<T> NewClause<T>() where T : notnull;
 
     /// <summary>
     /// Creates a new instance of <see cref="IClauseGroupBuilder"/>

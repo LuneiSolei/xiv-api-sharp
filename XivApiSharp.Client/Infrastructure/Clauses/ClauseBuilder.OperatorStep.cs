@@ -3,57 +3,80 @@ using XivApiSharp.Client.Core.Clauses;
 
 namespace XivApiSharp.Client.Infrastructure.Clauses;
 
-internal sealed partial class ClauseBuilder
+internal sealed partial class ClauseBuilder<T>
 {
     /// <inheritdoc/>
-    public IClause<string> PartiallyEqual(string value) =>
-        BuildClause(ClauseOperators.PartiallyEqual, value);
+    public IClause<string> PartiallyEqual(string value)
+    {
+        _operator = ClauseOperators.PartiallyEqual;
+        return BuildClause(value);
+    }
 
     /// <inheritdoc/>
-    public IClause<string> Equal(string value) =>
-        BuildClause(ClauseOperators.Equal, value);
+    public IClause<string> Equal(string value)
+    {
+        _operator = ClauseOperators.Equal;
+        return BuildClause(value);
+    }
 
     /// <inheritdoc/>
-    public IClause<bool> Equal(bool value) =>
-        BuildClause(ClauseOperators.Equal, value);
+    public IClause<bool> Equal(bool value)
+    {
+        _operator = ClauseOperators.Equal;
+        return BuildClause(value);
+    }
 
     /// <inheritdoc/>
-    public IClause<T> Equal<T>(T value) where T : INumber<T> =>
-        BuildClause(ClauseOperators.Equal, value);
+    public IClause<TValue> Equal<TValue>(TValue value) where TValue : INumber<TValue>
+    {
+        _operator = ClauseOperators.Equal;
+        return BuildClause(value);
+    }
 
     /// <inheritdoc/>
-    public IClause<T> GreaterThan<T>(T value) where T : INumber<T> =>
-        BuildClause(ClauseOperators.GreaterThan, value);
+    public IClause<TValue> GreaterThan<TValue>(TValue value) where TValue : INumber<TValue>
+    {
+        _operator = ClauseOperators.GreaterThan;
+        return BuildClause(value);
+    }
 
     /// <inheritdoc/>
-    public IClause<T> GreaterThanOrEqual<T>(T value) where T : INumber<T> =>
-        BuildClause(ClauseOperators.GreaterThanOrEqual, value);
+    public IClause<TValue> GreaterThanOrEqual<TValue>(TValue value) where TValue : INumber<TValue>
+    {
+        _operator = ClauseOperators.GreaterThanOrEqual;
+        return BuildClause(value);
+    }
 
     /// <inheritdoc/>
-    public IClause<T> LessThan<T>(T value) where T : INumber<T> =>
-        BuildClause(ClauseOperators.LessThan, value);
+    public IClause<TValue> LessThan<TValue>(TValue value) where TValue : INumber<TValue>
+    {
+        _operator = ClauseOperators.LessThan;
+        return BuildClause(value);
+    }
 
     /// <inheritdoc/>
-    public IClause<T> LessThanOrEqual<T>(T value) where T : INumber<T> =>
-        BuildClause(ClauseOperators.LessThanOrEqual, value);
+    public IClause<TValue> LessThanOrEqual<TValue>(TValue value) where TValue : INumber<TValue>
+    {
+        _operator = ClauseOperators.LessThanOrEqual;
+        return BuildClause(value);
+    }
 
     /// <summary>
     /// Builds a clause by assigning the specified operator and
     /// <paramref name="value"/> to the clause.
     /// </summary>
-    /// <param name="op">The comparison operator to use for the clause.</param>
     /// <param name="value">The value to compare against.</param>
-    /// <typeparam name="T">The type of the clause value.</typeparam>
+    /// <typeparam name="TValue">The type of the clause value.</typeparam>
     /// <returns>A fully constructed clause.</returns>
     /// <seealso cref="ClauseOperators"/>
     /// <seealso cref="IClause{T}"/>
-    private IClause<T> BuildClause<T>(ClauseOperators op, T value)
+    private IClause<TValue> BuildClause<TValue>(TValue value)
     {
         return _factory.CreateClause(
             decorator: _decorator,
             specifier: _specifier,
             language: _language,
-            op: op,
+            op: _operator,
             value: value);
     }
 }

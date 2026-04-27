@@ -3,7 +3,7 @@ namespace XivApiSharp.Client.Core.Clauses;
 /// <summary>
 /// Defines methods for the initial step of a ClauseBuilder.
 /// </summary>
-public interface IClauseBuilder
+public interface IClauseBuilder<T> where T : notnull
 {
     /// <summary>
     /// Sets the specifier portion of the clause.
@@ -30,7 +30,7 @@ public interface IClauseBuilder
     /// <returns>
     /// This clause builder instance for method chaining.
     /// </returns>
-    IClauseBuilder WithDecorator(ClauseDecorators decorator);
+    IClauseBuilder<T> WithDecorator(ClauseDecorators decorator);
 
     /// <summary>
     /// Sets the specifier for the clause to use.
@@ -41,7 +41,7 @@ public interface IClauseBuilder
     /// <returns>
     /// This clause builder instance for method chaining.
     /// </returns>
-    IClauseBuilder WithSpecifier(string specifier);
+    IClauseBuilder<T> WithSpecifier(string specifier);
 
     /// <summary>
     /// Sets the language for the clause to use. Overrides the <see cref="QueryString"/> language parameter.
@@ -52,7 +52,7 @@ public interface IClauseBuilder
     /// <returns>
     /// This clause builder instance for method chaining.
     /// </returns>
-    IClauseBuilder WithLanguage(SchemaLanguage language);
+    IClauseBuilder<T> WithLanguage(SchemaLanguage language);
 
     /// <summary>
     /// Sets the <see cref="ClauseOperators">operator</see> for the clause to use.
@@ -63,7 +63,7 @@ public interface IClauseBuilder
     /// <returns>
     /// This clause builder instance for method chaining.
     /// </returns>
-    IClauseBuilder WithOperator(ClauseOperators @operator);
+    IClauseBuilder<T> WithOperator(ClauseOperators @operator);
 
     /// <summary>
     /// Sets the value for the clause to compare its specifier against.
@@ -78,5 +78,13 @@ public interface IClauseBuilder
     /// The built clause.
     /// </returns>
     /// <seealso cref="IClause{T}"/>
-    IClause<T> WithValue<T>(T value);
+    IClauseBuilder<T> WithValue(T value);
+
+    /// <summary>
+    /// Builds the clause.
+    /// </summary>
+    /// <returns>
+    /// A built instance of <see cref="IClause{T}"/>.
+    /// </returns>
+    IClause<T> Build();
 }

@@ -3,32 +3,34 @@ using XivApiSharp.Client.Core.Clauses;
 
 namespace XivApiSharp.Client.Infrastructure.Clauses;
 
-internal sealed partial class ClauseBuilder
+internal sealed partial class ClauseBuilder<T>
 {
-    public IClauseBuilder WithSpecifier(string specifier)
+    public IClauseBuilder<T> WithSpecifier(string specifier)
     {
         _specifier = specifier;
         return this;
     }
 
-    IClauseBuilder IClauseBuilder.WithLanguage(SchemaLanguage language)
+    IClauseBuilder<T> IClauseBuilder<T>.WithLanguage(SchemaLanguage language)
     {
         _language = language;
         return this;
     }
 
-    public IClauseBuilder WithOperator(ClauseOperators @operator)
+    public IClauseBuilder<T> WithOperator(ClauseOperators @operator)
     {
         _operator = @operator;
         return this;
     }
 
-    public IClause<T> WithValue<T>(T value) =>
-        BuildClause(_operator, value);
+    public IClauseBuilder<T> WithValue(T value)
+    {
+        _value = value;
+        return this;
+    }
 
-    public IClause<string> WithValue(string value) =>
-        BuildClause(_operator, value);
-
-    public IClause<bool> WithValue(bool value) =>
-        BuildClause(_operator, value);
+    public IClause<T> Build()
+    {
+        return BuildClause((T)_value);
+    }
 }

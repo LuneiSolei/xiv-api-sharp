@@ -57,7 +57,8 @@ internal class XivApiService : IXivApiService
     }
 
     /// <inheritdoc />
-    public IClauseBuilder NewClause() => new ClauseBuilder(_internalDependencies.ClauseFactory);
+    public IClauseBuilder<T> NewClause<T>() where T : notnull =>
+        new ClauseBuilder<T>(_internalDependencies.ClauseFactory);
 
     /// <inheritdoc/>
     public IClauseGroupBuilder NewClauseGroup() => new ClauseGroupBuilder(_internalDependencies.ClauseFactory);

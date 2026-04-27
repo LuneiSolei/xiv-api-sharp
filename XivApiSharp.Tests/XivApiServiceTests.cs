@@ -22,7 +22,7 @@ public class XivApiServiceTests
         if (!int.TryParse(options.Value, out int parsedValue))
             Assert.Fail("The provided option 'Value' is not valid.");
 
-        IClause<int> clause = TestSetup.Service.NewClause()
+        IClause<int> clause = TestSetup.Service.NewClause<int>()
             .WhereSpecifier(options.Specifier)
             .WithLanguage(language)
             .Must
@@ -44,36 +44,39 @@ public class XivApiServiceTests
             SchemaLanguage firstLanguage,
             ClauseOperators firstOperator) = ParseClauseOptions(options.FirstClause);
 
-        clauses.Add(TestSetup.Service.NewClause()
+        clauses.Add(TestSetup.Service.NewClause<string>()
             .WithDecorator(firstDecorator)
             .WithSpecifier(options.FirstClause.Specifier)
             .WithLanguage(firstLanguage)
             .WithOperator(firstOperator)
-            .WithValue(options.FirstClause.Value));
+            .WithValue(options.FirstClause.Value)
+            .Build());
 
         // Parse and add second clause options
         (ClauseDecorators secondDecorator,
             SchemaLanguage secondLanguage,
             ClauseOperators secondOperator) = ParseClauseOptions(options.SecondClause);
 
-        clauses.Add(TestSetup.Service.NewClause()
+        clauses.Add(TestSetup.Service.NewClause<int>()
             .WithDecorator(secondDecorator)
             .WithSpecifier(options.SecondClause.Specifier)
             .WithLanguage(secondLanguage)
             .WithOperator(secondOperator)
-            .WithValue(options.SecondClause.Value));
+            .WithValue(options.SecondClause.Value)
+            .Build());
 
         // Parse and add third clause options
         (ClauseDecorators thirdDecorator,
             SchemaLanguage thirdLanguage,
             ClauseOperators thirdOperator) = ParseClauseOptions(options.ThirdClause);
 
-        clauses.Add(TestSetup.Service.NewClause()
+        clauses.Add(TestSetup.Service.NewClause<double>()
             .WithDecorator(thirdDecorator)
             .WithSpecifier(options.ThirdClause.Specifier)
             .WithLanguage(thirdLanguage)
             .WithOperator(thirdOperator)
-            .WithValue(options.ThirdClause.Value));
+            .WithValue(options.ThirdClause.Value)
+            .Build());
 
         IClauseGroup clauseGroup = TestSetup.Service.NewClauseGroup()
             .WithClauses(clauses)

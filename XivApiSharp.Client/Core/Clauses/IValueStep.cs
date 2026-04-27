@@ -4,7 +4,7 @@ namespace XivApiSharp.Client.Core.Clauses;
 
 /// <summary>
 /// Represents a type that is used for the final step of the "multistep" method chain for the
-/// <see cref="IClauseBuilder"/>.
+/// <see cref="IClauseBuilder{T}"/>.
 /// </summary>
 public interface IValueStep
 {

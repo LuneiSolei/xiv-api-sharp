@@ -6,17 +6,17 @@ namespace XivApiSharp.Tests.Options.Schemas.ClauseTests;
 public class BaseClauseOptions
 {
     [Required(AllowEmptyStrings = false), UsedImplicitly]
-    public string Decorator { get; set; }
+    public required string Decorator { get; set; }
 
     [Required(AllowEmptyStrings = false), UsedImplicitly]
-    public string Specifier { get; set; }
+    public required string Specifier { get; set; }
 
     [Required(AllowEmptyStrings = false), UsedImplicitly]
-    public string Language { get; set; }
+    public required string Language { get; set; }
 
     [Required(AllowEmptyStrings = false), UsedImplicitly]
-    public string Operator { get; set; }
+    public required string Operator { get; set; }
 
     [Required(AllowEmptyStrings = false), UsedImplicitly]
-    public string ExpectedValue { get; set; }
+    public required string ExpectedValue { get; set; }
 }

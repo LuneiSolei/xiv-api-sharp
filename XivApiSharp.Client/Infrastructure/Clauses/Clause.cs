@@ -1,5 +1,4 @@
 using System.Numerics;
-using System.Text;
 using System.Web;
 using JetBrains.Annotations;
 using XivApiSharp.Client.Core;
@@ -9,19 +8,12 @@ using XivApiSharp.Client.Core.Extensions;
 namespace XivApiSharp.Client.Infrastructure.Clauses;
 
 /// <inheritdoc cref="IClause{T}"/>
-internal sealed class Clause<T> : BaseClause, IClause<T> where T : notnull
+internal sealed class Clause<T> : BaseClause, IClause<T>
 {
     /// <summary>
     /// Backing field for <see cref="Value"/>
     /// </summary>
     private T _value;
-
-    /// <summary>
-    /// Cache for determining if this instance is of a numeric type.
-    /// </summary>
-    private static readonly bool IsNumericType = typeof(T).GetInterfaces().Any(i =>
-            i.IsGenericType &&
-            i.GetGenericTypeDefinition() == typeof(INumber<>));
 
     /// <summary>
     /// The value of clause to be compared.
@@ -153,12 +145,20 @@ internal sealed class Clause<T> : BaseClause, IClause<T> where T : notnull
                 $"@{Language.ToString().ToLower()}");
         }
 
+        Console.WriteLine($"Is Number: {typeof(T)}");
         string encodedValue = Value switch
         {
+            // If value is of a number type, return it as a string. Return as an empty string if value is null.
+            _ when IsNumericType() => Value?.ToString() ?? string.Empty,
+
+            // If value is a bool, return it as an all lowercase string.
             bool b => b.ToString().ToLowerInvariant(),
-            string s => HttpUtility.UrlEncode(s),
-            _ when IsNumericType => Value.ToString() ?? string.Empty,
-            _ => throw new InvalidOperationException($"Unsupported value type: {Value.GetType().Name}. " +
+
+            // If value is a string, encode it with double quotes included.
+            string s => HttpUtility.UrlEncode($"\"{s}\""),
+
+            // If value is anything else, it is unsupported.
+            _ => throw new InvalidOperationException($"Unsupported value type: {Value?.GetType().Name}. " +
                                                      $"Only numeric, boolean, and string types are supported.")
         };
 
@@ -173,9 +173,20 @@ internal sealed class Clause<T> : BaseClause, IClause<T> where T : notnull
         string specifier = Specifier;
         string lang = Language == SchemaLanguage.None ? string.Empty : Language.GetStringValue();
         string clauseOperator = ClauseOperator.GetStringValue();
-        string value = $"\"{Value.ToString() ?? string.Empty}\"";
+        string value = $"\"{Value?.ToString() ?? string.Empty}\"";
 
         UnencodedCache =  $"{decorator}{specifier}@{lang}"
                           + $"{clauseOperator}{value}";
+    }
+
+    /// <summary>
+    /// Checks if type T implements INumber&lt;T&gt;.
+    /// </summary>
+    /// <returns>True if T implements INumber&lt;T&gt;. False otherwise.</returns>
+    private static bool IsNumericType()
+    {
+        return typeof(T).GetInterfaces().Any(i =>
+            i.IsGenericType &&
+            i.GetGenericTypeDefinition() == typeof(INumber<>));
     }
 }

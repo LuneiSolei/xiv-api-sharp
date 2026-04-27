@@ -1,5 +1,3 @@
-using System.Numerics;
-
 namespace XivApiSharp.Client.Core.Clauses;
 
 /// <summary>

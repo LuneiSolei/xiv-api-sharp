@@ -10,7 +10,7 @@ public class ClauseTests
     public void Factory_CreateClauseString_Success()
     {
         // Get the options
-        CreateClauseTest options = TestSetup
+        StringClauseOptions options = TestSetup
             .Options
             .ClauseTests
             .CreateClauseTest;
@@ -24,7 +24,7 @@ public class ClauseTests
     [Test]
     public void Clause_ToUriEncodedString_Succeeds()
     {
-        ToUriEncodedStringTest options = TestSetup
+        StringClauseOptions options = TestSetup
             .Options
             .ClauseTests
             .ToUriEncodedStringTest;

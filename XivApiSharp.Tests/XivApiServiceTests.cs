@@ -1,8 +1,7 @@
-using System.Diagnostics;
-using Microsoft.VisualBasic.CompilerServices;
 using XivApiSharp.Client.Core;
 using XivApiSharp.Client.Core.ClauseGroups;
 using XivApiSharp.Client.Core.Clauses;
+using XivApiSharp.Tests.Options.Schemas.ClauseTests;
 using XivApiSharp.Tests.Options.Schemas.XivApiServiceTests;
 
 namespace XivApiSharp.Tests;
@@ -39,44 +38,66 @@ public class XivApiServiceTests
 
         // Convert clause options into actual clauses
         List<IBaseClause> clauses = [];
-        options.Clauses.ForEach(clauseOptions =>
-        {
-            // Convert language option from string to type
-            if (!Enum.TryParse(clauseOptions.Language, out SchemaLanguage parsedLanguage))
-                Assert.Fail("The provided option 'Language' is not valid.");
 
-            // Convert decorator option from string to type
-            if (!Enum.TryParse(clauseOptions.Decorator, out ClauseDecorators parsedDecorator))
-                Assert.Fail("The provided option 'Decorator' is not valid.");
+        // Parse and add first clause options
+        (ClauseDecorators firstDecorator,
+            SchemaLanguage firstLanguage,
+            ClauseOperators firstOperator) = ParseClauseOptions(options.FirstClause);
 
-            // Convert operator option from string to type
-            if (!Enum.TryParse(clauseOptions.Operator, out ClauseOperators parsedOperator))
-                Assert.Fail("The provided option 'Operator' is not valid.");
+        clauses.Add(TestSetup.Service.NewClause()
+            .WithDecorator(firstDecorator)
+            .WithSpecifier(options.FirstClause.Specifier)
+            .WithLanguage(firstLanguage)
+            .WithOperator(firstOperator)
+            .WithValue(options.FirstClause.Value));
 
-            switch (parsedDecorator)
-            {
-                case ClauseDecorators.None:
-                    clauses.Add(TestSetup.Service.NewClause()
-                        .WithSpecifier(clauseOptions.Specifier)
-                        .WithLanguage(parsedLanguage)
-                        .WithOperator(parsedOperator)
-                        .WithValue(clauseOptions.Value));
-                    break;
-                case ClauseDecorators.Must:
-                case ClauseDecorators.MustNot:
-                    clauses.Add(TestSetup.Service.NewClause()
-                        .WithDecorator(parsedDecorator)
-                        .WithSpecifier(clauseOptions.Specifier)
-                        .WithLanguage(parsedLanguage)
-                        .WithOperator(parsedOperator)
-                        .WithValue(clauseOptions.Value));
-                    break;
-            }
-        });
+        // Parse and add second clause options
+        (ClauseDecorators secondDecorator,
+            SchemaLanguage secondLanguage,
+            ClauseOperators secondOperator) = ParseClauseOptions(options.SecondClause);
+
+        clauses.Add(TestSetup.Service.NewClause()
+            .WithDecorator(secondDecorator)
+            .WithSpecifier(options.SecondClause.Specifier)
+            .WithLanguage(secondLanguage)
+            .WithOperator(secondOperator)
+            .WithValue(options.SecondClause.Value));
+
+        // Parse and add third clause options
+        (ClauseDecorators thirdDecorator,
+            SchemaLanguage thirdLanguage,
+            ClauseOperators thirdOperator) = ParseClauseOptions(options.ThirdClause);
+
+        clauses.Add(TestSetup.Service.NewClause()
+            .WithDecorator(thirdDecorator)
+            .WithSpecifier(options.ThirdClause.Specifier)
+            .WithLanguage(thirdLanguage)
+            .WithOperator(thirdOperator)
+            .WithValue(options.ThirdClause.Value));
 
         IClauseGroup clauseGroup = TestSetup.Service.NewClauseGroup()
             .WithClauses(clauses)
             .MustNotMatch
             .Build();
+
+        Assert.That(clauseGroup.ToUriEncodedString(), Is.EqualTo(options.ExpectedValue));
+    }
+
+    private static (ClauseDecorators, SchemaLanguage, ClauseOperators)
+        ParseClauseOptions<TClauseOptions>(TClauseOptions clauseOptions) where TClauseOptions : BaseClauseOptions
+    {
+        // Convert decorator option from string to type
+        if (!Enum.TryParse(clauseOptions.Decorator, out ClauseDecorators decorator))
+            Assert.Fail("The provided option 'Decorator' is not valid.");
+
+        // Convert language option from string to type
+        if (!Enum.TryParse(clauseOptions.Language, out SchemaLanguage language))
+            Assert.Fail("The provided option 'Language' is not valid.");
+
+        // Convert operator option from string to type
+        if (!Enum.TryParse(clauseOptions.Operator, out ClauseOperators @operator))
+            Assert.Fail("The provided option 'Operator' is not valid.");
+
+        return (decorator, language, @operator);
     }
 }

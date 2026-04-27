@@ -7,8 +7,8 @@ namespace XivApiSharp.Tests.Options.Schemas.XivApiServiceTests;
 public class XivApiServiceTestsSchema
 {
     [Required, ValidateObjectMembers, UsedImplicitly]
-    public NewClauseTest NewClauseTest { get; set; }
+    public required NewClauseTest NewClauseTest { get; set; }
 
     [Required, ValidateObjectMembers, UsedImplicitly]
-    public NewClauseGroupTest NewClauseGroupTest { get; set; }
+    public required NewClauseGroupTest NewClauseGroupTest { get; set; }
 }

@@ -7,8 +7,8 @@ namespace XivApiSharp.Tests.Options.Schemas.ClauseTests;
 public class ClauseTestsSchema
 {
     [Required, ValidateObjectMembers, UsedImplicitly]
-    public required ToUriEncodedStringTest ToUriEncodedStringTest { get; set; }
+    public required StringClauseOptions ToUriEncodedStringTest { get; set; }
 
     [Required, ValidateObjectMembers, UsedImplicitly]
-    public required CreateClauseTest CreateClauseTest { get; set; }
+    public required StringClauseOptions CreateClauseTest { get; set; }
 }

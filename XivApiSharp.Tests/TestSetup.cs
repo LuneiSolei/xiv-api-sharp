@@ -41,7 +41,7 @@ internal static class TestSetup
     }
 
     public static IClause<TValue> SetUpClause<TOptions, TValue>(TOptions options, TValue value)
-        where TOptions : IBaseClauseOptions
+        where TOptions : BaseClauseOptions
         where TValue : notnull
     {
         IClauseFactory factory = ServiceContainer
@@ -59,19 +59,13 @@ internal static class TestSetup
         if (!Enum.TryParse(options.Operator, out ClauseOperators operation))
             Assert.Fail("The provided option 'Operator' is not valid.");
 
-        if (value is TValue)
-        {
-            return factory.CreateClause(
-                decorator: decorator,
-                specifier: options.Specifier,
-                language: language,
-                op: operation,
-                value: value
-            );
-        }
-
-        Assert.Fail($"The provided option 'Value' is not of type {typeof(TValue).Name}");
-        return null;
+        return factory.CreateClause(
+            decorator: decorator,
+            specifier: options.Specifier,
+            language: language,
+            op: operation,
+            value: value
+        );
     }
 
     private static void ConfigureOptions()

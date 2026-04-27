@@ -3,23 +3,20 @@ using JetBrains.Annotations;
 
 namespace XivApiSharp.Tests.Options.Schemas.ClauseTests;
 
-public interface IBaseClauseOptions
+public class BaseClauseOptions
 {
     [Required(AllowEmptyStrings = false), UsedImplicitly]
-    string Decorator { get; set; }
+    public string Decorator { get; set; }
 
     [Required(AllowEmptyStrings = false), UsedImplicitly]
-    string Specifier { get; set; }
+    public string Specifier { get; set; }
 
     [Required(AllowEmptyStrings = false), UsedImplicitly]
-    string Language { get; set; }
+    public string Language { get; set; }
 
     [Required(AllowEmptyStrings = false), UsedImplicitly]
-    string Operator { get; set; }
+    public string Operator { get; set; }
 
     [Required(AllowEmptyStrings = false), UsedImplicitly]
-    string Value { get; set; }
-
-    [Required(AllowEmptyStrings = false), UsedImplicitly]
-    string ExpectedValue { get; set; }
+    public string ExpectedValue { get; set; }
 }

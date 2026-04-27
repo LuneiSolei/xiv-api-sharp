@@ -8,5 +8,6 @@ namespace XivApiSharp.Client.Core.ClauseGroups;
 /// </summary>
 public interface IClauseGroup : IBaseClause
 {
-
+    void AddClause(IBaseClause clause);
+    void AddClauses(IEnumerable<IBaseClause> clauses);
 }

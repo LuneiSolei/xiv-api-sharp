@@ -7,7 +7,7 @@ internal abstract class BaseClause : IBaseClause
     /// Cache for storing the URI encoded string representation of the instance.
     /// </summary>
     private protected string UriEncodedCache { get; set; } = string.Empty;
-    
+
     /// <summary>
     /// Cache for storing the unencoded string representation of this instance.
     /// </summary>
@@ -20,19 +20,19 @@ internal abstract class BaseClause : IBaseClause
     /// The URI encoded string representation of this instance.
     /// </returns>
     /// <seealso cref="ToUnencodedString"/>
-    public virtual string ToUriEncodedString()
-    { 
+    public string ToUriEncodedString()
+    {
         return UriEncodedCache;
     }
-    
+
     /// <summary>
     /// Converts this instance into its unencoded string representation.
     /// </summary>
     /// <returns>
-    /// The unencoded string representation of this instance. 
+    /// The unencoded string representation of this instance.
     /// </returns>
     /// <seealso cref="ToUriEncodedString"/>
-    public virtual string ToUnencodedString()
+    public string ToUnencodedString()
     {
         return UnencodedCache;
     }

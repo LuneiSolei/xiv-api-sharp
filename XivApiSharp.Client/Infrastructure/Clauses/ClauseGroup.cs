@@ -1,6 +1,5 @@
 using System.Web;
 using JetBrains.Annotations;
-using XivApiSharp.Client.Core.ClauseGroups;
 using XivApiSharp.Client.Core.Clauses;
 using XivApiSharp.Client.Core.Extensions;
 

@@ -1,6 +1,4 @@
-using XivApiSharp.Client.Core.Clauses;
-
-namespace XivApiSharp.Client.Core.ClauseGroups;
+namespace XivApiSharp.Client.Core.Clauses;
 
 /// <summary>
 /// Represents a type that is used to define a group of clauses. This clause

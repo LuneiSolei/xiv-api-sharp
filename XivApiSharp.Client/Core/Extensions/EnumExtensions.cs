@@ -1,4 +1,5 @@
 using System.Reflection;
+using System.Web;
 
 namespace XivApiSharp.Client.Core.Extensions;
 
@@ -34,5 +35,8 @@ internal static class EnumExtensions
             StringValueAttribute? attr = field.GetCustomAttribute<StringValueAttribute>();
             return attr?.Value ?? name;
         }
+        
+        public string ToUriEncodedString() => 
+            HttpUtility.UrlEncode(value.GetStringValue());
     }
 }

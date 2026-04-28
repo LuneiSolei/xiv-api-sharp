@@ -1,5 +1,6 @@
 using XivApiSharp.Client.Core.ClauseGroups;
 using XivApiSharp.Client.Core.Clauses;
+using XivApiSharp.Client.Infrastructure.Clauses;
 
 namespace XivApiSharp.Client.Core;
 
@@ -34,7 +35,7 @@ public sealed record QueryString
     /// <summary>
     /// A collection of single instances of <see cref="Clause{T}">Clause&lt;T&gt;</see>.
     /// </summary>
-    private List<IClause> Clauses { get; } = [];
+    private List<IBaseClause> Clauses { get; } = [];
 
     /// <summary>
     /// Adds a single clause to the query string.
@@ -44,12 +45,12 @@ public sealed record QueryString
     /// <code>
     /// QueryString query = new();
     /// Clause&lt;string&gt; clause = XivApiService.NewClause()
-    ///     .WhereSpecifier("Name")
+    ///     .OptionalDecoratorStep("Name")
     ///     .Is.EqualTo("Tank You, Paladin I");
     /// query.AddClause(clause);
     /// </code>
     /// </example>
-    public void AddClause(IClause clause) => 
+    public void AddClause(IBaseClause clause) => 
         Clauses.Add(clause);
 
     /// <summary>
@@ -60,11 +61,11 @@ public sealed record QueryString
     /// <code>
     /// QueryString query = new();
     /// Clause&lt;int&gt; clause = XivApiService.NewClause()
-    ///     .WhereSpecifier("Amount")
+    ///     .OptionalDecoratorStep("Amount")
     ///     .Is.GreaterThanOrEqualTo(4);
     /// </code>
     /// </example>
-    public void AddClauses(IEnumerable<IClause> clauses) =>
+    public void AddClauses(IEnumerable<IBaseClause> clauses) =>
         Clauses.AddRange(clauses);
 
     /// <summary>

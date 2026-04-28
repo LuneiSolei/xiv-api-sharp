@@ -7,12 +7,12 @@ namespace XivApiSharp.Client.Core;
 internal sealed class StringValueAttribute : Attribute
 {
     /// <summary>
-    /// The value of the "StringValue" attribute.
+    /// The value of the "UriEncodedCache" attribute.
     /// </summary>
     public string Value { get; }
     
     /// <summary>
-    /// A simple constructor that stores the value of the "StringValue"
+    /// A simple constructor that stores the value of the "UriEncodedCache"
     /// attribute.
     /// </summary>
     /// <param name="value">

@@ -7,7 +7,7 @@ namespace XivApiSharp.Client.Core;
 /// Not all languages that are supported by the format are valid for all
 /// versions/editions of FFXIV. For example, the global game client acknowledges
 /// the existence of the <c>CHS</c> and <c>KR</c> languages, but does not
-/// provide any data for them. 
+/// provide any data for them.
 /// <br/>
 /// <br/>
 /// *Based on the documentation provided by XIV API's
@@ -16,26 +16,35 @@ namespace XivApiSharp.Client.Core;
 public enum SchemaLanguage
 {
     /// <summary>No language specified.</summary>
+    [StringValue("")]
     None,
-    
+
     /// <summary>Japanese</summary>
+    ///
+    [StringValue("ja")]
     JA,
-    
+
     /// <summary>English</summary>
+    [StringValue("en")]
     EN,
-    
+
     /// <summary>German</summary>
+    [StringValue("de")]
     DE,
-    
+
     /// <summary>French</summary>
+    [StringValue("fr")]
     FR,
-    
+
     /// <summary>Chinese (Simplified)</summary>
+    [StringValue("chs")]
     CHS,
-    
+
     /// <summary>Chinese (Traditional)</summary>
+    [StringValue("cht")]
     CHT,
-    
+
     /// <summary>Korean</summary>
+    [StringValue("kr")]
     KR
 }

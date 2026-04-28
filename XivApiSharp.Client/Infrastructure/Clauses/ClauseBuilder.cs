@@ -6,8 +6,8 @@ namespace XivApiSharp.Client.Infrastructure.Clauses;
 /// <summary>
 /// Builds a singular clause for use in a <see cref="QueryString"/>.
 /// </summary>
-/// <seealso cref="IClause"/>
-public sealed class ClauseBuilder : IClauseBuilder
+/// <seealso cref="IClause{T}"/>
+internal sealed partial class ClauseBuilder<T> : IClauseBuilder<T>, IOptionalLanguageStep where T : notnull
 {
     /// <summary>
     /// The injected IClauseFactory for the builder to use.
@@ -15,15 +15,84 @@ public sealed class ClauseBuilder : IClauseBuilder
     private readonly IClauseFactory _factory;
 
     /// <summary>
+    /// The decorator for the clause to use.
+    /// </summary>
+    private ClauseDecorators _decorator;
+
+    /// <summary>
+    /// The specifier for the clause to use.
+    /// </summary>
+    private string _specifier;
+
+    /// <summary>
+    /// The language override for the clause to use.
+    /// </summary>
+    private SchemaLanguage _language;
+
+    /// <summary>
+    /// The operator for the clause to use.
+    /// </summary>
+    private ClauseOperators _operator;
+
+    private object _value;
+
+    /// <summary>
+    /// Configures the clause to require itself to match on any returned result.
+    /// </summary>
+    public IOperatorStep Must
+    {
+        get
+        {
+            _decorator = ClauseDecorators.Must;
+            return this;
+        }
+    }
+
+    /// <summary>
+    /// Configures the clause to require itself not to match on any returned
+    /// result.
+    /// </summary>
+    public IOperatorStep MustNot
+    {
+        get
+        {
+            _decorator = ClauseDecorators.MustNot;
+            return this;
+        }
+    }
+
+    /// <summary>
     /// Creates a new instance with an injected IClauseFactory.
     /// </summary>
-    /// <param name="factory">The factory instance for the builder to use.</param>
+    /// <param name="factory">
+    /// The factory instance for the builder to use.
+    /// </param>
     internal ClauseBuilder(IClauseFactory factory)
     {
         _factory = factory;
+        _language = SchemaLanguage.None;
+        _specifier = string.Empty;
+        _decorator = ClauseDecorators.None;
+        _value = "";
+    }
+
+    public IClauseBuilder<T> WithDecorator(ClauseDecorators decorator)
+    {
+        _decorator = decorator;
+        return this;
     }
 
     /// <inheritdoc/>
-    public IWhereSpecifier WhereSpecifier(string name) => 
-        new WhereSpecifier(name, _factory);
+    public IOptionalLanguageStep WhereSpecifier(string specifier)
+    {
+        _specifier = specifier;
+        return this;
+    }
+
+    /// <inheritdoc/>
+    public IOptionalDecoratorStep WithLanguage(SchemaLanguage language)
+    {
+        _language = language;
+        return this;
+    }
 }

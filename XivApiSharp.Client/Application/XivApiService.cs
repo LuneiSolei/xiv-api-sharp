@@ -1,4 +1,6 @@
 using Microsoft.Extensions.Options;
+using XivApiSharp.Client.Core;
+using XivApiSharp.Client.Core.ClauseGroups;
 using XivApiSharp.Client.Core.Clauses;
 using XivApiSharp.Client.Core.InternalDependencies;
 using XivApiSharp.Client.Core.Options;
@@ -10,14 +12,14 @@ namespace XivApiSharp.Client.Application;
 /// Provides functionality to interact with the XIV API.
 /// </summary>
 /// <seealso href="https://xivapi.com"/>
-public class XivApiService
+internal class XivApiService : IXivApiService
 {
     /// <summary>
     /// Stores the options configuration.
     /// </summary>
     /// <seealso cref="XivApiOptions"/>
     private readonly XivApiOptions _opts;
-    
+
     /// <summary>
     /// Stores access to internal dependencies required by XivApiService.
     /// </summary>
@@ -53,13 +55,11 @@ public class XivApiService
         _internalDependencies = internalDependencies;
         _client = client;
     }
-    
-    /// <summary>
-    /// Creates a new instance of ClauseBuilder.
-    /// </summary>
-    /// <returns>
-    /// The interface for ClauseBuilder.
-    /// </returns>
-    /// <seealso cref="IClauseBuilder"/>
-    public IClauseBuilder NewClause() => new ClauseBuilder(_internalDependencies.ClauseFactory);
+
+    /// <inheritdoc />
+    public IClauseBuilder<T> NewClause<T>() where T : notnull =>
+        new ClauseBuilder<T>(_internalDependencies.ClauseFactory);
+
+    /// <inheritdoc/>
+    public IClauseGroupBuilder NewClauseGroup() => new ClauseGroupBuilder(_internalDependencies.ClauseFactory);
 }

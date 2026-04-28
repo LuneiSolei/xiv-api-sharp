@@ -1,4 +1,3 @@
-using XivApiSharp.Client.Core.ClauseGroups;
 using XivApiSharp.Client.Infrastructure.Clauses;
 
 namespace XivApiSharp.Client.Core.Clauses;

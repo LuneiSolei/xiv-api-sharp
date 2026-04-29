@@ -40,34 +40,6 @@ internal static class TestSetup
         Service = ServiceContainer.GetRequiredService<XivApiService>();
     }
 
-    public static IClause<TValue> SetUpClause<TOptions, TValue>(TOptions options, TValue value)
-        where TOptions : BaseClauseOptions
-        where TValue : notnull
-    {
-        IClauseFactory factory = ServiceContainer
-            .GetRequiredService<IClauseFactory>();
-
-        // Convert decorator option from string to type
-        if (!Enum.TryParse(options.Decorator, out ClauseDecorators decorator))
-            Assert.Fail("The provided option 'Decorator' is not valid.");
-
-        // Convert language option from string to type
-        if (!Enum.TryParse(options.Language, out SchemaLanguage language))
-            Assert.Fail("The provided option 'Language' is not valid.");
-
-        // Convert operator option from string to type
-        if (!Enum.TryParse(options.Operator, out ClauseOperators operation))
-            Assert.Fail("The provided option 'Operator' is not valid.");
-
-        return factory.CreateClause(
-            decorator: decorator,
-            specifier: options.Specifier,
-            language: language,
-            op: operation,
-            value: value
-        );
-    }
-
     private static void ConfigureOptions()
     {
         // Get our current assembly
@@ -107,5 +79,17 @@ internal static class TestSetup
 
         string errors = string.Join(", ", validationResults.Select(r => r.ErrorMessage));
         throw new InvalidOperationException($"TestingOptions is invalid: {errors}");
+    }
+
+    internal static IClause<TValue> BuildClause<TOptions, TValue>(TOptions options, TValue value)
+        where TOptions : BaseClauseOptions
+    {
+        return Service.NewClause<TValue>()
+            .WithDecorator(options.Decorator)
+            .WithSpecifier(options.Specifier)
+            .WithLanguage(options.Language)
+            .WithOperator(options.Operator)
+            .WithValue(value)
+            .Build();
     }
 }

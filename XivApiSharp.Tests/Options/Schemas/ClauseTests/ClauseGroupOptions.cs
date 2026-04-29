@@ -1,15 +1,15 @@
 using System.ComponentModel.DataAnnotations;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Options;
-using XivApiSharp.Tests.Options.Schemas.ClauseTests;
+using XivApiSharp.Client.Core.Clauses;
 
-namespace XivApiSharp.Tests.Options.Schemas.XivApiServiceTests;
+namespace XivApiSharp.Tests.Options.Schemas.ClauseTests;
 
 [UsedImplicitly]
-public class NewClauseGroupTest
+public class ClauseGroupOptions
 {
-    [Required(AllowEmptyStrings = false), UsedImplicitly]
-    public required string Decorator { get; set; }
+    [Required, UsedImplicitly]
+    public required ClauseDecorators Decorator { get; set; }
 
     [Required, ValidateObjectMembers, UsedImplicitly]
     public required StringClauseOptions FirstClause { get; set; }

@@ -8,5 +8,4 @@ public class NewClauseTest : BaseClauseOptions
 {
     [Required(AllowEmptyStrings = false), UsedImplicitly]
     public required string Value { get; set; }
-
 }

@@ -1,98 +1,76 @@
+using System.Text;
+using System.Web;
 using XivApiSharp.Client.Core.Clauses;
-using XivApiSharp.Client.Infrastructure.Clauses;
 
 namespace XivApiSharp.Client.Core;
 
-/// <summary>
-/// A string used for searching data in the XIV API. 
-/// </summary>
-/// 
-/// <remarks>
-/// <para>
-///     QueryStrings are formed from one (1) or more <see cref="Clause{T}">Clause&lt;T&gt;</see> and/or <see cref="ClauseGroup"/>
-///     instances.
-/// </para>
-/// 
-/// <para>
-///     <b>Note</b>: In XivApiSharp, "QueryString" refers specifically to the parameter named "query" and <b>NOT</b> the
-///     traditional URL query string.
-/// </para>
-/// <para>
-///     *Based on the XIV API model <see href="https://v2.xivapi.com/api/docs#model/QueryString">QueryString</see> documentation.
-/// </para>
-/// </remarks>
-/// 
-/// <seealso cref="Clause{T}">Clause&lt;T&gt;</seealso>
-/// <seealso cref="ClauseGroup"/>
-public sealed record QueryString
+/// <inheritdoc />
+public sealed record QueryString : IQueryString
 {
     /// <summary>
-    /// A collection of <see cref="ClauseGroups"/>.
+    ///     Cache for storing the URI encoded representation of this instance.
     /// </summary>
-    private List<IClauseGroup> ClauseGroups { get; } = [];
-    
-    /// <summary>
-    /// A collection of single instances of <see cref="Clause{T}">Clause&lt;T&gt;</see>.
-    /// </summary>
-    private List<IBaseClause> Clauses { get; } = [];
+    private string _uriEncodedCache = string.Empty;
 
     /// <summary>
-    /// Adds a single clause to the query string.
+    ///     Cache for storing the unencoded representation of this instance.
     /// </summary>
-    /// <param name="clause">The clause to add.</param>
-    /// <example>
-    /// <code>
-    /// QueryString query = new();
-    /// Clause&lt;string&gt; clause = XivApiService.NewClause()
-    ///     .OptionalDecoratorStep("Name")
-    ///     .Is.EqualTo("Tank You, Paladin I");
-    /// query.AddClause(clause);
-    /// </code>
-    /// </example>
-    public void AddClause(IBaseClause clause) => 
-        Clauses.Add(clause);
+    private string _unencodedCache = string.Empty;
 
     /// <summary>
-    /// Adds a multiple single clauses to the query string.
+    /// The backing field for <see cref="Clauses"/>.
     /// </summary>
-    /// <param name="clauses">The clauses to add.</param>
-    /// <example>
-    /// <code>
-    /// QueryString query = new();
-    /// Clause&lt;int&gt; clause = XivApiService.NewClause()
-    ///     .OptionalDecoratorStep("Amount")
-    ///     .Is.GreaterThanOrEqualTo(4);
-    /// </code>
-    /// </example>
-    public void AddClauses(IEnumerable<IBaseClause> clauses) =>
-        Clauses.AddRange(clauses);
+    private ICollection<IBaseClause> _clauses = [];
 
-    /// <summary>
-    /// Adds a single clause group to the query string.
-    /// </summary>
-    /// <param name="group">The clause group to add.</param>
-    // TODO: Add example code.
-    public void AddClauseGroup(IClauseGroup group) => 
-        ClauseGroups.Add(group);
-    
-    /// <summary>
-    /// Adds multiple clause groups to the query string.
-    /// </summary>
-    /// <param name="groups">The clause groups to add.</param>
-    // TODO: Add example code.
-    public void AddClauseGroups(IEnumerable<IClauseGroup> groups) =>
-        ClauseGroups.AddRange(groups);
-    
-    /// <summary>
-    /// Converts the value of this instance to its string representation.
-    /// </summary>
-    /// <returns>The converted clauses in a formatted string.</returns>
-    public override string ToString()
+    /// <inheritdoc />
+    public ICollection<IBaseClause> Clauses
     {
-        // Query clauses MUST be separated via whitespace
-        string result = string.Join(" ", Clauses);
-        result += string.Join(" ", ClauseGroups);
-        
-        return result;
+        get => _clauses;
+        set
+        {
+            _clauses = value;
+            UpdateCaches();
+        }
+    }
+
+    /// <inheritdoc />
+    public string ToUnencodedString()
+    {
+        return _unencodedCache;
+    }
+
+    /// <inheritdoc />
+    public string ToUriEncodedString()
+    {
+        return _uriEncodedCache;
+    }
+
+    private void UpdateCaches()
+    {
+        RebuildUnencodedStringCache();
+        RebuildUriEncodedStringCache();
+    }
+
+    private void RebuildUriEncodedStringCache()
+    {
+        string param = HttpUtility.UrlEncode("query=");
+        _uriEncodedCache = $"{param}{string.Join(' ', Clauses)}";
+    }
+
+    private void RebuildUnencodedStringCache()
+    {
+        // Join clauses together without using Join() because Join() calls ToString() and ToString() calls
+        // ToUriEncodedString() on clauses.
+        StringBuilder builder = new();
+        foreach (IBaseClause clause in Clauses)
+        {
+            // Don't put a space before the first clause
+            if (Clauses.First() != clause) builder.Append(' ');
+
+            // Append the clause
+            builder.Append(clause.ToUnencodedString());
+        }
+
+        _unencodedCache = builder.ToString();
     }
 }

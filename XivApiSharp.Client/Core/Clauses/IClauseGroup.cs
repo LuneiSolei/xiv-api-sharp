@@ -6,7 +6,15 @@ namespace XivApiSharp.Client.Core.Clauses;
 /// </summary>
 public interface IClauseGroup : IBaseClause
 {
+    /// <summary>
+    /// The clauses that are within this clause group.
+    /// </summary>
     IEnumerable<IBaseClause> Clauses { get; set; }
+
+    /// <summary>
+    /// The <see cref="ClauseDecorators">clause decorator</see> to be used in front of the clause group when converted
+    /// to a string.
+    /// </summary>
     ClauseDecorators Decorator { get; set; }
 
     /// <summary>

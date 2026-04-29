@@ -1,6 +1,5 @@
 ﻿using XivApiSharp.Client.Core.Clauses;
 using XivApiSharp.Tests.Options.Schemas.ClauseTests;
-using XivApiSharp.Tests.Options.Schemas.XivApiServiceTests;
 
 namespace XivApiSharp.Tests;
 

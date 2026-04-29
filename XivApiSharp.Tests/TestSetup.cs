@@ -82,7 +82,7 @@ internal static class TestSetup
     }
 
     internal static IClause<TValue> BuildClause<TOptions, TValue>(TOptions options, TValue value)
-        where TOptions : BaseClauseOptions
+        where TOptions : BaseClauseOptions where TValue : notnull
     {
         return Service.NewClause<TValue>()
             .WithDecorator(options.Decorator)

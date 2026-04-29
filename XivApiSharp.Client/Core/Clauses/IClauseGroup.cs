@@ -6,6 +6,9 @@ namespace XivApiSharp.Client.Core.Clauses;
 /// </summary>
 public interface IClauseGroup : IBaseClause
 {
+    IEnumerable<IBaseClause> Clauses { get; set; }
+    ClauseDecorators Decorator { get; set; }
+
     /// <summary>
     /// Adds a <see cref="IClause{T}">single clause</see> or clause group to this clause group instance.
     /// </summary>

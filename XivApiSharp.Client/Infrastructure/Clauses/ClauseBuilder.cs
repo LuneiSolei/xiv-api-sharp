@@ -34,6 +34,9 @@ internal sealed partial class ClauseBuilder<T> : IClauseBuilder<T>, IOptionalLan
     /// </summary>
     private ClauseOperators _operator;
 
+    /// <summary>
+    ///     The value of the clause.
+    /// </summary>
     private object _value;
 
     /// <summary>
@@ -76,6 +79,7 @@ internal sealed partial class ClauseBuilder<T> : IClauseBuilder<T>, IOptionalLan
         _value = "";
     }
 
+    /// <inheritdoc />
     public IClauseBuilder<T> WithDecorator(ClauseDecorators decorator)
     {
         _decorator = decorator;

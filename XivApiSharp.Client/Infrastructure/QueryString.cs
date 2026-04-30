@@ -38,6 +38,9 @@ internal sealed record QueryString : IQueryString
         }
     }
 
+    /// <summary>
+    ///     Internal constructor used to ensure that the Clauses property properly registers event listeners.
+    /// </summary>
     internal QueryString() => Clauses = [];
 
     /// <inheritdoc />
@@ -46,15 +49,30 @@ internal sealed record QueryString : IQueryString
     /// <inheritdoc />
     public string ToUriEncodedString() => _uriEncodedCache;
 
+    /// <summary>
+    ///     Handler for the <see cref="ObservableCollection{T}.CollectionChanged" /> event.
+    /// </summary>
+    /// <param name="sender">
+    ///     The object sending the event notification.
+    /// </param>
+    /// <param name="e">
+    ///     The event args.
+    /// </param>
     private void OnClausesChanged(object? sender, NotifyCollectionChangedEventArgs e) =>
         UpdateCaches();
 
+    /// <summary>
+    ///     Helper to update string caches.
+    /// </summary>
     private void UpdateCaches()
     {
         RebuildUnencodedStringCache();
         RebuildUriEncodedStringCache();
     }
 
+    /// <summary>
+    ///     Helper to rebuild the URI encoded string cache.
+    /// </summary>
     private void RebuildUriEncodedStringCache()
     {
         StringBuilder builder = new();
@@ -69,6 +87,9 @@ internal sealed record QueryString : IQueryString
         _uriEncodedCache = $"query{encodedEquals}{builder}";
     }
 
+    /// <summary>
+    ///     Helper to rebuild the unencoded string cache.
+    /// </summary>
     private void RebuildUnencodedStringCache()
     {
         // Join clauses together without using Join() because Join() calls ToString() and ToString() calls
@@ -84,6 +105,18 @@ internal sealed record QueryString : IQueryString
         _unencodedCache = builder.ToString();
     }
 
+    /// <summary>
+    ///     Helper to build the clauses portion of the query parameter.
+    /// </summary>
+    /// <param name="builder">
+    ///     The <see cref="StringBuilder" /> to use, passed by reference.
+    /// </param>
+    /// <param name="clauseString">
+    ///     The string of the clause to use.
+    /// </param>
+    /// <param name="isFirst">
+    ///     Whether this clause is the first one in the string.
+    /// </param>
     private static void BuildString(ref StringBuilder builder, string clauseString, bool isFirst)
     {
         // Don't put a space before the first clause

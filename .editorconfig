@@ -27,6 +27,7 @@ resharper_formatter_tags_enabled = true
 resharper_show_autodetect_configure_formatting_tip = false
 resharper_use_indent_from_vs = false
 resharper_csharp_for_built_in_types = use_var_when_evident
+resharper_internal_or_private_member_not_documented_highlighting = warning
 
 # Microsoft .NET properties
 dotnet_style_parentheses_in_arithmetic_binary_operators = never_if_unnecessary:none

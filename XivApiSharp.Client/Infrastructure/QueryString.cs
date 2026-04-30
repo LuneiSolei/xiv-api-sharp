@@ -1,11 +1,12 @@
 using System.Text;
 using System.Web;
+using XivApiSharp.Client.Core;
 using XivApiSharp.Client.Core.Clauses;
 
-namespace XivApiSharp.Client.Core;
+namespace XivApiSharp.Client.Infrastructure;
 
 /// <inheritdoc />
-public sealed record QueryString : IQueryString
+internal sealed record QueryString : IQueryString
 {
     /// <summary>
     ///     Cache for storing the URI encoded representation of this instance.

@@ -54,7 +54,10 @@ public sealed record QueryString : IQueryString
     private void RebuildUriEncodedStringCache()
     {
         string param = HttpUtility.UrlEncode("query=");
-        _uriEncodedCache = $"{param}{string.Join(' ', Clauses)}";
+        var parsed = $"{param}{string.Join(' ', Clauses)}";
+        if (parsed.StartsWith("%2B")) parsed = parsed[3..];
+
+        _uriEncodedCache = parsed;
     }
 
     private void RebuildUnencodedStringCache()
@@ -65,10 +68,22 @@ public sealed record QueryString : IQueryString
         foreach (IBaseClause clause in Clauses)
         {
             // Don't put a space before the first clause
-            if (Clauses.First() != clause) builder.Append(' ');
-
-            // Append the clause
-            builder.Append(clause.ToUnencodedString());
+            bool isFirst = Clauses.First() == clause;
+            switch (isFirst)
+            {
+                // Separate clauses via space (if not the first)
+                case false:
+                    builder.Append($" {clause.ToUnencodedString()}");
+                    break;
+                // Drop the decorator if it's the first clause AND it starts with a '+'
+                case true when clause.ToUnencodedString()[0] == '+':
+                    string result = clause.ToUnencodedString()[1..];
+                    builder.Append(result);
+                    break;
+                case true:
+                    builder.Append(clause.ToUnencodedString());
+                    break;
+            }
         }
 
         _unencodedCache = builder.ToString();

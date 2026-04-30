@@ -75,13 +75,13 @@ public class ClauseTests
 
         // Create a new empty clause group, then add new clauses after
         IClauseGroup clauseGroup = TestSetup.Service.NewClauseGroup().Build();
-        IEnumerable<IBaseClause> clauses = [
+        IEnumerable<IBaseClause> clauses =
+        [
             (TestSetup.BuildClause(options.FirstClause, options.FirstClause.Value)),
             (TestSetup.BuildClause(options.SecondClause, options.SecondClause.Value)),
             (TestSetup.BuildClause(options.ThirdClause, options.ThirdClause.Value))
         ];
         clauseGroup.AddClauses(clauses);
-        // TODO: add group clause as a fourth base clause for testing nested group clauses
 
         Assert.That(clauseGroup.ToUriEncodedString(), Is.EqualTo(options.ExpectedValue));
     }

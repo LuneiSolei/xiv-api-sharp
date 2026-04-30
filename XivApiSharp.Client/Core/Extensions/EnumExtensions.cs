@@ -31,12 +31,18 @@ internal static class EnumExtensions
 
             FieldInfo? field = type.GetField(name);
             if (field is null) return value.ToString();
-            
+
             StringValueAttribute? attr = field.GetCustomAttribute<StringValueAttribute>();
             return attr?.Value ?? name;
         }
-        
-        public string ToUriEncodedString() => 
+
+        /// <summary>
+        ///     Gets the URI encoded <see cref="StringValueAttribute" /> representation of the enum.
+        /// </summary>
+        /// <returns>
+        ///     The enum's URI encoded StringValueAttribute representation.
+        /// </returns>
+        public string ToUriEncodedString() =>
             HttpUtility.UrlEncode(value.GetStringValue());
     }
 }

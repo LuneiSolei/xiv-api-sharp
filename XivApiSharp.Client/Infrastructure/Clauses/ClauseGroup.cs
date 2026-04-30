@@ -9,8 +9,12 @@ namespace XivApiSharp.Client.Infrastructure.Clauses;
 /// <inheritdoc cref="IClauseGroup"/>
 internal sealed class ClauseGroup : BaseClause, IClauseGroup
 {
+    /// <summary>
+    ///     The backing field for <see cref="Clauses" />.
+    /// </summary>
     private IEnumerable<IBaseClause> _clauses;
 
+    /// <inheritdoc />
     public IEnumerable<IBaseClause> Clauses
     {
         get => _clauses;
@@ -21,9 +25,14 @@ internal sealed class ClauseGroup : BaseClause, IClauseGroup
         }
     }
 
+    /// <summary>
+    ///     The backing field for <see cref="Decorator" />.
+    /// </summary>
     private ClauseDecorators _decorator;
 
-    public ClauseDecorators Decorator {
+    /// <inheritdoc />
+    public ClauseDecorators Decorator
+    {
         get => _decorator;
         set
         {
@@ -32,6 +41,15 @@ internal sealed class ClauseGroup : BaseClause, IClauseGroup
         }
     }
 
+    /// <summary>
+    ///     Constructor for internal use and direct instantiation of its properties.
+    /// </summary>
+    /// <param name="clauses">
+    ///     The clauses to instantiate with.
+    /// </param>
+    /// <param name="decorator">
+    ///     The decorator to instantiate with.
+    /// </param>
     internal ClauseGroup(IEnumerable<IBaseClause> clauses, ClauseDecorators decorator)
     {
         _clauses = clauses;
@@ -74,5 +92,4 @@ internal sealed class ClauseGroup : BaseClause, IClauseGroup
         // Put everything together
         UnencodedCache = $"{Decorator.GetStringValue()}({stringBuilder})";
     }
-
 }

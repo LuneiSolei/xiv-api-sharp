@@ -47,9 +47,6 @@ internal sealed class ClauseGroup : BaseClause, IClauseGroup
     public void AddClauses(IEnumerable<IBaseClause> clauses) =>
         Clauses = _clauses.Concat(clauses);
 
-    /// <inheritdoc cref="IClauseGroup.ToString"/>
-    public override string ToString() => ToUriEncodedString();
-
     /// <inheritdoc />
     [UsedImplicitly]
     private protected override void RebuildUriEncodedCache()
@@ -62,7 +59,8 @@ internal sealed class ClauseGroup : BaseClause, IClauseGroup
     /// <inheritdoc />
     private protected override void RebuildUnencodedCache()
     {
-        // Using StringBuilder, call ToUnencodedString() on each clause and separate them by whitespace
+        // Join clauses together without using Join() because Join() calls ToString() and ToString() calls
+        // ToUriEncodedString() on clauses.
         StringBuilder stringBuilder = new();
         foreach (IBaseClause clause in Clauses)
         {

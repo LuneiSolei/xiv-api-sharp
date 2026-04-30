@@ -1,5 +1,6 @@
 using System.Numerics;
 using JetBrains.Annotations;
+using XivApiSharp.Client.Infrastructure;
 
 namespace XivApiSharp.Client.Core.Clauses;
 

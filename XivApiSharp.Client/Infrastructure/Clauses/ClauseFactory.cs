@@ -36,8 +36,6 @@ internal class ClauseFactory : IClauseFactory
     /// </returns>
     /// <seealso cref="IClauseGroup"/>
     IClauseGroup IClauseFactory.CreateClauseGroup(IEnumerable<IBaseClause> elements,
-        ClauseDecorators decorator)
-    {
-        return new ClauseGroup(elements, decorator);
-    }
+        ClauseDecorators decorator) =>
+        new ClauseGroup(elements, decorator);
 }

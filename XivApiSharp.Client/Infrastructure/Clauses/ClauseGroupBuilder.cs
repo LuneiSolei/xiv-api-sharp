@@ -9,15 +9,19 @@ internal class ClauseGroupBuilder : IClauseGroupBuilder
     private IEnumerable<IBaseClause> _clauses = [];
     private readonly IClauseFactory _factory;
 
-    internal ClauseGroupBuilder(IClauseFactory factory)
-    {
-        _factory = factory;
-    }
+    internal ClauseGroupBuilder(IClauseFactory factory) => _factory = factory;
 
     /// <inheritdoc />
     public IClauseGroupBuilder WithClauses(IEnumerable<IBaseClause> clauses)
     {
         _clauses = _clauses.Concat(clauses);
+        return this;
+    }
+
+    /// <inheritdoc />
+    public IClauseGroupBuilder WithDecorator(ClauseDecorators decorator)
+    {
+        _decorator = decorator;
         return this;
     }
 
@@ -42,8 +46,5 @@ internal class ClauseGroupBuilder : IClauseGroupBuilder
     }
 
     /// <inheritdoc/>
-    public IClauseGroup Build()
-    {
-        return _factory.CreateClauseGroup(_clauses, _decorator);
-    }
+    public IClauseGroup Build() => _factory.CreateClauseGroup(_clauses, _decorator);
 }

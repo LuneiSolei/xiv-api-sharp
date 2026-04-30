@@ -1,3 +1,5 @@
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Text;
 using System.Web;
 using XivApiSharp.Client.Core;
@@ -18,33 +20,34 @@ internal sealed record QueryString : IQueryString
     /// </summary>
     private string _unencodedCache = string.Empty;
 
-    /// <summary>
-    /// The backing field for <see cref="Clauses"/>.
-    /// </summary>
-    private ICollection<IBaseClause> _clauses = [];
-
     /// <inheritdoc />
-    public ICollection<IBaseClause> Clauses
+    public ObservableCollection<IBaseClause> Clauses
     {
-        get => _clauses;
+        get;
         set
         {
-            _clauses = value;
+            if (field is INotifyCollectionChanged oldCollection)
+                oldCollection.CollectionChanged -= OnClausesChanged;
+
+            field = value;
+
+            if (field is INotifyCollectionChanged newCollection)
+                newCollection.CollectionChanged += OnClausesChanged;
+
             UpdateCaches();
         }
     }
 
-    /// <inheritdoc />
-    public string ToUnencodedString()
-    {
-        return _unencodedCache;
-    }
+    internal QueryString() => Clauses = [];
 
     /// <inheritdoc />
-    public string ToUriEncodedString()
-    {
-        return _uriEncodedCache;
-    }
+    public string ToUnencodedString() => _unencodedCache;
+
+    /// <inheritdoc />
+    public string ToUriEncodedString() => _uriEncodedCache;
+
+    private void OnClausesChanged(object? sender, NotifyCollectionChangedEventArgs e) =>
+        UpdateCaches();
 
     private void UpdateCaches()
     {
@@ -54,11 +57,16 @@ internal sealed record QueryString : IQueryString
 
     private void RebuildUriEncodedStringCache()
     {
-        string param = HttpUtility.UrlEncode("query=");
-        var parsed = $"{param}{string.Join(' ', Clauses)}";
-        if (parsed.StartsWith("%2B")) parsed = parsed[3..];
+        StringBuilder builder = new();
+        var isFirst = true;
+        foreach (IBaseClause clause in Clauses)
+        {
+            BuildString(ref builder, clause.ToUriEncodedString(), isFirst);
+            if (isFirst) isFirst = false;
+        }
 
-        _uriEncodedCache = parsed;
+        string encodedEquals = HttpUtility.UrlEncode("=").ToUpper();
+        _uriEncodedCache = $"query{encodedEquals}{builder}";
     }
 
     private void RebuildUnencodedStringCache()
@@ -66,27 +74,38 @@ internal sealed record QueryString : IQueryString
         // Join clauses together without using Join() because Join() calls ToString() and ToString() calls
         // ToUriEncodedString() on clauses.
         StringBuilder builder = new();
+        var isFirst = true;
         foreach (IBaseClause clause in Clauses)
         {
-            // Don't put a space before the first clause
-            bool isFirst = Clauses.First() == clause;
-            switch (isFirst)
-            {
-                // Separate clauses via space (if not the first)
-                case false:
-                    builder.Append($" {clause.ToUnencodedString()}");
-                    break;
-                // Drop the decorator if it's the first clause AND it starts with a '+'
-                case true when clause.ToUnencodedString()[0] == '+':
-                    string result = clause.ToUnencodedString()[1..];
-                    builder.Append(result);
-                    break;
-                case true:
-                    builder.Append(clause.ToUnencodedString());
-                    break;
-            }
+            BuildString(ref builder, clause.ToUnencodedString(), isFirst);
+            if (isFirst) isFirst = false;
         }
 
         _unencodedCache = builder.ToString();
+    }
+
+    private static void BuildString(ref StringBuilder builder, string clauseString, bool isFirst)
+    {
+        // Don't put a space before the first clause
+        if (clauseString.Length == 0) return;
+
+        switch (isFirst)
+        {
+            // Separate clauses via space (if not the first)
+            case false:
+                builder.Append($" {clauseString}");
+                break;
+            // Drop the decorator if it's the first clause AND it starts with a '+'
+            case true when clauseString[0] == '+':
+                builder.Append(clauseString[1..]);
+                break;
+            case true when clauseString.StartsWith("%2B"):
+                builder.Append(clauseString[3..]);
+                break;
+            // If first with no '+' decorator, just append
+            case true:
+                builder.Append(clauseString);
+                break;
+        }
     }
 }

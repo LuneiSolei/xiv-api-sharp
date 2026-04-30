@@ -29,8 +29,5 @@ internal sealed partial class ClauseBuilder<T>
         return this;
     }
 
-    public IClause<T> Build()
-    {
-        return BuildClause((T)_value);
-    }
+    public IClause<T> Build() => BuildClause((T)_value);
 }

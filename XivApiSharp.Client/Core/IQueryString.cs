@@ -1,3 +1,4 @@
+using System.Collections.ObjectModel;
 using JetBrains.Annotations;
 using XivApiSharp.Client.Core.Clauses;
 
@@ -12,17 +13,14 @@ public interface IQueryString
     ///     The individual <see cref="IClause{T}">clauses</see> to be included in the query string.
     /// </summary>
     /// <seealso cref="IXivApiService.NewClause" />
-    ICollection<IBaseClause> Clauses { get; set; }
+    ObservableCollection<IBaseClause> Clauses { get; set; }
 
     /// <summary>
     ///     Adds an individual <see cref="IClause{T}">clause</see> to the query string.
     /// </summary>
     /// <param name="clause">The clause to add.</param>
     [UsedImplicitly]
-    void AddClause(IBaseClause clause)
-    {
-        Clauses.Add(clause);
-    }
+    void AddClause(IBaseClause clause) => Clauses.Add(clause);
 
     /// <summary>
     ///     Adds a collection of <see cref="IClause{T}">clauses</see> to the query string.

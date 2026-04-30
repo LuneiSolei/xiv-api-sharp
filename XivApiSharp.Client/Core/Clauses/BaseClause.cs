@@ -20,10 +20,7 @@ internal abstract class BaseClause : IBaseClause
     /// The URI encoded string representation of this instance.
     /// </returns>
     /// <seealso cref="ToUnencodedString"/>
-    public string ToUriEncodedString()
-    {
-        return UriEncodedCache;
-    }
+    public string ToUriEncodedString() => UriEncodedCache;
 
     /// <summary>
     /// Converts this instance into its unencoded string representation.
@@ -32,10 +29,7 @@ internal abstract class BaseClause : IBaseClause
     /// The unencoded string representation of this instance.
     /// </returns>
     /// <seealso cref="ToUriEncodedString"/>
-    public string ToUnencodedString()
-    {
-        return UnencodedCache;
-    }
+    public string ToUnencodedString() => UnencodedCache;
 
     /// <summary>
     /// A wrapper for <see cref="ToUriEncodedString"/>.

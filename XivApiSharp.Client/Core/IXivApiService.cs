@@ -1,4 +1,4 @@
-using XivApiSharp.Client.Core.Clauses;
+using XivApiSharp.Client.Core.Clauses.Builders;
 
 namespace XivApiSharp.Client.Core;
 
@@ -7,7 +7,6 @@ namespace XivApiSharp.Client.Core;
 /// </summary>
 public interface IXivApiService
 {
-
     /// <summary>
     /// Creates a new instance of ClauseBuilder.
     /// </summary>

@@ -2,7 +2,7 @@ using System.Numerics;
 using JetBrains.Annotations;
 using XivApiSharp.Client.Infrastructure;
 
-namespace XivApiSharp.Client.Core.Clauses;
+namespace XivApiSharp.Client.Core.Clauses.Builders;
 
 /// <summary>
 /// Defines methods for adding comparison operators to a clause.

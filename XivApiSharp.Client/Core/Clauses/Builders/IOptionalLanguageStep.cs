@@ -1,4 +1,4 @@
-namespace XivApiSharp.Client.Core.Clauses;
+namespace XivApiSharp.Client.Core.Clauses.Builders;
 
 /// <summary>
 /// Defines a type that is used to determine the language type when using the

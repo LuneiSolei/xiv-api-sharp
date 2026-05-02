@@ -1,5 +1,7 @@
 using XivApiSharp.Client.Core;
 using XivApiSharp.Client.Core.Clauses;
+using XivApiSharp.Client.Core.Clauses.Builders;
+using XivApiSharp.Client.Infrastructure.Clauses.Builders;
 
 namespace XivApiSharp.Client.Infrastructure.Clauses;
 
@@ -22,20 +24,7 @@ internal class ClauseFactory : IClauseFactory
             value: value);
     }
 
-    /// <summary>
-    /// Creates a new instance of a clause group with the provided elements.
-    /// </summary>
-    /// <param name="elements">
-    /// The elements to instantiate the clause group with.
-    /// </param>
-    /// <param name="decorator">
-    /// The decorator to add to apply to the clause group.
-    /// </param>
-    /// <returns>
-    /// The created clause group.
-    /// </returns>
-    /// <seealso cref="IClauseGroup"/>
-    IClauseGroup IClauseFactory.CreateClauseGroup(IEnumerable<IBaseClause> elements,
-        ClauseDecorators decorator) =>
-        new ClauseGroup(elements, decorator);
+    /// <inheritdoc />
+    IClauseBuilder<T> IClauseFactory.CreateClauseBuilder<T>() =>
+        new ClauseBuilder<T>(this);
 }

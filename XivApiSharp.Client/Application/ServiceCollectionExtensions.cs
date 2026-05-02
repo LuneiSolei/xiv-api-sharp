@@ -4,9 +4,10 @@ using System.Resources;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using XivApiSharp.Client.Core;
 using XivApiSharp.Client.Core.Clauses;
-using XivApiSharp.Client.Core.InternalDependencies;
 using XivApiSharp.Client.Core.Options;
+using XivApiSharp.Client.Infrastructure;
 using XivApiSharp.Client.Infrastructure.Clauses;
 
 namespace XivApiSharp.Client.Application;
@@ -88,17 +89,17 @@ public static class ServiceCollectionExtensions
             // Using the default namespace, get the full resource name. Throw
             // exception if not found.
             string resourceName = assembly.GetManifestResourceNames()
-                .FirstOrDefault(name =>
-                    name.EndsWith(FileName, StringComparison.OrdinalIgnoreCase))
-                ?? throw new MissingManifestResourceException(
-                    $"Required manifest resource ending with '{FileName}' " +
-                    $"could not be found");
+                                      .FirstOrDefault(name =>
+                                          name.EndsWith(FileName, StringComparison.OrdinalIgnoreCase))
+                                  ?? throw new MissingManifestResourceException(
+                                      $"Required manifest resource ending with '{FileName}' " +
+                                      $"could not be found");
 
             // From the full resource name, get the file stream
             using Stream stream = assembly.GetManifestResourceStream(resourceName)
-                ?? throw new FileLoadException(
-                    $"Stream for required manifest resource '{resourceName}' " +
-                    $"could not be loaded");
+                                  ?? throw new FileLoadException(
+                                      $"Stream for required manifest resource '{resourceName}' " +
+                                      $"could not be loaded");
 
             // Load values
             _config = new ConfigurationBuilder()
@@ -127,12 +128,8 @@ public static class ServiceCollectionExtensions
 
                 // Inject dependencies
                 .AddScoped<IClauseFactory, ClauseFactory>()
-                .AddTransient(typeof(IClauseBuilder<>), typeof(ClauseBuilder<>))
-                .AddScoped<IInternalDependencies, InternalDependencies>(sp =>
-                {
-                    IClauseFactory clauseFactory = sp.GetRequiredService<IClauseFactory>();
-                    return new InternalDependencies(clauseFactory);
-                })
+                .AddScoped<IClauseGroupFactory, ClauseGroupFactory>()
+                .AddScoped<IXivApiDependencies, XivApiDependencies>()
 
                 // Add HttpClient
                 .AddHttpClient<XivApiService>((sp, client) =>

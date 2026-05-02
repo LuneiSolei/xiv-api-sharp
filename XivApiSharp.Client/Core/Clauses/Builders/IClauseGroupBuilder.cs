@@ -1,4 +1,4 @@
-namespace XivApiSharp.Client.Core.Clauses;
+namespace XivApiSharp.Client.Core.Clauses.Builders;
 
 /// <summary>
 /// Represents a type that is used to construct clause groups.

@@ -1,7 +1,7 @@
 using System.Numerics;
 using XivApiSharp.Client.Core.Clauses;
 
-namespace XivApiSharp.Client.Infrastructure.Clauses;
+namespace XivApiSharp.Client.Infrastructure.Clauses.Builders;
 
 internal sealed partial class ClauseBuilder<T>
 {

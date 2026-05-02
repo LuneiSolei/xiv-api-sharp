@@ -1,7 +1,8 @@
 using XivApiSharp.Client.Core;
 using XivApiSharp.Client.Core.Clauses;
+using XivApiSharp.Client.Core.Clauses.Builders;
 
-namespace XivApiSharp.Client.Infrastructure.Clauses;
+namespace XivApiSharp.Client.Infrastructure.Clauses.Builders;
 
 /// <summary>
 /// Builds a singular clause for use in a <see cref="QueryString"/>.

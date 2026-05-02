@@ -1,9 +1,5 @@
-using Microsoft.Extensions.Options;
 using XivApiSharp.Client.Core;
-using XivApiSharp.Client.Core.Clauses;
-using XivApiSharp.Client.Core.InternalDependencies;
-using XivApiSharp.Client.Core.Options;
-using XivApiSharp.Client.Infrastructure.Clauses;
+using XivApiSharp.Client.Core.Clauses.Builders;
 
 namespace XivApiSharp.Client.Application;
 
@@ -13,26 +9,7 @@ namespace XivApiSharp.Client.Application;
 /// <seealso href="https://xivapi.com"/>
 internal class XivApiService : IXivApiService
 {
-    /// <summary>
-    /// Stores the options configuration.
-    /// </summary>
-    /// <seealso cref="XivApiOptions"/>
-    private readonly XivApiOptions _opts;
-
-    /// <summary>
-    /// Stores access to internal dependencies required by XivApiService.
-    /// </summary>
-    /// <remarks>
-    /// This pattern ensures that internal dependencies are encapsulated and not
-    /// exposed directly to users.
-    /// </remarks>
-    /// <seealso cref="IInternalDependencies"/>
-    private readonly IInternalDependencies _internalDependencies;
-
-    /// <summary>
-    /// The HttpClient to use for making requests.
-    /// </summary>
-    private readonly HttpClient _client;
+    private readonly IXivApiDependencies _dependencies;
 
     /// <summary>
     /// Constructor for XivApiService.
@@ -44,21 +21,11 @@ internal class XivApiService : IXivApiService
     /// <param name="client">
     /// The HttpClient used for making requests.
     /// </param>
-    /// <param name="internalDependencies">
-    /// The dependencies required by XivApiService.
-    /// </param>
-    public XivApiService(IOptions<XivApiOptions> opts, HttpClient client,
-        IInternalDependencies internalDependencies)
-    {
-        _opts = opts.Value;
-        _internalDependencies = internalDependencies;
-        _client = client;
-    }
+    public XivApiService(IXivApiDependencies deps, HttpClient client) => _dependencies = deps;
 
     /// <inheritdoc />
-    public IClauseBuilder<T> NewClause<T>() where T : notnull =>
-        new ClauseBuilder<T>(_internalDependencies.ClauseFactory);
+    public IClauseBuilder<T> NewClause<T>() where T : notnull => _dependencies.ClauseFactory.CreateClauseBuilder<T>();
 
     /// <inheritdoc/>
-    public IClauseGroupBuilder NewClauseGroup() => new ClauseGroupBuilder(_internalDependencies.ClauseFactory);
+    public IClauseGroupBuilder NewClauseGroup() => _dependencies.ClauseGroupFactory.CreateClauseGroupBuilder();
 }

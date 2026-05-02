@@ -1,6 +1,7 @@
 using XivApiSharp.Client.Core.Clauses;
+using XivApiSharp.Client.Core.Clauses.Builders;
 
-namespace XivApiSharp.Client.Infrastructure.Clauses;
+namespace XivApiSharp.Client.Infrastructure.Clauses.Builders;
 
 /// <inheritdoc />
 internal class ClauseGroupBuilder : IClauseGroupBuilder
@@ -18,7 +19,7 @@ internal class ClauseGroupBuilder : IClauseGroupBuilder
     /// <summary>
     ///     The clause factory for the clause group builder to create the clause group with.
     /// </summary>
-    private readonly IClauseFactory _factory;
+    private readonly IClauseGroupFactory _factory;
 
     /// <summary>
     ///     Internal constructor to instantiate with the clause factory.
@@ -26,7 +27,7 @@ internal class ClauseGroupBuilder : IClauseGroupBuilder
     /// <param name="factory">
     ///     The clause factory to instantiate with.
     /// </param>
-    internal ClauseGroupBuilder(IClauseFactory factory) => _factory = factory;
+    internal ClauseGroupBuilder(IClauseGroupFactory factory) => _factory = factory;
 
     /// <inheritdoc />
     public IClauseGroupBuilder WithClauses(IEnumerable<IBaseClause> clauses)

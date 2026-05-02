@@ -1,6 +1,6 @@
 using XivApiSharp.Client.Infrastructure;
 
-namespace XivApiSharp.Client.Core.Clauses;
+namespace XivApiSharp.Client.Core.Clauses.Builders;
 
 /// <summary>
 /// Defines methods for the initial step of a ClauseBuilder.

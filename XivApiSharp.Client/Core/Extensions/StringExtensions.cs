@@ -3,7 +3,7 @@ namespace XivApiSharp.Client.Core.Extensions;
 /// <summary>
 /// Provides additional functionality to strings.
 /// </summary>
-public static class StringExtensions
+internal static class StringExtensions
 {
     extension(string input)
     {

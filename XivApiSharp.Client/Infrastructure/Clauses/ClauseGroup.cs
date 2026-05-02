@@ -7,7 +7,7 @@ using XivApiSharp.Client.Core.Extensions;
 namespace XivApiSharp.Client.Infrastructure.Clauses;
 
 /// <inheritdoc cref="IClauseGroup"/>
-internal sealed class ClauseGroup : BaseClause, IClauseGroup
+internal sealed record ClauseGroup : BaseClause, IClauseGroup
 {
     /// <summary>
     ///     The backing field for <see cref="Clauses" />.
@@ -71,7 +71,8 @@ internal sealed class ClauseGroup : BaseClause, IClauseGroup
     {
         // Encode decorator
         string encodedDecorator = HttpUtility.UrlEncode(Decorator.GetStringValue());
-        UriEncodedCache = $"{encodedDecorator}%28{string.Join(' ', Clauses)}%28";
+        string encodedClause = string.Join(' ', Clauses.Select(c => c.ToUriEncodedString()));
+        UriEncodedCache = $"{encodedDecorator}%28{encodedClause}%29";
     }
 
     /// <inheritdoc />
@@ -79,17 +80,19 @@ internal sealed class ClauseGroup : BaseClause, IClauseGroup
     {
         // Join clauses together without using Join() because Join() calls ToString() and ToString() calls
         // ToUriEncodedString() on clauses.
-        StringBuilder stringBuilder = new();
+        StringBuilder builder = new();
+        bool isFirst = true;
         foreach (IBaseClause clause in Clauses)
         {
             // Don't put a space before the first one!
-            if (Clauses.First() != clause) stringBuilder.Append(' ');
+            if (!isFirst) builder.Append(' ');
 
             // Append the unencoded clause
-            stringBuilder.Append(clause.ToUnencodedString());
+            builder.Append(clause.ToUnencodedString());
+            if (isFirst) isFirst = false;
         }
 
         // Put everything together
-        UnencodedCache = $"{Decorator.GetStringValue()}({stringBuilder})";
+        UnencodedCache = $"{Decorator.GetStringValue()}({builder})";
     }
 }

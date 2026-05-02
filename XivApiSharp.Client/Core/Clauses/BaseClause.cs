@@ -1,7 +1,7 @@
 namespace XivApiSharp.Client.Core.Clauses;
 
 /// <inheritdoc/>
-internal abstract class BaseClause : IBaseClause
+internal abstract record BaseClause : IBaseClause
 {
     /// <summary>
     /// Cache for storing the URI encoded string representation of the instance.

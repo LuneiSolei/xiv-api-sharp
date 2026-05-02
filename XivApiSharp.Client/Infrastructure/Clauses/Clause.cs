@@ -8,7 +8,7 @@ using XivApiSharp.Client.Core.Extensions;
 namespace XivApiSharp.Client.Infrastructure.Clauses;
 
 /// <inheritdoc cref="IClause{T}"/>
-internal sealed class Clause<T> : BaseClause, IClause<T>
+internal sealed record Clause<T> : BaseClause, IClause<T>
 {
     /// <summary>
     /// Backing field for <see cref="Value"/>
